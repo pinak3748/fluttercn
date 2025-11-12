@@ -22,9 +22,7 @@ class ShowcaseDashboard extends StatelessWidget {
             variant: ButtonVariant.ghost,
             size: ButtonSize.icon,
             onPressed: onThemeToggle,
-            child: Icon(
-              isDark ? Icons.light_mode : Icons.dark_mode,
-            ),
+            child: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
           ),
           const SizedBox(width: 8),
         ],
@@ -41,7 +39,7 @@ class ShowcaseDashboard extends StatelessWidget {
           itemCount: _components.length,
           itemBuilder: (context, index) {
             final component = _components[index];
-            return CustomCard(
+            return CNCard(
               onTap: () => _navigateToShowcase(context, component),
               child: Center(
                 child: Text(
@@ -72,9 +70,7 @@ class ShowcaseDashboard extends StatelessWidget {
         return;
     }
 
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => page),
-    );
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
   }
 }
 
