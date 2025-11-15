@@ -1,28 +1,65 @@
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
+import 'theme.dart';
 
-/// Theme extension to easily access shadcn-style color tokens
+/// Theme extension to easily access all theme values (colors, spacing, radius)
 /// 
-/// This extension provides automatic theme-aware color access, similar to how
-/// shadcn uses CSS variables. Colors automatically adapt to light/dark theme.
+/// This extension provides automatic theme-aware access, similar to how
+/// shadcn uses CSS variables. All values automatically adapt to light/dark theme.
 /// 
 /// **Usage:**
 /// ```dart
-/// // Instead of manually checking theme:
-/// final isDark = Theme.of(context).brightness == Brightness.dark;
-/// final color = isDark ? AppColors.primaryDark : AppColors.primary;
+/// // Colors - automatically adapt to theme
+/// context.primary
+/// context.card
 /// 
-/// // Simply use:
-/// context.primary  // Automatically gets the right color for current theme
+/// // Spacing - relative to baseSpacing
+/// context.spacing.xs
+/// context.spacing.md
+/// 
+/// // Radius - relative to baseRadius
+/// context.radius.md
+/// context.radius.xl
 /// ```
-/// 
-/// All colors are automatically theme-aware - no need to manually check
-/// for light/dark mode. Just use `context.colorName` and it will return
-/// the correct color based on the current theme.
 extension FlutterCNTheme on BuildContext {
   /// Get the current brightness (light/dark)
   bool get isDark => Theme.of(this).brightness == Brightness.dark;
+
+  // ============================================================================
+  // SPACING - Access via context.spacing.xs, context.spacing.md, etc.
+  // ============================================================================
+
+  /// Spacing values - relative to AppTheme.baseSpacing
+  /// 
+  /// Example:
+  /// ```dart
+  /// Padding(
+  ///   padding: EdgeInsets.all(context.spacing.md),
+  ///   child: YourWidget(),
+  /// )
+  /// ```
+  Spacing get spacing => AppTheme.spacing;
+
+  // ============================================================================
+  // RADIUS - Access via context.radius.sm, context.radius.xl, etc.
+  // ============================================================================
+
+  /// Radius values - relative to AppTheme.baseRadius
+  /// 
+  /// Example:
+  /// ```dart
+  /// Container(
+  ///   decoration: BoxDecoration(
+  ///     borderRadius: BorderRadius.circular(context.radius.xl),
+  ///   ),
+  /// )
+  /// ```
+  ThemeRadius get radius => AppTheme.radius;
+
+  // ============================================================================
+  // COLORS - Automatically adapt to theme
+  // ============================================================================
 
   // Base colors
   /// Background color - automatically adapts to theme

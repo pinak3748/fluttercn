@@ -1,6 +1,13 @@
 # FlutterCN Theme System
 
-This theme system is designed to work like shadcn/ui's CSS variable system, adapted for Flutter. It provides automatic theme-aware colors, spacing, and radius constants.
+This theme system is designed to work like shadcn/ui's CSS variable system, adapted for Flutter. It provides automatic theme-aware colors, relative spacing, and relative radius constants - all consolidated under `AppTheme`.
+
+## 🎯 Key Features
+
+- **Relative System**: Spacing and radius values are multipliers of base units (like shadcn's rem system)
+- **Consolidated**: Everything is under `AppTheme` - no separate classes
+- **Automatic Theme Adaptation**: Colors automatically switch between light/dark
+- **Easy Scaling**: Change base units to scale the entire design system
 
 ## 🎨 Colors
 
@@ -56,66 +63,93 @@ context.popover
 context.popoverForeground
 ```
 
-### Example Usage
+## 📐 Spacing (Relative System)
+
+Spacing values are **multipliers** of `AppTheme.baseSpacing` (default: 4px). This means you can scale all spacing globally by changing just the base value!
+
+### Base Unit
 
 ```dart
-Container(
-  color: context.card,
-  child: Text(
-    'Hello',
-    style: TextStyle(color: context.cardForeground),
-  ),
-)
+AppTheme.baseSpacing  // Default: 4px
 ```
 
-## 📐 Spacing
+### Spacing Values
 
-Use `AppSpacing` constants for consistent spacing throughout your app:
+All spacing values are relative to the base:
 
 ```dart
-import 'package:flutter_cn_playground/theme/spacing.dart';
+// Via context extension (recommended)
+context.spacing.xs     // 0.25x base = 1px (with default base)
+context.spacing.sm     // 0.5x base = 2px
+context.spacing.md     // 1x base = 4px
+context.spacing.lg     // 1.5x base = 6px
+context.spacing.xl     // 2x base = 8px
+context.spacing.xxl    // 3x base = 12px
+context.spacing.xxxl   // 4x base = 16px
+context.spacing.xxxxl  // 6x base = 24px
+context.spacing.xxxxxl // 8x base = 32px
+context.spacing.xxxxxxl // 12x base = 48px
+context.spacing.xxxxxxxl // 16x base = 64px
 
-// Available spacing values
-AppSpacing.xs    // 4px
-AppSpacing.sm    // 8px
-AppSpacing.md    // 16px
-AppSpacing.lg    // 24px
-AppSpacing.xl    // 32px
-AppSpacing.xxl   // 48px
-AppSpacing.xxxl  // 64px
+// Or directly from AppTheme
+AppTheme.spacing.md
 ```
 
 ### Example Usage
 
 ```dart
 Padding(
-  padding: EdgeInsets.all(AppSpacing.md),
+  padding: EdgeInsets.all(context.spacing.md),
   child: YourWidget(),
 )
 
-SizedBox(height: AppSpacing.lg)
+SizedBox(height: context.spacing.lg)
 
 EdgeInsets.symmetric(
-  horizontal: AppSpacing.lg,
-  vertical: AppSpacing.md,
+  horizontal: context.spacing.lg,
+  vertical: context.spacing.md,
 )
 ```
 
-## 🔲 Radius
+### Scaling Spacing Globally
 
-Use `AppRadius` constants for consistent border radius:
+To make spacing tighter or looser globally, just change the base:
 
 ```dart
-import 'package:flutter_cn_playground/theme/radius.dart';
+// In theme.dart
+static const double baseSpacing = 3.0;  // Tighter spacing
+// or
+static const double baseSpacing = 5.0;  // Looser spacing
+```
 
-// Available radius values
-AppRadius.none   // 0px
-AppRadius.sm     // 2px
-AppRadius.md     // 4px
-AppRadius.lg     // 6px
-AppRadius.xl     // 8px (commonly used for cards)
-AppRadius.xxl    // 12px
-AppRadius.full   // 9999px (fully rounded)
+All spacing values will automatically scale!
+
+## 🔲 Radius (Relative System)
+
+Radius values are **multipliers** of `AppTheme.baseRadius` (default: 2px). Scale all radius globally by changing just the base value!
+
+### Base Unit
+
+```dart
+AppTheme.baseRadius  // Default: 2px
+```
+
+### Radius Values
+
+All radius values are relative to the base:
+
+```dart
+// Via context extension (recommended)
+context.radius.none  // 0px
+context.radius.sm    // 1x base = 2px (with default base)
+context.radius.md    // 2x base = 4px
+context.radius.lg    // 3x base = 6px
+context.radius.xl    // 4x base = 8px (commonly used for cards)
+context.radius.xxl   // 6x base = 12px
+context.radius.full  // 9999px (fully rounded)
+
+// Or directly from AppTheme
+AppTheme.radius.xl
 ```
 
 ### Example Usage
@@ -123,7 +157,7 @@ AppRadius.full   // 9999px (fully rounded)
 ```dart
 Container(
   decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(AppRadius.xl),
+    borderRadius: BorderRadius.circular(context.radius.xl),
     color: context.card,
   ),
 )
@@ -132,27 +166,38 @@ Container(
 Container(
   decoration: BoxDecoration(
     shape: BoxShape.circle,  // or
-    borderRadius: BorderRadius.circular(AppRadius.full),
+    borderRadius: BorderRadius.circular(context.radius.full),
   ),
 )
 ```
+
+### Scaling Radius Globally
+
+To make radius tighter or looser globally, just change the base:
+
+```dart
+// In theme.dart
+static const double baseRadius = 1.5;  // Tighter radius
+// or
+static const double baseRadius = 3.0;  // Looser radius
+```
+
+All radius values will automatically scale!
 
 ## 🎯 Complete Example
 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_cn_playground/theme/theme_extensions.dart';
-import 'package:flutter_cn_playground/theme/spacing.dart';
-import 'package:flutter_cn_playground/theme/radius.dart';
 
 class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(AppSpacing.lg),
+      padding: EdgeInsets.all(context.spacing.lg),
       decoration: BoxDecoration(
         color: context.card,
-        borderRadius: BorderRadius.circular(AppRadius.xl),
+        borderRadius: BorderRadius.circular(context.radius.xl),
         border: Border.all(color: context.border),
       ),
       child: Column(
@@ -165,7 +210,7 @@ class MyCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: AppSpacing.sm),
+          SizedBox(height: context.spacing.sm),
           Text(
             'Description',
             style: TextStyle(
@@ -180,7 +225,9 @@ class MyCard extends StatelessWidget {
 }
 ```
 
-## 🔄 Updating Theme Colors
+## 🔄 Updating Theme
+
+### Updating Colors
 
 To update theme colors, simply modify the values in `colors.dart`:
 
@@ -197,13 +244,53 @@ class AppColors {
 
 All components using `context.primary` will automatically use the new colors!
 
+### Scaling Spacing Globally
+
+Change `AppTheme.baseSpacing` in `theme.dart`:
+
+```dart
+// Tighter spacing
+static const double baseSpacing = 3.0;
+
+// Looser spacing
+static const double baseSpacing = 5.0;
+```
+
+### Scaling Radius Globally
+
+Change `AppTheme.baseRadius` in `theme.dart`:
+
+```dart
+// Tighter radius
+static const double baseRadius = 1.5;
+
+// Looser radius
+static const double baseRadius = 3.0;
+```
+
 ## 📝 Key Benefits
 
-1. **Automatic Theme Adaptation**: Colors automatically switch between light/dark
-2. **No Manual Theme Checks**: No need to check `isDark` everywhere
-3. **Consistent Spacing**: Use spacing constants instead of magic numbers
-4. **Consistent Radius**: Use radius constants for uniform border radius
-5. **Easy Updates**: Change colors in one place, affects entire app
+1. **Relative System**: Like shadcn's rem-based system - change base, everything scales
+2. **Consolidated**: Everything under `AppTheme` - no separate classes
+3. **Automatic Theme Adaptation**: Colors automatically switch between light/dark
+4. **No Manual Theme Checks**: No need to check `isDark` everywhere
+5. **Easy Scaling**: Change base units to scale entire design system
 6. **Type Safe**: Compile-time checks for all values
 7. **Similar to shadcn**: Familiar API for developers coming from shadcn/ui
 
+## 🎨 Architecture
+
+```
+AppTheme
+├── baseSpacing (4px) - Base unit for all spacing
+├── baseRadius (2px) - Base unit for all radius
+├── spacing - Spacing values (xs, sm, md, lg, etc.)
+├── radius - Radius values (sm, md, lg, xl, etc.)
+├── lightTheme - Light theme ThemeData
+└── darkTheme - Dark theme ThemeData
+
+Context Extension
+├── spacing - Access AppTheme.spacing
+├── radius - Access AppTheme.radius
+└── colors - Automatic theme-aware color access
+```

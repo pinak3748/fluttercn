@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../theme/radius.dart';
-import '../theme/spacing.dart';
 import '../theme/theme_extensions.dart';
 
 /// Main Card component - container for card sections
@@ -40,6 +38,7 @@ class CNCard extends StatefulWidget {
     this.child,
     this.onTap,
     this.padding,
+    this.showDividers = false,
   }) : assert(
          child == null || (header == null && content == null && footer == null),
          'Cannot use both child and header/content/footer. Use either composable structure or single child.',
@@ -63,6 +62,10 @@ class CNCard extends StatefulWidget {
 
   /// Custom padding for the entire card (only used when using single child)
   final EdgeInsets? padding;
+
+  /// Whether to show dividers between sections (header, content, footer)
+  /// Defaults to false. Set to true to show dividers between sections.
+  final bool showDividers;
 
   @override
   State<CNCard> createState() => _CNCardState();
@@ -132,7 +135,7 @@ class _CNCardState extends State<CNCard> with SingleTickerProviderStateMixin {
               duration: const Duration(milliseconds: 200),
               decoration: BoxDecoration(
                 color: context.card,
-                borderRadius: BorderRadius.circular(AppRadius.xl),
+                borderRadius: BorderRadius.circular(context.radius.xl),
                 border: Border.all(color: context.border, width: 1),
                 boxShadow: _isHovered && widget.onTap != null
                     ? [
@@ -153,7 +156,7 @@ class _CNCardState extends State<CNCard> with SingleTickerProviderStateMixin {
                   onTapDown: _onTapDown,
                   onTapUp: _onTapUp,
                   onTapCancel: _onTapCancel,
-                  borderRadius: BorderRadius.circular(AppRadius.xl),
+                  borderRadius: BorderRadius.circular(context.radius.xl),
                   splashColor: context.accent.withValues(alpha: 0.1),
                   highlightColor: context.accent.withValues(alpha: 0.05),
                   child: _buildContent(context),
@@ -170,7 +173,7 @@ class _CNCardState extends State<CNCard> with SingleTickerProviderStateMixin {
     // Backward compatible: single child
     if (widget.child != null) {
       return Padding(
-        padding: widget.padding ?? EdgeInsets.all(AppSpacing.md),
+        padding: widget.padding ?? EdgeInsets.all(context.spacing.md),
         child: DefaultTextStyle(
           style: TextStyle(color: context.cardForeground),
           child: widget.child!,
@@ -186,16 +189,17 @@ class _CNCardState extends State<CNCard> with SingleTickerProviderStateMixin {
     }
 
     if (widget.content != null) {
-      // Add divider if header exists
-      if (widget.header != null) {
+      // Add divider if header exists and dividers are enabled
+      if (widget.showDividers && widget.header != null) {
         children.add(Divider(height: 1, thickness: 1, color: context.border));
       }
       children.add(widget.content!);
     }
 
     if (widget.footer != null) {
-      // Add divider if header or content exists
-      if (widget.header != null || widget.content != null) {
+      // Add divider if header or content exists and dividers are enabled
+      if (widget.showDividers &&
+          (widget.header != null || widget.content != null)) {
         children.add(Divider(height: 1, thickness: 1, color: context.border));
       }
       children.add(widget.footer!);
@@ -250,10 +254,10 @@ class CardHeader extends StatelessWidget {
     final defaultPadding =
         padding ??
         EdgeInsets.fromLTRB(
-          AppSpacing.lg,
-          AppSpacing.lg,
-          AppSpacing.lg,
-          AppSpacing.md,
+          context.spacing.lg,
+          context.spacing.lg,
+          context.spacing.lg,
+          context.spacing.md,
         );
 
     if (child != null) {
@@ -266,7 +270,7 @@ class CardHeader extends StatelessWidget {
     }
     if (description != null) {
       if (title != null) {
-        children.add(SizedBox(height: AppSpacing.sm));
+        children.add(SizedBox(height: context.spacing.sm));
       }
       children.add(description!);
     }
@@ -367,7 +371,7 @@ class CardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPadding = padding ?? EdgeInsets.all(AppSpacing.lg);
+    final defaultPadding = padding ?? EdgeInsets.all(context.spacing.lg);
 
     return Padding(padding: defaultPadding, child: child);
   }
@@ -400,10 +404,10 @@ class CardFooter extends StatelessWidget {
     final defaultPadding =
         padding ??
         EdgeInsets.fromLTRB(
-          AppSpacing.lg,
-          AppSpacing.md,
-          AppSpacing.lg,
-          AppSpacing.lg,
+          context.spacing.lg,
+          context.spacing.md,
+          context.spacing.lg,
+          context.spacing.lg,
         );
 
     return Padding(padding: defaultPadding, child: child);
