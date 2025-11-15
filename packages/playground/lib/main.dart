@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'config/theme.dart';
 import 'presentations/showcase_dashboard.dart';
-import 'theme/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = ThemeMode.dark;
 
   void _toggleTheme() {
     setState(() {
@@ -26,7 +26,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize theme on startup (default to dark)
+    AppTheme.initializeTheme(_themeMode == ThemeMode.dark);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // Update theme initialization when mode changes
+    AppTheme.initializeTheme(_themeMode == ThemeMode.dark);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter CN Playground',

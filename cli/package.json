@@ -1,0 +1,38 @@
+{
+  "name": "flutter-cn",
+  "version": "0.0.1",
+  "description": "Add Flutter components to your apps.",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+"bin": {
+  "flutter-cn": "./dist/index.js"
+},
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^24.10.1",
+    "cross-env": "^10.1.0",
+    "rimraf": "^6.1.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.20.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2",
+    "fs-extra": "^11.3.2",
+    "ora": "^9.0.0",
+    "yaml": "^2.8.1"
+  }
+}

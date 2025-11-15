@@ -1,0 +1,43 @@
+{
+  "components": {
+    "card": {
+      "name": "card",
+      "description": "A card component with header, content, and footer sections",
+      "files": [
+        {
+          "source": "widgets/card.dart",
+          "destination": "lib/widgets/common/card.dart"
+        }
+      ],
+      "dependencies": [
+        {
+          "type": "config",
+          "file": "config/theme.dart",
+          "message": "Theme configuration is required. Make sure you have run 'flutter-cn init' first."
+        }
+      ],
+      "importPath": "package:flutter/material.dart",
+      "usageExample": "import 'package:your_app/widgets/common/card.dart';\n\nCNCard(\n  header: CardHeader(\n    title: CardTitle('Card Title'),\n    description: CardDescription('Card description'),\n  ),\n  content: CardContent(\n    child: Text('Card content'),\n  ),\n)"
+    },
+    "button": {
+      "name": "button",
+      "description": "A customizable button component with multiple variants and sizes",
+      "files": [
+        {
+          "source": "widgets/button.dart",
+          "destination": "lib/widgets/common/button.dart"
+        }
+      ],
+      "dependencies": [
+        {
+          "type": "config",
+          "file": "config/theme.dart",
+          "message": "Theme configuration is required. Make sure you have run 'flutter-cn init' first."
+        }
+      ],
+      "importPath": "package:flutter/material.dart",
+      "usageExample": "import 'package:your_app/widgets/common/button.dart';\n\nButton(\n  variant: ButtonVariant.primary,\n  size: ButtonSize.md,\n  onPressed: () {\n    // Handle button press\n  },\n  child: Text('Click me'),\n)\n\n// With icon\nButton(\n  variant: ButtonVariant.secondary,\n  onPressed: () {},\n  icon: Icon(Icons.add),\n  iconPosition: IconPosition.leading,\n  child: Text('Add Item'),\n)"
+    }
+  }
+}
+
