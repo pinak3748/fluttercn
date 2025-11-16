@@ -1,14 +1,16 @@
 {
-  "name": "flutter-cn",
-  "version": "0.0.1",
-  "description": "Add Flutter components to your apps.",
+  "name": "fluttercn",
+  "version": "0.0.2",
+  "description": "Flutter CN is a library of native components for Flutter. It provides a set of components that are easy to use and customize.",
   "license": "MIT",
   "type": "module",
+  "author": "Pinak Faldu",
   "files": [
     "dist"
   ],
+  "keywords": ["flutter", "components", "ui", "cli", "fluttercn","flutter-cn","widgets","native components"],
 "bin": {
-  "flutter-cn": "./dist/index.js"
+  "fluttercn": "./dist/index.js"
 },
   "scripts": {
     "dev": "tsup --watch",

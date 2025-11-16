@@ -1,15 +1,28 @@
 import chalk from "chalk";
 import { listComponents } from "../utils/registry.js";
+import { preflightList } from "../preflights/preflight-list.js";
 
 /**
  * List all available components
  */
 export async function listCommand() {
   try {
+    // Pre-flight checks
+    const preflight = preflightList();
+
+    if (!preflight.success) {
+      console.log("\n" + preflight.error);
+      if (preflight.details) {
+        preflight.details.forEach((detail) => console.log(detail));
+      }
+      console.log();
+      process.exit(1);
+    }
+
     const components = listComponents();
 
     if (components.length === 0) {
-      console.log(chalk.yellow("No components available in the registry."));
+      console.log(chalk.yellow("⚠ No components available in the registry."));
       return;
     }
 
@@ -25,11 +38,11 @@ export async function listCommand() {
     console.log(
       chalk.gray(
         `\n💡 Usage: `) +
-        chalk.cyan(`flutter-cn add <component-name>`)
+        chalk.cyan(`fluttercn add <component-name>`)
     );
     console.log(
       chalk.gray(`   Example: `) +
-        chalk.cyan(`flutter-cn add card\n`)
+        chalk.cyan(`fluttercn add card\n`)
     );
   } catch (error) {
     console.error(

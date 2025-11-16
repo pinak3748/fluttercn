@@ -1,8 +1,8 @@
 import chalk from "chalk";
 import ora from "ora";
 import { join } from "path";
+import { preflightInit } from "../preflights/preflight-init.js";
 import { copyFile, getCoreFilePath } from "../utils/file-handler.js";
-import { isAlreadyInitialized, validateFlutterProject } from "../utils/validator.js";
 
 /**
  * Initialize Flutter CN in the current Flutter project
@@ -13,19 +13,28 @@ export async function initCommand() {
   try {
     const cwd = process.cwd();
 
-    // Step 1: Validate Flutter project
-    spinner.text = "Validating Flutter project...";
-    const validation = validateFlutterProject(cwd);
+    // Pre-flight checks
+    spinner.text = "Running pre-flight checks...";
+    const preflight = preflightInit(cwd);
 
-    if (!validation.isValid) {
-      spinner.fail(validation.error || "Validation failed");
+    if (!preflight.success) {
+      spinner.stop();
+      console.log("\n" + preflight.error);
+      if (preflight.details) {
+        preflight.details.forEach((detail) => console.log(detail));
+      }
+      console.log();
       process.exit(1);
     }
 
-    // Step 2: Check if already initialized
-    if (isAlreadyInitialized(cwd)) {
-      spinner.warn("Flutter CN is already initialized in this project.");
-      spinner.info(`Theme file exists at: ${join(cwd, "lib", "config", "theme.dart")}`);
+    // Handle warning if already initialized
+    if (preflight.warning) {
+      spinner.stop();
+      console.log("\n" + preflight.warning);
+      if (preflight.details) {
+        preflight.details.forEach((detail) => console.log(detail));
+      }
+      console.log();
       return;
     }
 
@@ -51,7 +60,7 @@ export async function initCommand() {
     console.log("\n" + chalk.green("✓ Flutter CN initialized successfully!"));
     console.log(
       chalk.gray("  You can now use ") +
-        chalk.cyan("flutter-cn add [component]") +
+        chalk.cyan("fluttercn add [component]") +
         chalk.gray(" to add components.")
     );
   } catch (error) {

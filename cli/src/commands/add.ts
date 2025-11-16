@@ -4,8 +4,7 @@ import ora from "ora";
 import { dirname, join, relative } from "path";
 import readline from "readline";
 import { copyFile, getCoreFilePath } from "../utils/file-handler.js";
-import { getComponent } from "../utils/registry.js";
-import { isAlreadyInitialized, validateFlutterProject } from "../utils/validator.js";
+import { preflightAdd } from "../preflights/preflight-add.js";
 
 const { existsSync } = fs;
 
@@ -71,17 +70,6 @@ function transformComponentContent(
 }
 
 /**
- * Checks if a dependency file exists
- * @param cwd - Current working directory
- * @param dependencyFile - Relative path to dependency file
- * @returns boolean indicating if dependency exists
- */
-function checkDependency(cwd: string, dependencyFile: string): boolean {
-  const dependencyPath = join(cwd, "lib", dependencyFile);
-  return existsSync(dependencyPath);
-}
-
-/**
  * Prompts the user for confirmation to overwrite an existing file
  * @param filePath - Path to the file that already exists
  * @returns Promise that resolves to true if user wants to overwrite, false otherwise
@@ -116,49 +104,23 @@ export async function addCommand(componentName: string) {
   const cwd = process.cwd();
 
   try {
-    // Step 1: Validate Flutter project
-    spinner.text = "Validating Flutter project...";
-    const validation = validateFlutterProject(cwd);
+    // Pre-flight checks
+    spinner.text = "Running pre-flight checks...";
+    const preflight = preflightAdd(cwd, componentName);
 
-    if (!validation.isValid) {
-      spinner.fail(validation.error || "Validation failed");
-      process.exit(1);
-    }
-
-    // Step 2: Check if Flutter CN is initialized
-    if (!isAlreadyInitialized(cwd)) {
-      spinner.fail(
-        "Flutter CN is not initialized. Please run 'flutter-cn init' first."
-      );
-      process.exit(1);
-    }
-
-    // Step 3: Load component from registry
-    spinner.text = `Loading component: ${componentName}...`;
-    const component = getComponent(componentName);
-
-    if (!component) {
-      spinner.fail(`Component '${componentName}' not found in registry.`);
-      spinner.info("Run 'flutter-cn list' to see available components.");
-      process.exit(1);
-    }
-
-    // Step 4: Check dependencies
-    if (component.dependencies && component.dependencies.length > 0) {
-      spinner.text = "Checking dependencies...";
-      for (const dep of component.dependencies) {
-        const depPath = join("lib", dep.file);
-        if (!checkDependency(cwd, dep.file)) {
-          spinner.fail(
-            dep.message ||
-              `Dependency not found: ${depPath}. Please run 'flutter-cn init' first.`
-          );
-          process.exit(1);
-        }
+    if (!preflight.success) {
+      spinner.stop();
+      console.log("\n" + preflight.error);
+      if (preflight.details) {
+        preflight.details.forEach((detail) => console.log(detail));
       }
+      console.log();
+      process.exit(1);
     }
 
-    // Step 5: Copy component files
+    const component = preflight.component!;
+
+    // Step 2: Copy component files
     spinner.text = `Installing ${component.name}...`;
     const copiedFiles: string[] = [];
     const skippedFiles: string[] = [];
@@ -203,7 +165,7 @@ export async function addCommand(componentName: string) {
       }
     }
 
-    // Step 6: Success message
+    // Step 3: Success message
     console.log("\n" + chalk.green(`✓ ${component.name} added successfully!`));
 
     if (copiedFiles.length > 0) {
@@ -220,7 +182,7 @@ export async function addCommand(componentName: string) {
       });
     }
 
-    // Step 7: Show usage instructions
+    // Step 4: Show usage instructions
 //     console.log("\n" + chalk.cyan("📝 Usage:"));
 //     console.log(chalk.gray("  Make sure your MaterialApp is configured with the theme:"));
 //     console.log(

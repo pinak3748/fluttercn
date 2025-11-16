@@ -30,10 +30,10 @@ function findCliRoot(): string {
   while (searchDir !== dirname(searchDir)) {
     const packageJsonPath = join(searchDir, "package.json");
     if (existsSync(packageJsonPath)) {
-      // Check if this is the CLI package.json (has "flutter-cn" name)
+      // Check if this is the CLI package.json (has "fluttercn" name)
       try {
         const packageJson = fs.readJsonSync(packageJsonPath);
-        if (packageJson.name === "flutter-cn") {
+        if (packageJson.name === "fluttercn") {
           return searchDir;
         }
       } catch {
