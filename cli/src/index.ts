@@ -8,7 +8,7 @@ import { listCommand } from "./commands/list.js";
 const program = new Command();
 
 program
-  .name("flutter-cn")
+  .name("fluttercn")
   .description("Add Flutter components to your apps")
   .version("0.0.1")
   .addHelpCommand("help [command]", "Display help for a command");

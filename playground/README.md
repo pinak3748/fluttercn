@@ -1,34 +1,36 @@
-# flutter_cn_playground
+# Flutter CN Playground
 
-Flutter CN Component Playground
+A testing environment for developing and showcasing Flutter CN components.
 
-## Getting Started
+## Overview
 
-This project is a starting point for a Flutter application.
+The playground is where we develop and test new components before they're added to the CLI. Each component goes through development and testing here before being made available through the CLI.
 
-A few resources to get you started if this is your first Flutter project:
+## Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- `lib/widgets/` - Component implementations
+- `lib/presentations/` - Showcase pages demonstrating different use cases for each component
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Adding a New Component
 
-Base Widgets
+1. Create your widget in `lib/widgets/`
+2. Create a showcase page in `lib/presentations/` to demonstrate various use cases
+3. Add navigation to your showcase in the dashboard
+4. Test thoroughly before creating a PR
 
-- Card 
+## Available Components soon
+
+- Card
 - Button
 - Badge
 - Avatar
 - Typography
-- Toggle 
-- checkbox
+- Toggle
+- Checkbox
 - Tooltip
 
+## Upcoming Components
 
-
-Upcoming 
 - Toast
 - Dialog
 - Popup

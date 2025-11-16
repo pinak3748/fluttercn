@@ -13,7 +13,7 @@
         {
           "type": "config",
           "file": "config/theme.dart",
-          "message": "Theme configuration is required. Make sure you have run 'flutter-cn init' first."
+          "message": "Theme configuration is required. Make sure you have run 'fluttercn init' first."
         }
       ],
       "importPath": "package:flutter/material.dart",
@@ -32,7 +32,7 @@
         {
           "type": "config",
           "file": "config/theme.dart",
-          "message": "Theme configuration is required. Make sure you have run 'flutter-cn init' first."
+          "message": "Theme configuration is required. Make sure you have run 'fluttercn init' first."
         }
       ],
       "importPath": "package:flutter/material.dart",
