@@ -2,6 +2,7 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
 import { dirname, join, relative } from "path";
+import readline from "readline";
 import { copyFile, getCoreFilePath } from "../utils/file-handler.js";
 import { getComponent } from "../utils/registry.js";
 import { isAlreadyInitialized, validateFlutterProject } from "../utils/validator.js";
@@ -81,6 +82,32 @@ function checkDependency(cwd: string, dependencyFile: string): boolean {
 }
 
 /**
+ * Prompts the user for confirmation to overwrite an existing file
+ * @param filePath - Path to the file that already exists
+ * @returns Promise that resolves to true if user wants to overwrite, false otherwise
+ */
+function promptOverwrite(filePath: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    rl.question(
+      chalk.yellow(
+        `\n⚠️  File already exists: ${filePath}\n   Do you want to overwrite it? (y/N): `
+      ),
+      (answer) => {
+        rl.close();
+        const shouldOverwrite =
+          answer.toLowerCase() === "y" || answer.toLowerCase() === "yes";
+        resolve(shouldOverwrite);
+      }
+    );
+  });
+}
+
+/**
  * Add a component to the Flutter project
  * @param componentName - Name of the component to add
  */
@@ -139,19 +166,37 @@ export async function addCommand(componentName: string) {
     for (const file of component.files) {
       const sourcePath = getCoreFilePath(file.source);
       const destinationPath = join(cwd, file.destination);
+      const fileExists = existsSync(destinationPath);
+
+      // Check if file already exists and prompt user
+      let shouldOverwrite = false;
+      if (fileExists) {
+        spinner.stop();
+        shouldOverwrite = await promptOverwrite(file.destination);
+        spinner.start();
+
+        if (!shouldOverwrite) {
+          skippedFiles.push(file.destination);
+          spinner.warn(`Skipped ${file.destination} (user chose not to overwrite)`);
+          continue;
+        }
+      }
 
       // Transform content to fix import paths
       const transformFn = (content: string) =>
         transformComponentContent(content, destinationPath, cwd);
 
-      const result = copyFile(sourcePath, destinationPath, false, transformFn);
+      // Copy file with overwrite enabled if file exists and user confirmed
+      const result = copyFile(
+        sourcePath,
+        destinationPath,
+        shouldOverwrite,
+        transformFn
+      );
 
       if (result.success) {
         copiedFiles.push(file.destination);
         spinner.succeed(result.message);
-      } else if (result.skipped) {
-        skippedFiles.push(file.destination);
-        spinner.warn(result.message);
       } else {
         spinner.fail(result.message);
         process.exit(1);
