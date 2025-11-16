@@ -4,6 +4,7 @@ import '../widgets/button.dart';
 import '../widgets/card.dart';
 import 'button_showcase.dart';
 import 'card_showcase.dart';
+import 'avatar_showcase.dart';
 
 class ShowcaseDashboard extends StatelessWidget {
   const ShowcaseDashboard({super.key, required this.onThemeToggle});
@@ -66,6 +67,9 @@ class ShowcaseDashboard extends StatelessWidget {
       case 'Card':
         page = const CardShowcase();
         break;
+      case 'Avatar':
+        page = const AvatarShowcase();
+        break;
       default:
         return;
     }
@@ -77,6 +81,7 @@ class ShowcaseDashboard extends StatelessWidget {
 final List<String> _components = [
   'Button',
   'Card',
+  'Avatar',
   'Dropdown',
   'Input',
   'Dialog',
