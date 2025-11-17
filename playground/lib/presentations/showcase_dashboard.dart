@@ -7,6 +7,7 @@ import 'card_showcase.dart';
 import 'avatar_showcase.dart';
 import 'badge_showcase.dart';
 import 'checkbox_showcase.dart';
+import 'tooltip_showcase.dart';
 
 class ShowcaseDashboard extends StatelessWidget {
   const ShowcaseDashboard({super.key, required this.onThemeToggle});
@@ -78,6 +79,9 @@ class ShowcaseDashboard extends StatelessWidget {
       case 'Checkbox':
         page = const CheckboxShowcase();
         break;
+      case 'Tooltip':
+        page = const TooltipShowcase();
+        break;
       default:
         return;
     }
@@ -92,6 +96,7 @@ final List<String> _components = [
   'Avatar',
   'Badge',
   'Checkbox',
+  'Tooltip',
   'Dropdown',
   'Input',
   'Dialog',
