@@ -1,4 +1,4 @@
-# Flutter CN CLI
+# fluttercn CLI
 
 A command-line tool to add Flutter components to your Flutter projects.
 
@@ -42,7 +42,7 @@ fluttercn add <component>
 
 ## Commands
 
-- `fluttercn init` - Initialize Flutter CN in your project
+- `fluttercn init` - Initialize fluttercn in your project
 - `fluttercn add <component>` - Add a component to your project
 - `fluttercn list` - List all available components
 
@@ -50,7 +50,7 @@ fluttercn add <component>
 
 ### Adding a New Component
 
-Follow this workflow to add a new component to Flutter CN:
+Follow this workflow to add a new component to fluttercn:
 
 1. **Build the CLI**
    ```bash

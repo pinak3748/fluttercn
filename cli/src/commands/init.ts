@@ -5,10 +5,10 @@ import { preflightInit } from "../preflights/preflight-init.js";
 import { copyFile, getCoreFilePath } from "../utils/file-handler.js";
 
 /**
- * Initialize Flutter CN in the current Flutter project
+ * Initialize fluttercn in the current Flutter project
  */
 export async function initCommand() {
-  const spinner = ora("Initializing Flutter CN...").start();
+  const spinner = ora("Initializing fluttercn...").start();
 
   try {
     const cwd = process.cwd();
@@ -57,7 +57,7 @@ export async function initCommand() {
     }
 
     // Step 4: Success message
-    console.log("\n" + chalk.green("✓ Flutter CN initialized successfully!"));
+    console.log("\n" + chalk.green("✓ fluttercn initialized successfully!"));
     console.log(
       chalk.gray("  You can now use ") +
         chalk.cyan("fluttercn add [component]") +

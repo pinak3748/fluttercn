@@ -43,7 +43,7 @@ class LightColors {
   static const Color textTertiary = Color(0xFF737373);
   static const Color textDisabled = Color(0xFFA3A3A3);
   static const Color textOnPrimary = Color(0xFFFFFFFF);
-  static const Color textOnSecondary = Color(0xFFFFFFFF);
+  static const Color textOnSecondary = Color(0xFF171717);
 
   static const Color background = Color(0xFFFAFAFA);
   static const Color surface = Color(0xFFFFFFFF);
@@ -80,7 +80,7 @@ class DarkColors {
   static const Color textTertiary = Color(0xFFA3A3A3);
   static const Color textDisabled = Color(0xFF737373);
   static const Color textOnPrimary = Color(0xFF171717);
-  static const Color textOnSecondary = Color(0xFF171717);
+  static const Color textOnSecondary = Color(0xFFFFFFFF);
 
   static const Color background = Color(0xFF121212);
   static const Color surface = Color(0xFF1E1E1E);

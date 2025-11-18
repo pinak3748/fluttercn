@@ -3,7 +3,7 @@ export const siteConfig = {
     url: "https://fluttercn.com",
     ogImage: "https://fluttercn.com/og.jpg",
     description:
-    "Flutter CN is a library of native components for Flutter. It provides a set of components that are easy to use and customize.",
+    "fluttercn is a library of native components for Flutter. It provides a set of components that are easy to use and customize.",
     navItems: [
       {
         href: "/docs",

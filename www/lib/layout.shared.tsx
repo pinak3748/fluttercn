@@ -8,12 +8,12 @@ export function baseOptions(options?: { hideLinks?: boolean }): BaseLayoutProps 
         <>
           <img
             src="/logo-dark.png"
-            alt="Flutter CN"
+            alt="fluttercn"
             width={24}
             height={24}
             className="inline-block rounded-sm"
           />
-          Flutter CN
+          fluttercn
         </>
       ),
       url: "/",

@@ -19,7 +19,11 @@ Buttons come in six different variants for different use cases:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/button/button_variants.png"
+      alt="Button variants preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
@@ -73,7 +77,11 @@ Three predefined sizes plus an icon-only size:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/button/button_sizes.png"
+      alt="Button sizes preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
@@ -114,7 +122,11 @@ Add leading or trailing icons to buttons:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/button/button_icons.png"
+      alt="Button icons preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
@@ -142,7 +154,11 @@ Show loading indicator while processing:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/button/button_loading.png"
+      alt="Button loading state preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
@@ -161,7 +177,11 @@ Disable button interactions:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/button/button_disabled.png"
+      alt="Button disabled state preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
@@ -169,25 +189,6 @@ Button(
   onPressed: () {},
   disabled: true,
   child: Text('Disabled'),
-)
-```
-  </Tab>
-</Tabs>
-
-### Full Width
-
-Stretch button to fill available width:
-
-<Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
-    {/* Add screenshot here */}
-  </Tab>
-  <Tab value="Code">
-```dart
-Button(
-  onPressed: () {},
-  fullWidth: true,
-  child: Text('Full Width Button'),
 )
 ```
   </Tab>

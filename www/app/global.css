@@ -397,7 +397,10 @@
 }
 
 [data-state="active"][role="tabpanel"].bg-fd-background.rounded-xl {
-  background-color: red !important;
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+}
+
+.prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)){
+  margin : 0px !important;
 }

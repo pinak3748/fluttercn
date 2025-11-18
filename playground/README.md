@@ -1,6 +1,6 @@
-# Flutter CN Playground
+# fluttercn Playground
 
-A testing environment for developing and showcasing Flutter CN components.
+A testing environment for developing and showcasing fluttercn components.
 
 ## Overview
 

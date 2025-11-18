@@ -1,0 +1,322 @@
+---
+title: Checkbox
+description: A customizable checkbox component with labels, descriptions, and error states
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Installation
+```bash
+npx fluttercn@latest add checkbox
+```
+
+## Usage
+
+### Basic Checkbox
+
+A simple checkbox with a label:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/checkbox/checkbox_basic.png"
+      alt="Basic checkbox component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+bool isChecked = false;
+
+Checkbox(
+  value: isChecked,
+  label: 'Accept terms and conditions',
+  onChanged: (value) {
+    setState(() => isChecked = value ?? false);
+  },
+)
+```
+  </Tab>
+</Tabs>
+
+### With Description
+
+Provide additional context below the label:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/checkbox/checkbox_with_description.png"
+      alt="Checkbox with description preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Checkbox(
+  value: enableNotifications,
+  label: 'Enable notifications',
+  description: 'Receive email notifications about your account activity',
+  onChanged: (value) {
+    setState(() => enableNotifications = value ?? false);
+  },
+)
+```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+Three sizes to match your design:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/checkbox/checkbox_sizes.png"
+      alt="Checkbox sizes preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Small
+Checkbox(
+  value: true,
+  label: 'Small checkbox',
+  size: CheckboxSize.sm,
+  onChanged: (value) {},
+)
+
+// Medium (default)
+Checkbox(
+  value: true,
+  label: 'Medium checkbox',
+  size: CheckboxSize.md,
+  onChanged: (value) {},
+)
+
+// Large
+Checkbox(
+  value: true,
+  label: 'Large checkbox',
+  size: CheckboxSize.lg,
+  onChanged: (value) {},
+)
+```
+  </Tab>
+</Tabs>
+
+### Disabled State
+
+Prevent user interaction:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/checkbox/checkbox_disabled.png"
+      alt="Disabled checkbox preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Checkbox(
+  value: true,
+  label: 'Disabled checkbox',
+  disabled: true,
+  onChanged: (value) {},
+)
+```
+  </Tab>
+</Tabs>
+
+### Error State
+
+Show validation errors:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/checkbox/checkbox_error.png"
+      alt="Checkbox error state preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Checkbox(
+  value: false,
+  label: 'Accept terms and conditions',
+  error: true,
+  errorText: 'You must accept the terms to continue',
+  onChanged: (value) {},
+)
+```
+  </Tab>
+</Tabs>
+
+### Checkbox Group
+
+Manage multiple related checkboxes:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/checkbox/checkbox_group.png"
+      alt="Checkbox group preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+List<String> selectedOptions = ['Option 1'];
+
+CheckboxGroup(
+  options: ['Option 1', 'Option 2', 'Option 3'],
+  selectedValues: selectedOptions,
+  onChanged: (values) {
+    setState(() => selectedOptions = values);
+  },
+)
+```
+  </Tab>
+</Tabs>
+
+
+## Examples
+
+### Form Validation
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/checkbox/checkbox_exmaple.png"
+      alt="Form validation example"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+class SignupForm extends StatefulWidget {
+  @override
+  State<SignupForm> createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
+  bool acceptTerms = false;
+  bool attemptedSubmit = false;
+
+  void _handleSubmit() {
+    setState(() => attemptedSubmit = true);
+    
+    if (!acceptTerms) {
+      return; // Show error
+    }
+    
+    // Process form
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // ... other form fields
+        
+        Checkbox(
+          value: acceptTerms,
+          label: 'I accept the terms and conditions',
+          error: attemptedSubmit && !acceptTerms,
+          errorText: attemptedSubmit && !acceptTerms
+              ? 'You must accept the terms to continue'
+              : null,
+          onChanged: (value) {
+            setState(() => acceptTerms = value ?? false);
+          },
+        ),
+        
+        AppTheme.gapLg,
+        
+        Button(
+          onPressed: _handleSubmit,
+          child: Text('Sign Up'),
+        ),
+      ],
+    );
+  }
+}
+```
+  </Tab>
+</Tabs>
+
+
+## API Reference
+
+### Checkbox
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `bool?` | required | Current checkbox state (true, false, or null) |
+| `onChanged` | `ValueChanged<bool?>?` | required | Callback when state changes |
+| `label` | `String?` | `null` | Label text next to checkbox |
+| `description` | `String?` | `null` | Description text below label |
+| `size` | `CheckboxSize` | `md` | Checkbox size |
+| `disabled` | `bool` | `false` | Whether checkbox is disabled |
+| `error` | `bool` | `false` | Show error state styling |
+| `errorText` | `String?` | `null` | Error message below checkbox |
+| `tristate` | `bool` | `false` | Allow indeterminate (null) state |
+
+### CheckboxGroup
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `options` | `List<String>` | required | List of checkbox options |
+| `selectedValues` | `List<String>` | required | Currently selected values |
+| `onChanged` | `ValueChanged<List<String>>` | required | Callback when selection changes |
+| `size` | `CheckboxSize` | `md` | Size for all checkboxes |
+| `disabled` | `bool` | `false` | Disable all checkboxes |
+| `direction` | `Axis` | `vertical` | Layout direction |
+| `spacing` | `double` | `12` | Spacing between checkboxes |
+
+### CheckboxSize
+
+- `sm` - 16px checkbox
+- `md` - 20px checkbox (default)
+- `lg` - 24px checkbox
+
+## Features
+
+- **Three States** - Checked, unchecked, and indeterminate support
+- **Labels & Descriptions** - Built-in support for accessible labels
+- **Error Handling** - Show validation errors with custom messages
+- **Flexible Sizing** - Three sizes to match your design
+- **Animations** - Smooth press animation and state transitions
+- **Checkbox Groups** - Manage multiple related checkboxes
+- **Themed** - Automatically adapts to light/dark mode
+- **Accessible** - Proper labels and hover states
+
+<Callout type="info">
+Checkboxes include a subtle scale animation when pressed for tactile feedback.
+</Callout>
+
+<Callout type="warn">
+When using `tristate: true`, the value cycles through `false → true → null → false` on each tap.
+</Callout>
+
+## Best Practices
+
+- Use labels to make checkboxes accessible and clear
+- Add descriptions for complex options that need explanation
+- Show error states with specific messages to guide users
+- Use indeterminate state for "select all" functionality
+- Group related checkboxes with `CheckboxGroup`
+- Disable checkboxes that cannot be changed (like required settings)
+- Keep labels concise—use descriptions for additional details
+
+## Accessibility
+
+- Labels are clickable and associated with their checkboxes
+- Error messages provide clear feedback for validation
+- Disabled state prevents interaction and changes visual appearance
+- Hover states indicate interactivity
+- Proper cursor changes on hover

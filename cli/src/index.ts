@@ -15,8 +15,8 @@ program
 
 program
   .command("init")
-  .description("Initialize Flutter CN in your Flutter project")
-  .summary("Set up Flutter CN configuration and theme")
+  .description("Initialize fluttercn in your Flutter project")
+  .summary("Set up fluttercn configuration and theme")
   .action(initCommand);
 
 program

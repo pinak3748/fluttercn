@@ -3,8 +3,8 @@ title: Card
 description: A versatile container component for grouping related content
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { Callout } from 'fumadocs-ui/components/callout';
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 
 ## Installation
 ```bash
@@ -17,66 +17,39 @@ npx fluttercn@latest add card
 
 A simple card with custom content:
 
-<Tabs items={['Preview', 'Code']}>
+<Tabs items={["Preview", "Code"]}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/card/card_basic.png"
+      alt="Basic card component preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
-CNCard(
-  child: Text('Card content goes here'),
-)
-```
-  </Tab>
-</Tabs>
-
-### Card with Header
-
-Use the composable structure for cards with titles and descriptions:
-
-<Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
-    {/* Add screenshot here */}
-  </Tab>
-  <Tab value="Code">
-```dart
-CNCard(
-  header: CardHeader(
-    title: CardTitle('Card Title'),
-    description: CardDescription('Card description text'),
-  ),
-  content: CardContent(
-    child: Text('Your content here'),
-  ),
-)
-```
-  </Tab>
-</Tabs>
-
-### Card with Footer
-
-Add actions or additional information in the footer:
-
-<Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
-    {/* Add screenshot here */}
-  </Tab>
-  <Tab value="Code">
-```dart
-CNCard(
-  header: CardHeader(
+Card(
+  header: const CardHeader(
     title: CardTitle('Complete Card'),
     description: CardDescription('With all sections'),
   ),
   content: CardContent(
-    child: Text('Main content area'),
+    child: Text(
+      'Use the content slot for your main information or body copy.',
+      style: TextStyle(color: AppTheme.textSecondary),
+    ),
   ),
   footer: CardFooter(
     child: Row(
       children: [
-        ElevatedButton(
+        Button(
           onPressed: () {},
-          child: Text('Action'),
+          child: const Text('Primary Action'),
+        ),
+        AppTheme.gapHorizontalSm,
+        Button(
+          variant: ButtonVariant.ghost,
+          onPressed: () {},
+          child: const Text('Secondary'),
         ),
       ],
     ),
@@ -92,11 +65,15 @@ Cards can be made tappable with the `onTap` callback:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/card/card_interactive.png"
+      alt="Interactive card preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
-CNCard(
+Card(
   onTap: () {
     print('Card tapped');
   },
@@ -116,13 +93,17 @@ CNCard(
 
 Visually separate sections with dividers:
 
-<Tabs items={['Preview', 'Code']}>
+<Tabs items={["Preview", "Code"]}>
   <Tab value="Preview">
-    {/* Add screenshot here */}
+    <MobileScreenshot
+      src="/previews/card/card_with_divider.png"
+      alt="Card with divider preview"
+      width={360}
+    />
   </Tab>
   <Tab value="Code">
 ```dart
-CNCard(
+Card(
   showDividers: true,
   header: CardHeader(
     title: CardTitle('Sectioned Card'),
@@ -139,56 +120,104 @@ CNCard(
   </Tab>
 </Tabs>
 
+## Examples
+
+### Profile Card
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/card/card_profile_example.png"
+      alt="Profile card preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Card(
+  header: const CardHeader(
+    title: CardTitle('John Doe'),
+    description: CardDescription('Software Engineer'),
+  ),
+  content: CardContent(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Email: john@example.com'),
+        AppTheme.gapSm,
+        const Text('Location: San Francisco, CA'),
+        AppTheme.gapSm,
+        Row(
+          children: const [
+            Icon(Icons.star, color: Colors.amber),
+            SizedBox(width: 4),
+            Text('Top-rated mentor'),
+          ],
+        ),
+      ],
+    ),
+  ),
+  footer: CardFooter(
+    child: Button(
+      onPressed: () {},
+      child: const Text('View Profile'),
+    ),
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
 ## API Reference
 
-### CNCard
+### Card
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `header` | `CardHeader?` | `null` | Header section with title and description |
-| `content` | `CardContent?` | `null` | Main content area |
-| `footer` | `CardFooter?` | `null` | Footer section for actions |
-| `child` | `Widget?` | `null` | Single child for simple cards (cannot be used with header/content/footer) |
-| `onTap` | `VoidCallback?` | `null` | Callback when card is tapped |
-| `padding` | `EdgeInsets?` | `null` | Custom padding (only for single child mode) |
-| `showDividers` | `bool` | `false` | Show dividers between sections |
+| Property       | Type            | Default | Description                                                               |
+| -------------- | --------------- | ------- | ------------------------------------------------------------------------- |
+| `header`       | `CardHeader?`   | `null`  | Header section with title and description                                 |
+| `content`      | `CardContent?`  | `null`  | Main content area                                                         |
+| `footer`       | `CardFooter?`   | `null`  | Footer section for actions                                                |
+| `child`        | `Widget?`       | `null`  | Single child for simple cards (cannot be used with header/content/footer) |
+| `onTap`        | `VoidCallback?` | `null`  | Callback when card is tapped                                              |
+| `padding`      | `EdgeInsets?`   | `null`  | Custom padding (only for single child mode)                               |
+| `showDividers` | `bool`          | `false` | Show dividers between sections                                            |
 
 ### CardHeader
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `title` | `CardTitle?` | `null` | Card title widget |
-| `description` | `CardDescription?` | `null` | Card description widget |
-| `child` | `Widget?` | `null` | Custom header content (cannot be used with title/description) |
-| `padding` | `EdgeInsets?` | `null` | Custom padding |
+| Property      | Type               | Default | Description                                                   |
+| ------------- | ------------------ | ------- | ------------------------------------------------------------- |
+| `title`       | `CardTitle?`       | `null`  | Card title widget                                             |
+| `description` | `CardDescription?` | `null`  | Card description widget                                       |
+| `child`       | `Widget?`          | `null`  | Custom header content (cannot be used with title/description) |
+| `padding`     | `EdgeInsets?`      | `null`  | Custom padding                                                |
 
 ### CardTitle
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `text` | `String` | required | The title text |
-| `style` | `TextStyle?` | `null` | Custom text style |
+| Property | Type         | Default  | Description       |
+| -------- | ------------ | -------- | ----------------- |
+| `text`   | `String`     | required | The title text    |
+| `style`  | `TextStyle?` | `null`   | Custom text style |
 
 ### CardDescription
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `text` | `String` | required | The description text |
-| `style` | `TextStyle?` | `null` | Custom text style |
+| Property | Type         | Default  | Description          |
+| -------- | ------------ | -------- | -------------------- |
+| `text`   | `String`     | required | The description text |
+| `style`  | `TextStyle?` | `null`   | Custom text style    |
 
 ### CardContent
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `child` | `Widget` | required | Content widget |
-| `padding` | `EdgeInsets?` | `null` | Custom padding |
+| Property  | Type          | Default  | Description    |
+| --------- | ------------- | -------- | -------------- |
+| `child`   | `Widget`      | required | Content widget |
+| `padding` | `EdgeInsets?` | `null`   | Custom padding |
 
 ### CardFooter
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `child` | `Widget` | required | Footer widget |
-| `padding` | `EdgeInsets?` | `null` | Custom padding |
+| Property  | Type          | Default  | Description    |
+| --------- | ------------- | -------- | -------------- |
+| `child`   | `Widget`      | required | Footer widget  |
+| `padding` | `EdgeInsets?` | `null`   | Custom padding |
 
 ## Features
 
@@ -198,43 +227,17 @@ CNCard(
 - **Themed** - Automatically adapts to your app's theme
 - **Dividers** - Optional visual separation between sections
 
-## Examples
-
-### Profile Card
-```dart
-CNCard(
-  header: CardHeader(
-    title: CardTitle('John Doe'),
-    description: CardDescription('Software Engineer'),
-  ),
-  content: CardContent(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Email: john@example.com'),
-        AppTheme.gapSm,
-        Text('Location: San Francisco, CA'),
-      ],
-    ),
-  ),
-  footer: CardFooter(
-    child: ElevatedButton(
-      onPressed: () {},
-      child: Text('View Profile'),
-    ),
-  ),
-)
-```
 
 <Callout type="info">
-Cards automatically handle hover states and press animations when `onTap` is provided.
+  Cards automatically handle hover states and press animations when `onTap` is
+  provided.
 </Callout>
 
 ## Customization
 
 ### Custom Padding
 ```dart
-CNCard(
+Card(
   header: CardHeader(
     title: CardTitle('Custom Spacing'),
     padding: EdgeInsets.all(24),
@@ -259,5 +262,6 @@ CardTitle(
 ```
 
 <Callout type="warn">
-Do not use both `child` and `header/content/footer` together. Choose either the simple single-child approach or the composable structure.
+  Do not use both `child` and `header/content/footer` together. Choose either
+  the simple single-child approach or the composable structure.
 </Callout>

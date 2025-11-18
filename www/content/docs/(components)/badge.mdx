@@ -1,0 +1,330 @@
+---
+title: Badge
+description: Small labels for displaying status, categories, and metadata
+---
+
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+
+## Installation
+```bash
+npx fluttercn@latest add badge
+```
+
+## Usage
+
+### Basic Badge
+
+Simple badge with text:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/badge/badge_basic.png"
+      alt="Basic badge component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Badge(label: 'New')
+```
+  </Tab>
+</Tabs>
+
+### Variants
+
+Seven variants for different contexts:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/badge/badge_variants.png"
+      alt="Basic badge component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Default - Primary color
+Badge(
+  label: 'Default',
+  variant: BadgeVariant.default_,
+)
+
+// Secondary - Subtle gray
+Badge(
+  label: 'Secondary',
+  variant: BadgeVariant.secondary,
+)
+
+// Destructive - Red for errors
+Badge(
+  label: 'Destructive',
+  variant: BadgeVariant.destructive,
+)
+
+// Outline - Transparent with border
+Badge(
+  label: 'Outline',
+  variant: BadgeVariant.outline,
+)
+
+// Success - Green for positive states
+Badge(
+  label: 'Success',
+  variant: BadgeVariant.success,
+)
+
+// Warning - Yellow for caution
+Badge(
+  label: 'Warning',
+  variant: BadgeVariant.warning,
+)
+
+// Info - Blue for information
+Badge(
+  label: 'Info',
+  variant: BadgeVariant.info,
+)
+```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+Three sizes for different contexts:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/badge/badge_sizes.png"
+      alt="Basic badge component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Small
+Badge(
+  label: 'Small',
+  size: BadgeSize.sm,
+)
+
+// Medium (default)
+Badge(
+  label: 'Medium',
+  size: BadgeSize.md,
+)
+
+// Large
+Badge(
+  label: 'Large',
+  size: BadgeSize.lg,
+)
+```
+  </Tab>
+</Tabs>
+
+### With Icon
+
+Add icons for visual context:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/badge/badge_with_icons.png"
+      alt="Basic badge component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Leading icon
+Badge(
+  label: 'Verified',
+  icon: Icon(Icons.check_circle, size: 12),
+  variant: BadgeVariant.success,
+)
+
+// Trailing icon
+Badge(
+  label: 'External',
+  icon: Icon(Icons.open_in_new, size: 12),
+  iconPosition: IconPosition.trailing,
+)
+```
+  </Tab>
+</Tabs>
+
+### With Dot
+
+Minimal style with status dot:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/badge/badge_dots.png"
+      alt="Basic badge component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Badge(
+  label: 'Online',
+  showDot: true,
+  variant: BadgeVariant.success,
+)
+
+Badge(
+  label: 'Offline',
+  showDot: true,
+  variant: BadgeVariant.secondary,
+)
+```
+  </Tab>
+</Tabs>
+
+### Removable Badge
+
+Badge with remove button:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/badge/badge_with_removable.png"
+      alt="Basic badge component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Badge(
+  label: 'Tag Name',
+  variant: BadgeVariant.secondary,
+  onRemove: () {
+    print('Badge removed');
+  },
+)
+```
+  </Tab>
+</Tabs>
+
+## Examples
+
+### Product Tags
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/badge/badge_example.png"
+      alt="Basic badge component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Badge(label: 'Electronics'),
+Badge(
+  label: 'Sale',
+  variant: BadgeVariant.destructive,
+),
+Badge(
+  label: 'New',
+  variant: BadgeVariant.success,
+),
+Badge(
+  label: 'Featured',
+  variant: BadgeVariant.warning,
+),
+```
+  </Tab>
+</Tabs>
+
+## API Reference
+
+### Badge
+
+| Property       | Type            | Default    | Description                                  |
+| -------------- | --------------- | ---------- | -------------------------------------------- |
+| `label`        | `String`        | required   | Badge text content                           |
+| `variant`      | `BadgeVariant`  | `default_` | Color scheme variant                         |
+| `size`         | `BadgeSize`     | `md`       | Badge size                                   |
+| `icon`         | `Widget?`       | `null`     | Optional icon                                |
+| `iconPosition` | `IconPosition`  | `leading`  | Icon placement                               |
+| `showDot`      | `bool`          | `false`    | Show status dot instead of filled background |
+| `onRemove`     | `VoidCallback?` | `null`     | Shows remove button when provided            |
+| `onTap`        | `VoidCallback?` | `null`     | Makes badge clickable                        |
+
+### CountBadge
+
+| Property   | Type           | Default    | Description                            |
+| ---------- | -------------- | ---------- | -------------------------------------- |
+| `count`    | `int`          | required   | Number to display                      |
+| `max`      | `int?`         | `null`     | Maximum count (shows max+ if exceeded) |
+| `variant`  | `BadgeVariant` | `default_` | Color scheme variant                   |
+| `size`     | `BadgeSize`    | `sm`       | Badge size                             |
+| `showZero` | `bool`         | `false`    | Show badge when count is 0             |
+
+### StatusBadge
+
+Named constructors for common status types:
+
+- `StatusBadge.online()` - Green with "Online" label
+- `StatusBadge.offline()` - Gray with "Offline" label
+- `StatusBadge.pending()` - Yellow with "Pending" label
+- `StatusBadge.active()` - Green with "Active" label
+- `StatusBadge.inactive()` - Gray with "Inactive" label
+- `StatusBadge.error()` - Red with "Error" label
+
+### BadgeVariant
+
+- `default_` - Primary color (black/white theme)
+- `secondary` - Subtle gray background
+- `destructive` - Red for errors or warnings
+- `outline` - Transparent with border
+- `success` - Green for positive states
+- `warning` - Yellow for caution
+- `info` - Blue for information
+
+### BadgeSize
+
+- `sm` - Small (10px text)
+- `md` - Medium (12px text, default)
+- `lg` - Large (14px text)
+
+## Features
+
+- **Seven Variants** - Different colors for different contexts
+- **Multiple Sizes** - Small, medium, and large
+- **Icons** - Leading or trailing icon support
+- **Dot Indicator** - Minimal style with status dot
+- **Removable** - Optional close button
+- **Interactive** - Tap handling support
+- **Count Badges** - Special badges for counts with max limits
+- **Status Badges** - Pre-configured for common statuses
+- **Themed** - Adapts to light/dark mode
+
+
+<Callout type="info">
+  Badges automatically adjust their text color for optimal contrast against the
+  background color.
+</Callout>
+
+<Callout type="warn">
+  When using `showDot: true`, the badge becomes transparent with just a colored
+  dot indicator—useful for minimal status displays.
+</Callout>
+
+## Best Practices
+
+- Use **default** for primary information or branding
+- Use **secondary** for less important tags or metadata
+- Use **destructive** sparingly for errors or critical actions
+- Use **outline** when you need subtle, non-intrusive badges
+- Use **success**, **warning**, and **info** for status indicators
+- Keep badge text short (1-2 words ideally)
+- Use `CountBadge` with `max` to prevent overflow on high counts
+- Combine with dots (`showDot: true`) for cleaner status indicators
+- Use `StatusBadge` helpers for consistent status displays
