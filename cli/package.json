@@ -1,6 +1,6 @@
 {
   "name": "fluttercn",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "fluttercn is a library of native components for Flutter. It provides a set of components that are easy to use and customize.",
   "license": "MIT",
   "type": "module",
