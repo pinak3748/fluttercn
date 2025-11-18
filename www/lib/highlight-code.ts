@@ -7,6 +7,7 @@ export const transformers = [
       if (node.tagName === "code") {
         const raw = this.source
         node.properties["__raw__"] = raw
+        node.properties["data-raw"] = raw
 
         if (raw.startsWith("npm install")) {
           node.properties["__npm__"] = raw

@@ -1,0 +1,263 @@
+---
+title: Card
+description: A versatile container component for grouping related content
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Installation
+```bash
+npx fluttercn@latest add card
+```
+
+## Usage
+
+### Basic Card
+
+A simple card with custom content:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    {/* Add screenshot here */}
+  </Tab>
+  <Tab value="Code">
+```dart
+CNCard(
+  child: Text('Card content goes here'),
+)
+```
+  </Tab>
+</Tabs>
+
+### Card with Header
+
+Use the composable structure for cards with titles and descriptions:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    {/* Add screenshot here */}
+  </Tab>
+  <Tab value="Code">
+```dart
+CNCard(
+  header: CardHeader(
+    title: CardTitle('Card Title'),
+    description: CardDescription('Card description text'),
+  ),
+  content: CardContent(
+    child: Text('Your content here'),
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+### Card with Footer
+
+Add actions or additional information in the footer:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    {/* Add screenshot here */}
+  </Tab>
+  <Tab value="Code">
+```dart
+CNCard(
+  header: CardHeader(
+    title: CardTitle('Complete Card'),
+    description: CardDescription('With all sections'),
+  ),
+  content: CardContent(
+    child: Text('Main content area'),
+  ),
+  footer: CardFooter(
+    child: Row(
+      children: [
+        ElevatedButton(
+          onPressed: () {},
+          child: Text('Action'),
+        ),
+      ],
+    ),
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+### Interactive Card
+
+Cards can be made tappable with the `onTap` callback:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    {/* Add screenshot here */}
+  </Tab>
+  <Tab value="Code">
+```dart
+CNCard(
+  onTap: () {
+    print('Card tapped');
+  },
+  header: CardHeader(
+    title: CardTitle('Clickable Card'),
+    description: CardDescription('Tap to interact'),
+  ),
+  content: CardContent(
+    child: Text('This card responds to taps'),
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+### Card with Dividers
+
+Visually separate sections with dividers:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    {/* Add screenshot here */}
+  </Tab>
+  <Tab value="Code">
+```dart
+CNCard(
+  showDividers: true,
+  header: CardHeader(
+    title: CardTitle('Sectioned Card'),
+    description: CardDescription('With dividers'),
+  ),
+  content: CardContent(
+    child: Text('Content section'),
+  ),
+  footer: CardFooter(
+    child: Text('Footer section'),
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+## API Reference
+
+### CNCard
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `header` | `CardHeader?` | `null` | Header section with title and description |
+| `content` | `CardContent?` | `null` | Main content area |
+| `footer` | `CardFooter?` | `null` | Footer section for actions |
+| `child` | `Widget?` | `null` | Single child for simple cards (cannot be used with header/content/footer) |
+| `onTap` | `VoidCallback?` | `null` | Callback when card is tapped |
+| `padding` | `EdgeInsets?` | `null` | Custom padding (only for single child mode) |
+| `showDividers` | `bool` | `false` | Show dividers between sections |
+
+### CardHeader
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `title` | `CardTitle?` | `null` | Card title widget |
+| `description` | `CardDescription?` | `null` | Card description widget |
+| `child` | `Widget?` | `null` | Custom header content (cannot be used with title/description) |
+| `padding` | `EdgeInsets?` | `null` | Custom padding |
+
+### CardTitle
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `text` | `String` | required | The title text |
+| `style` | `TextStyle?` | `null` | Custom text style |
+
+### CardDescription
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `text` | `String` | required | The description text |
+| `style` | `TextStyle?` | `null` | Custom text style |
+
+### CardContent
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `child` | `Widget` | required | Content widget |
+| `padding` | `EdgeInsets?` | `null` | Custom padding |
+
+### CardFooter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `child` | `Widget` | required | Footer widget |
+| `padding` | `EdgeInsets?` | `null` | Custom padding |
+
+## Features
+
+- **Composable Structure** - Build cards with separate header, content, and footer sections
+- **Interactive** - Built-in tap handling with scale animation and hover effects
+- **Flexible** - Use simple single-child mode or full composable structure
+- **Themed** - Automatically adapts to your app's theme
+- **Dividers** - Optional visual separation between sections
+
+## Examples
+
+### Profile Card
+```dart
+CNCard(
+  header: CardHeader(
+    title: CardTitle('John Doe'),
+    description: CardDescription('Software Engineer'),
+  ),
+  content: CardContent(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Email: john@example.com'),
+        AppTheme.gapSm,
+        Text('Location: San Francisco, CA'),
+      ],
+    ),
+  ),
+  footer: CardFooter(
+    child: ElevatedButton(
+      onPressed: () {},
+      child: Text('View Profile'),
+    ),
+  ),
+)
+```
+
+<Callout type="info">
+Cards automatically handle hover states and press animations when `onTap` is provided.
+</Callout>
+
+## Customization
+
+### Custom Padding
+```dart
+CNCard(
+  header: CardHeader(
+    title: CardTitle('Custom Spacing'),
+    padding: EdgeInsets.all(24),
+  ),
+  content: CardContent(
+    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+    child: Text('Custom padded content'),
+  ),
+)
+```
+
+### Custom Styles
+```dart
+CardTitle(
+  'Styled Title',
+  style: TextStyle(
+    fontSize: 24,
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+  ),
+)
+```
+
+<Callout type="warn">
+Do not use both `child` and `header/content/footer` together. Choose either the simple single-child approach or the composable structure.
+</Callout>

@@ -1,0 +1,5 @@
+{
+  "title": "Components",
+  "pages": ["button", "card", "input", "select", "textarea", "checkbox", "radio", "switch", "slider", "progress", "tooltip", "popover", "dropdown", "modal", "alert", "badge", "avatar", "button-group", "card-group", "input-group", "select-group", "textarea-group", "checkbox-group", "radio-group", "switch-group", "slider-group", "progress-group", "tooltip-group", "popover-group", "dropdown-group", "modal-group", "alert-group", "badge-group", "avatar-group", "button-group", "card-group", "input-group", "select-group", "textarea-group", "checkbox-group", "radio-group", "switch-group", "slider-group", "progress-group", "tooltip-group", "popover-group", "dropdown-group", "modal-group", "alert-group", "badge-group", "avatar-group"],
+  "defaultOpen": false
+}
