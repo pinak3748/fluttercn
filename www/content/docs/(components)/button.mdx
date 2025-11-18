@@ -1,0 +1,347 @@
+---
+title: Button
+description: A versatile button component with multiple variants and sizes
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Installation
+```bash
+npx fluttercn@latest add button
+```
+
+## Usage
+
+### Variants
+
+Buttons come in six different variants for different use cases:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/button/button_variants.png"
+      alt="Button variants preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Primary - Main call-to-action
+Button(
+  onPressed: () {},
+  child: Text('Primary'),
+)
+
+// Secondary - Less prominent actions
+Button(
+  onPressed: () {},
+  variant: ButtonVariant.secondary,
+  child: Text('Secondary'),
+)
+
+// Destructive - Dangerous actions
+Button(
+  onPressed: () {},
+  variant: ButtonVariant.destructive,
+  child: Text('Destructive'),
+)
+
+// Outline - Alternative style
+Button(
+  onPressed: () {},
+  variant: ButtonVariant.outline,
+  child: Text('Outline'),
+)
+
+// Ghost - Minimal style
+Button(
+  onPressed: () {},
+  variant: ButtonVariant.ghost,
+  child: Text('Ghost'),
+)
+
+// Link - Text link style
+Button(
+  onPressed: () {},
+  variant: ButtonVariant.link,
+  child: Text('Link'),
+)
+```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+Three predefined sizes plus an icon-only size:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/button/button_sizes.png"
+      alt="Button sizes preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Small
+Button(
+  onPressed: () {},
+  size: ButtonSize.sm,
+  child: Text('Small'),
+)
+
+// Medium (default)
+Button(
+  onPressed: () {},
+  size: ButtonSize.md,
+  child: Text('Medium'),
+)
+
+// Large
+Button(
+  onPressed: () {},
+  size: ButtonSize.lg,
+  child: Text('Large'),
+)
+
+// Icon only
+Button(
+  onPressed: () {},
+  size: ButtonSize.icon,
+  child: Icon(Icons.settings),
+)
+```
+  </Tab>
+</Tabs>
+
+### With Icons
+
+Add leading or trailing icons to buttons:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/button/button_icons.png"
+      alt="Button icons preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Leading icon (default)
+Button(
+  onPressed: () {},
+  icon: Icon(Icons.mail),
+  child: Text('Email'),
+)
+
+// Trailing icon
+Button(
+  onPressed: () {},
+  icon: Icon(Icons.arrow_forward),
+  iconPosition: IconPosition.trailing,
+  child: Text('Continue'),
+)
+```
+  </Tab>
+</Tabs>
+
+### Loading State
+
+Show loading indicator while processing:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/button/button_loading.png"
+      alt="Button loading state preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Button(
+  onPressed: () {},
+  loading: true,
+  child: Text('Loading...'),
+)
+```
+  </Tab>
+</Tabs>
+
+### Disabled State
+
+Disable button interactions:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/button/button_disabled.png"
+      alt="Button disabled state preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Button(
+  onPressed: () {},
+  disabled: true,
+  child: Text('Disabled'),
+)
+```
+  </Tab>
+</Tabs>
+
+## API Reference
+
+### Button
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `onPressed` | `VoidCallback?` | required | Callback when button is pressed |
+| `child` | `Widget` | required | Button content (typically Text widget) |
+| `variant` | `ButtonVariant` | `primary` | Visual style variant |
+| `size` | `ButtonSize` | `md` | Button size |
+| `disabled` | `bool` | `false` | Whether button is disabled |
+| `loading` | `bool` | `false` | Show loading indicator |
+| `fullWidth` | `bool` | `false` | Expand to fill container width |
+| `icon` | `Widget?` | `null` | Optional icon |
+| `iconPosition` | `IconPosition` | `leading` | Icon placement (leading or trailing) |
+
+### ButtonVariant
+
+- `primary` - Filled button with primary color (main actions)
+- `secondary` - Filled button with secondary color (less emphasis)
+- `destructive` - Filled button with error color (dangerous actions)
+- `outline` - Transparent with border (alternative actions)
+- `ghost` - Minimal style with hover effect (subtle actions)
+- `link` - Text-only link style (navigation)
+
+### ButtonSize
+
+- `sm` - Small (32px height)
+- `md` - Medium (40px height)
+- `lg` - Large (48px height)
+- `icon` - Icon only (40px height, square)
+
+### IconPosition
+
+- `leading` - Icon before text
+- `trailing` - Icon after text
+
+## Features
+
+- **Six Variants** - Different styles for different contexts
+- **Multiple Sizes** - From small to large plus icon-only
+- **Loading States** - Built-in loading spinner
+- **Icons** - Leading or trailing icon support
+- **Animations** - Press animation and smooth transitions
+- **Themed** - Automatically adapts to light/dark mode
+- **Accessible** - Proper disabled and loading states
+
+## Examples
+
+### Delete Confirmation
+```dart
+Column(
+  children: [
+    Text('Are you sure you want to delete this item?'),
+    AppTheme.gapLg,
+    Row(
+      children: [
+        Expanded(
+          child: Button(
+            onPressed: () {},
+            variant: ButtonVariant.outline,
+            fullWidth: true,
+            child: Text('Cancel'),
+          ),
+        ),
+        AppTheme.gapHorizontalMd,
+        Expanded(
+          child: Button(
+            onPressed: () {},
+            variant: ButtonVariant.destructive,
+            fullWidth: true,
+            child: Text('Delete'),
+          ),
+        ),
+      ],
+    ),
+  ],
+)
+```
+
+### Navigation Button
+```dart
+Button(
+  onPressed: () {
+    Navigator.push(context, ...);
+  },
+  variant: ButtonVariant.link,
+  icon: Icon(Icons.arrow_forward),
+  iconPosition: IconPosition.trailing,
+  child: Text('Learn More'),
+)
+```
+
+### Loading Button
+```dart
+class MyWidget extends StatefulWidget {
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  bool _isLoading = false;
+
+  Future<void> _handleSubmit() async {
+    setState(() => _isLoading = true);
+    
+    await Future.delayed(Duration(seconds: 2));
+    
+    setState(() => _isLoading = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Button(
+      onPressed: _handleSubmit,
+      loading: _isLoading,
+      child: Text('Submit'),
+    );
+  }
+}
+```
+
+### Icon Button
+```dart
+Button(
+  onPressed: () {},
+  size: ButtonSize.icon,
+  variant: ButtonVariant.ghost,
+  child: Icon(Icons.more_vert),
+)
+```
+
+<Callout type="info">
+Buttons automatically scale down when pressed and show appropriate cursor on hover.
+</Callout>
+
+<Callout type="warn">
+When `loading` is true, the button becomes non-interactive. Set `loading` to false when the operation completes.
+</Callout>
+
+## Best Practices
+
+- Use `primary` for main actions (submit, save, continue)
+- Use `secondary` for alternative actions
+- Use `destructive` for dangerous actions (delete, remove)
+- Use `outline` for secondary actions with more emphasis than ghost
+- Use `ghost` for tertiary actions or toolbar buttons
+- Use `link` for navigation or less prominent actions
+- Always provide meaningful text in the `child` widget
+- Use `disabled` state for unavailable actions
+- Show `loading` state during async operations

@@ -11,7 +11,7 @@ enum BadgeVariant {
   outline,
   success,
   warning,
-  info
+  info,
 }
 
 /// Badge sizes
@@ -25,22 +25,22 @@ enum BadgeSize { sm, md, lg }
 /// Example:
 /// ```dart
 /// // Basic badge
-/// CNBadge(label: 'New')
+/// Badge(label: 'New')
 ///
 /// // Badge with variant
-/// CNBadge(
+/// Badge(
 ///   label: 'Success',
 ///   variant: BadgeVariant.success,
 /// )
 ///
 /// // Badge with icon
-/// CNBadge(
+/// Badge(
 ///   label: 'Verified',
 ///   icon: Icon(Icons.check, size: 12),
 /// )
 /// ```
-class CNBadge extends StatelessWidget {
-  const CNBadge({
+class Badge extends StatelessWidget {
+  const Badge({
     super.key,
     required this.label,
     this.variant = BadgeVariant.default_,
@@ -335,13 +335,11 @@ class CountBadge extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final displayCount = max != null && count > max! ? '$max+' : count.toString();
+    final displayCount = max != null && count > max!
+        ? '$max+'
+        : count.toString();
 
-    return CNBadge(
-      label: displayCount,
-      variant: variant,
-      size: size,
-    );
+    return Badge(label: displayCount, variant: variant, size: size);
   }
 }
 
@@ -363,34 +361,34 @@ class StatusBadge extends StatelessWidget {
   });
 
   const StatusBadge.online({super.key, this.size = BadgeSize.sm})
-      : label = 'Online',
-        variant = BadgeVariant.success,
-        showDot = true;
+    : label = 'Online',
+      variant = BadgeVariant.success,
+      showDot = true;
 
   const StatusBadge.offline({super.key, this.size = BadgeSize.sm})
-      : label = 'Offline',
-        variant = BadgeVariant.secondary,
-        showDot = true;
+    : label = 'Offline',
+      variant = BadgeVariant.secondary,
+      showDot = true;
 
   const StatusBadge.pending({super.key, this.size = BadgeSize.sm})
-      : label = 'Pending',
-        variant = BadgeVariant.warning,
-        showDot = true;
+    : label = 'Pending',
+      variant = BadgeVariant.warning,
+      showDot = true;
 
   const StatusBadge.active({super.key, this.size = BadgeSize.sm})
-      : label = 'Active',
-        variant = BadgeVariant.success,
-        showDot = true;
+    : label = 'Active',
+      variant = BadgeVariant.success,
+      showDot = true;
 
   const StatusBadge.inactive({super.key, this.size = BadgeSize.sm})
-      : label = 'Inactive',
-        variant = BadgeVariant.secondary,
-        showDot = true;
+    : label = 'Inactive',
+      variant = BadgeVariant.secondary,
+      showDot = true;
 
   const StatusBadge.error({super.key, this.size = BadgeSize.sm})
-      : label = 'Error',
-        variant = BadgeVariant.destructive,
-        showDot = true;
+    : label = 'Error',
+      variant = BadgeVariant.destructive,
+      showDot = true;
 
   final String label;
   final BadgeVariant variant;
@@ -399,11 +397,6 @@ class StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CNBadge(
-      label: label,
-      variant: variant,
-      size: size,
-      showDot: showDot,
-    );
+    return Badge(label: label, variant: variant, size: size, showDot: showDot);
   }
 }

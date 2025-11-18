@@ -1,0 +1,325 @@
+---
+title: Avatar
+description: Display user profile pictures with automatic fallbacks and status indicators
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Installation
+```bash
+npx fluttercn@latest add avatar
+```
+
+## Usage
+
+### Basic Avatar
+
+Display an avatar with automatic fallback to initials:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/avatar/avatar_basic.png"
+      alt="Basic avatar component preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Network image with fallback
+Avatar(
+  imageUrl: 'https://example.com/avatar.jpg',
+  fallbackName: 'John Doe',
+)
+
+// Asset image
+Avatar(
+  assetPath: 'assets/avatar.png',
+  fallbackName: 'Jane Smith',
+)
+
+// Initials only
+Avatar(
+  fallbackName: 'Alice Bob',
+)
+```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+Six predefined sizes from extra small to extra large:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/avatar/avatar_sizes.png"
+      alt="Avatar sizes preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Avatar(
+  fallbackName: 'John Doe',
+  size: AvatarSize.xs,  // 24px
+)
+
+Avatar(
+  fallbackName: 'John Doe',
+  size: AvatarSize.sm,  // 32px
+)
+
+Avatar(
+  fallbackName: 'John Doe',
+  size: AvatarSize.md,  // 40px (default)
+)
+
+Avatar(
+  fallbackName: 'John Doe',
+  size: AvatarSize.lg,  // 48px
+)
+
+Avatar(
+  fallbackName: 'John Doe',
+  size: AvatarSize.xl,  // 64px
+)
+
+Avatar(
+  fallbackName: 'John Doe',
+  size: AvatarSize.xl2, // 80px
+)
+```
+  </Tab>
+</Tabs>
+
+### Shapes
+
+Avatars support both circular and rectangular shapes:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/avatar/avatar_shapes.png"
+      alt="Avatar shapes preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Circle (default)
+Avatar(
+  fallbackName: 'John Doe',
+  shape: BoxShape.circle,
+)
+
+// Rectangle with default radius
+Avatar(
+  fallbackName: 'Jane Smith',
+  shape: BoxShape.rectangle,
+)
+
+// Rectangle with custom radius
+Avatar(
+  fallbackName: 'Alice Bob',
+  shape: BoxShape.rectangle,
+  borderRadius: 8,
+)
+```
+  </Tab>
+</Tabs>
+
+### Status Indicator
+
+Show online/offline status with a colored dot:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/avatar/avatar_status.png"
+      alt="Avatar status indicator preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Online status (green)
+Avatar(
+  fallbackName: 'John Doe',
+  showStatus: true,
+  statusColor: AppTheme.success,
+  statusPosition: StatusPosition.bottomRight,
+)
+
+// Busy status (red)
+Avatar(
+  fallbackName: 'Jane Smith',
+  showStatus: true,
+  statusColor: AppTheme.error,
+  statusPosition: StatusPosition.bottomRight,
+)
+
+// Away status (yellow)
+Avatar(
+  fallbackName: 'Alice Bob',
+  showStatus: true,
+  statusColor: AppTheme.warning,
+  statusPosition: StatusPosition.topRight,
+)
+```
+  </Tab>
+</Tabs>
+
+### Avatar Group
+
+Display multiple avatars with overlap:
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/avatar/avatar_group.png"
+      alt="Avatar group preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+AvatarGroup(
+  avatars: [
+    Avatar(fallbackName: 'John Doe'),
+    Avatar(fallbackName: 'Jane Smith'),
+    Avatar(fallbackName: 'Alice Bob'),
+    Avatar(fallbackName: 'Bob Wilson'),
+    Avatar(fallbackName: 'Carol Johnson'),
+  ],
+  max: 3,  // Show 3 avatars + count
+  size: AvatarSize.md,
+  spacing: -8,  // Overlap amount
+)
+```
+  </Tab>
+</Tabs>
+
+
+## Examples
+
+### User Profile Header
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/avatar/avatar_example.png"
+      alt="User profile header example"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Row(
+  children: [
+    Avatar(
+      imageUrl: user.avatarUrl,
+      fallbackName: user.name,
+      size: AvatarSize.xl,
+      showStatus: true,
+      statusColor: user.isOnline ? AppTheme.success : AppTheme.textDisabled,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ProfilePage(user)),
+        );
+      },
+    ),
+    AppTheme.gapHorizontalLg,
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(user.name, style: AppTheme.titleLarge),
+        Text(user.email, style: AppTheme.bodySmall),
+      ],
+    ),
+  ],
+)
+```
+  </Tab>
+</Tabs>
+
+## API Reference
+
+### Avatar
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `imageUrl` | `String?` | `null` | Network image URL |
+| `assetPath` | `String?` | `null` | Asset image path |
+| `fallbackName` | `String?` | `null` | Name for generating initials |
+| `fallbackWidget` | `Widget?` | `null` | Custom fallback widget |
+| `size` | `AvatarSize` | `md` | Avatar size |
+| `shape` | `BoxShape` | `circle` | Avatar shape (circle or rectangle) |
+| `borderRadius` | `double?` | `null` | Custom border radius (rectangle only) |
+| `showBorder` | `bool` | `false` | Show border around avatar |
+| `borderColor` | `Color?` | `null` | Border color |
+| `borderWidth` | `double` | `2.0` | Border width |
+| `showStatus` | `bool` | `false` | Show status indicator |
+| `statusColor` | `Color?` | `null` | Status indicator color (defaults to success green) |
+| `statusPosition` | `StatusPosition` | `bottomRight` | Status indicator position |
+| `onTap` | `VoidCallback?` | `null` | Callback when avatar is tapped |
+
+### AvatarGroup
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `avatars` | `List<Avatar>` | required | List of avatars to display |
+| `max` | `int?` | `null` | Maximum avatars to show (rest shown as +N) |
+| `size` | `AvatarSize` | `md` | Size for all avatars |
+| `spacing` | `double` | `-8.0` | Spacing between avatars (negative for overlap) |
+| `showBorder` | `bool` | `true` | Show border around avatars |
+
+### AvatarSize
+
+- `xs` - 24px
+- `sm` - 32px
+- `md` - 40px (default)
+- `lg` - 48px
+- `xl` - 64px
+- `xl2` - 80px
+
+### StatusPosition
+
+- `topRight` - Top right corner
+- `topLeft` - Top left corner
+- `bottomRight` - Bottom right corner (default)
+- `bottomLeft` - Bottom left corner
+
+## Features
+
+- **Smart Fallbacks** - Automatic fallback chain: network image → asset image → initials → default icon
+- **Loading States** - Built-in loading indicator for network images
+- **Error Handling** - Graceful fallback when images fail to load
+- **Initials Generation** - Automatic initials from names (e.g., "John Doe" → "JD")
+- **Status Indicators** - Optional colored dot for online/offline status
+- **Avatar Groups** - Display multiple avatars with overlap and count
+- **Interactive** - Optional tap handling with cursor feedback
+- **Flexible Shapes** - Circle or rounded rectangle with custom radius
+- **Themed** - Automatically adapts to light/dark mode
+
+<Callout type="info">
+Network images show a loading spinner while loading. If loading fails, the avatar automatically falls back to initials or the default icon.
+</Callout>
+
+<Callout type="warn">
+Do not use both `imageUrl` and `assetPath` together. Use one or the other for the image source.
+</Callout>
+
+## Fallback Priority
+
+When displaying an avatar, the component follows this fallback chain:
+
+1. **Network Image** (`imageUrl`) - If provided and loads successfully
+2. **Asset Image** (`assetPath`) - If network image fails or no URL provided
+3. **Custom Fallback** (`fallbackWidget`) - If custom widget provided
+4. **Initials** (`fallbackName`) - Generated from name (e.g., "John Doe" → "JD")
+5. **Default Icon** - Person icon if nothing else is available
+
+This ensures your avatars always display something meaningful, even when images fail to load.

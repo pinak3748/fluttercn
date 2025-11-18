@@ -31,7 +31,7 @@ export function preflightInit(cwd: string): PreflightResult {
     const themePath = join(cwd, "lib", "config", "theme.dart");
     return {
       success: true,
-      warning: chalk.yellow("⚠ Flutter CN is already initialized"),
+      warning: chalk.yellow("⚠ fluttercn is already initialized"),
       details: [
         chalk.gray(`  Theme file exists at: ${themePath}`),
         chalk.gray("  Skipping initialization..."),

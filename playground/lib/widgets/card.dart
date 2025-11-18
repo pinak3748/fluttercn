@@ -9,7 +9,7 @@ import '../config/theme.dart';
 ///
 /// Example with composable structure:
 /// ```dart
-/// CNCard(
+/// Card(
 ///   header: CardHeader(
 ///     title: CardTitle('Card Title'),
 ///     description: CardDescription('Card description text'),
@@ -25,12 +25,12 @@ import '../config/theme.dart';
 ///
 /// Example with single child (backward compatible):
 /// ```dart
-/// CNCard(
+/// Card(
 ///   child: YourContentWidget(),
 /// )
 /// ```
-class CNCard extends StatefulWidget {
-  const CNCard({
+class Card extends StatefulWidget {
+  const Card({
     super.key,
     this.header,
     this.content,
@@ -68,10 +68,10 @@ class CNCard extends StatefulWidget {
   final bool showDividers;
 
   @override
-  State<CNCard> createState() => _CNCardState();
+  State<Card> createState() => _CNCardState();
 }
 
-class _CNCardState extends State<CNCard> with SingleTickerProviderStateMixin {
+class _CNCardState extends State<Card> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isHovered = false;

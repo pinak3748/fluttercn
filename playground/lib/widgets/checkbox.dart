@@ -12,27 +12,27 @@ enum CheckboxSize { sm, md, lg }
 /// Example:
 /// ```dart
 /// // Basic checkbox
-/// CNCheckbox(
+/// Checkbox(
 ///   value: true,
 ///   onChanged: (value) => print(value),
 /// )
 ///
 /// // Checkbox with label
-/// CNCheckbox(
+/// Checkbox(
 ///   value: false,
 ///   label: 'Accept terms and conditions',
 ///   onChanged: (value) {},
 /// )
 ///
 /// // Indeterminate checkbox
-/// CNCheckbox(
+/// Checkbox(
 ///   value: null,
 ///   tristate: true,
 ///   onChanged: (value) {},
 /// )
 /// ```
-class CNCheckbox extends StatefulWidget {
-  const CNCheckbox({
+class Checkbox extends StatefulWidget {
+  const Checkbox({
     super.key,
     required this.value,
     required this.onChanged,
@@ -73,10 +73,11 @@ class CNCheckbox extends StatefulWidget {
   final bool tristate;
 
   @override
-  State<CNCheckbox> createState() => _CNCheckboxState();
+  State<Checkbox> createState() => _CNCheckboxState();
 }
 
-class _CNCheckboxState extends State<CNCheckbox> with SingleTickerProviderStateMixin {
+class _CNCheckboxState extends State<Checkbox>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isHovered = false;
@@ -124,7 +125,9 @@ class _CNCheckboxState extends State<CNCheckbox> with SingleTickerProviderStateM
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      cursor: widget.disabled ? SystemMouseCursors.basic : SystemMouseCursors.click,
+      cursor: widget.disabled
+          ? SystemMouseCursors.basic
+          : SystemMouseCursors.click,
       child: GestureDetector(
         onTap: _handleTap,
         onTapDown: (_) {
@@ -165,8 +168,8 @@ class _CNCheckboxState extends State<CNCheckbox> with SingleTickerProviderStateM
                                   color: widget.disabled
                                       ? AppTheme.textDisabled
                                       : widget.error
-                                          ? AppTheme.error
-                                          : AppTheme.textPrimary,
+                                      ? AppTheme.error
+                                      : AppTheme.textPrimary,
                                 ),
                               ),
                               if (widget.description != null) ...[
@@ -190,7 +193,9 @@ class _CNCheckboxState extends State<CNCheckbox> with SingleTickerProviderStateM
                   if (widget.errorText != null) ...[
                     SizedBox(height: AppTheme.spaceXs),
                     Padding(
-                      padding: EdgeInsets.only(left: _getCheckboxSize() + _getGapSize()),
+                      padding: EdgeInsets.only(
+                        left: _getCheckboxSize() + _getGapSize(),
+                      ),
                       child: Text(
                         widget.errorText!,
                         style: TextStyle(
@@ -220,10 +225,7 @@ class _CNCheckboxState extends State<CNCheckbox> with SingleTickerProviderStateM
       height: size,
       decoration: BoxDecoration(
         color: _getBackgroundColor(),
-        border: Border.all(
-          color: _getBorderColor(),
-          width: _getBorderWidth(),
-        ),
+        border: Border.all(color: _getBorderColor(), width: _getBorderWidth()),
         borderRadius: BorderRadius.circular(_getBorderRadius()),
       ),
       child: isChecked || isIndeterminate
@@ -270,7 +272,9 @@ class _CNCheckboxState extends State<CNCheckbox> with SingleTickerProviderStateM
   }
 
   double _getBorderWidth() {
-    return widget.value == true || (widget.value == null && widget.tristate) ? 0 : 2;
+    return widget.value == true || (widget.value == null && widget.tristate)
+        ? 0
+        : 2;
   }
 
   double _getGapSize() {
@@ -400,7 +404,7 @@ class CheckboxGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = options.map((option) {
       final isSelected = selectedValues.contains(option);
-      return CNCheckbox(
+      return Checkbox(
         value: isSelected,
         label: option,
         size: size,
@@ -422,18 +426,16 @@ class CheckboxGroup extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: children
-            .map((child) => Padding(
-                  padding: EdgeInsets.only(bottom: spacing),
-                  child: child,
-                ))
+            .map(
+              (child) => Padding(
+                padding: EdgeInsets.only(bottom: spacing),
+                child: child,
+              ),
+            )
             .toList(),
       );
     } else {
-      return Wrap(
-        spacing: spacing,
-        runSpacing: spacing,
-        children: children,
-      );
+      return Wrap(spacing: spacing, runSpacing: spacing, children: children);
     }
   }
 }

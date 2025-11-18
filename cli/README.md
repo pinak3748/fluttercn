@@ -1,10 +1,10 @@
-# Flutter CN CLI
+# fluttercn CLI
 
-Flutter CN is a CLI tool that helps you quickly add native Flutter components to your projects. It provides a curated library of reusable UI components that are easy to use and customize.
+fluttercn is a CLI tool that helps you quickly add native Flutter components to your projects. It provides a curated library of reusable UI components that are easy to use and customize.
 
 ## Installation
 
-Install Flutter CN globally using npm:
+Install fluttercn globally using npm:
 
 ```bash
 npm install -g fluttercn
@@ -18,7 +18,7 @@ yarn global add fluttercn
 
 ## Quick Start
 
-1. **Initialize Flutter CN in your project:**
+1. **Initialize fluttercn in your project:**
    ```bash
    fluttercn init
    ```
@@ -47,7 +47,7 @@ yarn global add fluttercn
 
 ### `init`
 
-Initialize Flutter CN in your Flutter project. This command:
+Initialize fluttercn in your Flutter project. This command:
 
 - Validates that you're in a Flutter project
 - Creates the theme configuration file at `lib/config/theme.dart`
@@ -58,14 +58,14 @@ Initialize Flutter CN in your Flutter project. This command:
 fluttercn init
 ```
 
-**Note:** You only need to run this once per project. If Flutter CN is already initialized, you'll see a warning message.
+**Note:** You only need to run this once per project. If fluttercn is already initialized, you'll see a warning message.
 
 ### `add <component>`
 
 Add a Flutter component to your project. This command:
 
 - Validates your Flutter project
-- Checks if Flutter CN is initialized
+- Checks if fluttercn is initialized
 - Verifies component dependencies
 - Copies component files to your project
 - Automatically fixes import paths
@@ -115,7 +115,7 @@ A flexible card component with header, content, and footer sections.
 ```dart
 import 'package:your_app/widgets/common/card.dart';
 
-CNCard(
+Card(
   header: CardHeader(
     title: CardTitle('Card Title'),
     description: CardDescription('Card description'),
@@ -164,9 +164,9 @@ Button(
 
 Make sure you're running the command from the root of your Flutter project (where `pubspec.yaml` is located).
 
-### "Flutter CN is not initialized"
+### "fluttercn is not initialized"
 
-Run `fluttercn init` first to set up Flutter CN in your project.
+Run `fluttercn init` first to set up fluttercn in your project.
 
 ### "Component not found"
 

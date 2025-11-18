@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'config/theme.dart';
-import 'presentations/showcase_dashboard.dart';
+import 'presentations/preview_component.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter CN Playground',
+      title: 'fluttercn Playground',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
