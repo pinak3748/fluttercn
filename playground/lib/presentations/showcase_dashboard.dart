@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../widgets/button.dart';
 import '../widgets/card.dart';
-import 'button_showcase.dart';
-import 'card_showcase.dart';
-import 'avatar_showcase.dart';
-import 'badge_showcase.dart';
-import 'checkbox_showcase.dart';
-import 'tooltip_showcase.dart';
+import 'button/button_showcase_list.dart';
+import 'card/card_showcase_list.dart';
+import 'avatar/avatar_showcase_list.dart';
+import 'badge/badge_showcase_list.dart';
+import 'checkbox/checkbox_showcase_list.dart';
+import 'tooltip/tooltip_showcase_list.dart';
 
 class ShowcaseDashboard extends StatelessWidget {
   const ShowcaseDashboard({super.key, required this.onThemeToggle});
@@ -65,22 +65,22 @@ class ShowcaseDashboard extends StatelessWidget {
     Widget page;
     switch (component) {
       case 'Button':
-        page = const ButtonShowcase();
+        page = const ButtonShowcaseList();
         break;
       case 'Card':
-        page = const CardShowcase();
+        page = const CardShowcaseList();
         break;
       case 'Avatar':
-        page = const AvatarShowcase();
+        page = const AvatarShowcaseList();
         break;
       case 'Badge':
-        page = const BadgeShowcase();
+        page = const BadgeShowcaseList();
         break;
       case 'Checkbox':
-        page = const CheckboxShowcase();
+        page = const CheckboxShowcaseList();
         break;
       case 'Tooltip':
-        page = const TooltipShowcase();
+        page = const TooltipShowcaseList();
         break;
       default:
         return;
