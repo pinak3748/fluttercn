@@ -6,6 +6,7 @@ export function baseOptions(options?: {
   hideLinks?: boolean
 }): BaseLayoutProps {
   return {
+    githubUrl: "https://github.com/pinak3748/fluttercn",
     nav: {
       title: (
         <>
@@ -19,7 +20,7 @@ export function baseOptions(options?: {
           fluttercn
         </>
       ),
-      url: "/",
+      url: "/"
     },
     ...(options?.hideLinks
       ? {}
