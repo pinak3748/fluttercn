@@ -1,12 +1,12 @@
-import { RootProvider } from "fumadocs-ui/provider/next"
-import { Toaster } from "sonner"
+import { Analytics } from '@vercel/analytics/next';
+import { RootProvider } from "fumadocs-ui/provider/next";
+import { Toaster } from "sonner";
+import "./global.css";
 
-import "./global.css"
+import { Metadata } from "next";
 
-import { Metadata } from "next"
-
-import { siteConfig } from "@/lib/config"
-import { fontVariables } from "@/lib/fonts"
+import { siteConfig } from "@/lib/config";
+import { fontVariables } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -68,6 +68,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
       <body className="flex flex-col min-h-screen">
         <RootProvider>{children}</RootProvider>
         <Toaster />
+        <Analytics />
       </body>
     </html>
   )
