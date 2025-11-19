@@ -20,11 +20,6 @@ export const siteConfig = {
         label: "Blocks",
         isAvailable: false
       },
-      {
-        href: "/docs/installation",
-        label: "Themes",
-        isAvailable: false
-      },
     ],
   }
   

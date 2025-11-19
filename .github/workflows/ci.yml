@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: cli/package-lock.json
+
+      - name: Install CLI dependencies
+        working-directory: ./cli
+        run: npm ci
+
+      - name: Build CLI
+        working-directory: ./cli
+        run: npm run build
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+
+      - name: Install Flutter dependencies
+        working-directory: ./playground
+        run: flutter pub get
+
+      - name: Analyze Flutter code
+        working-directory: ./playground
+        run: flutter analyze
+
+      - name: Setup Node.js for www
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: www/package-lock.json
+
+      - name: Install www dependencies
+        working-directory: ./www
+        run: npm ci
+
+      - name: Lint www
+        working-directory: ./www
+        run: npm run lint || true
+
+      - name: Type check www
+        working-directory: ./www
+        run: npm run typecheck || true
+

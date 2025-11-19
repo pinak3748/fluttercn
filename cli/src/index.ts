@@ -10,7 +10,7 @@ const program = new Command();
 program
   .name("fluttercn")
   .description("Add Flutter components to your apps")
-  .version("0.0.1")
+  .version("0.0.4")
   .addHelpCommand("help [command]", "Display help for a command");
 
 program

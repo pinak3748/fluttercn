@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or Discussion
+    url: https://github.com/pinak3748/fluttercn/discussions
+    about: Ask questions or start a discussion
+  - name: Documentation
+    url: https://fluttercn.site
+    about: Check our documentation
+

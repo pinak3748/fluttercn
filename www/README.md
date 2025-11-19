@@ -1,45 +1,48 @@
-# www
+# Documentation Website
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+The fluttercn documentation website built with Next.js and Fumadocs.
 
-Run development server:
+## Development
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm, yarn, or pnpm
+
+### Setup
+
+```bash
+npm install
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-pnpm dev
-# or
-yarn dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Open http://localhost:3000 to view the documentation.
 
-## Explore
+### Build
 
-In the project, you can see:
+```bash
+npm run build
+```
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+### Other Scripts
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+- `npm run lint` - Lint the codebase
+- `npm run typecheck` - Type check TypeScript files
+- `npm run format:write` - Format code with Prettier
+- `npm run format:check` - Check code formatting
 
-### Fumadocs MDX
+## Project Structure
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+- `app/` - Next.js app router pages
+- `content/docs/` - Documentation content (MDX files)
+- `components/` - React components
+- `lib/` - Utility functions and configuration
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+## Adding Documentation
 
-## Learn More
-
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+Documentation is written in MDX format and located in `content/docs/`. See [Fumadocs documentation](https://fumadocs.dev) for details on writing MDX content.

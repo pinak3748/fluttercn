@@ -8,7 +8,15 @@
   "files": [
     "dist"
   ],
-  "keywords": ["flutter", "components", "ui", "cli", "fluttercn","flutter-cn","widgets","native components"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pinak3748/fluttercn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pinak3748/fluttercn/issues"
+  },
+  "homepage": "https://fluttercn.site",
+  "keywords": ["flutter", "fluttercn", "flutter-ui","mobile-ui","mobile-components","mobile-widgets","native-components","native-ui","flutter-design"],
 "bin": {
   "fluttercn": "./dist/index.js"
 },
