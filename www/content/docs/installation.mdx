@@ -1,0 +1,103 @@
+---
+title: Installation
+description: Get started with fluttercn in your Flutter project
+---
+
+# Installation
+
+Get fluttercn up and running in your Flutter project in just a few steps.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- **Node.js** (v14 or higher) - for the CLI tool
+- **Flutter SDK** - installed and configured on your machine
+- **A Flutter project** - or create a new one
+
+## Step 1: Install the CLI
+
+Install fluttercn CLI globally using npm:
+
+```bash
+npm install -g fluttercn
+```
+
+Or using yarn:
+
+```bash
+yarn global add fluttercn
+```
+
+## Step 2: Initialize Your Project
+
+Navigate to your Flutter project directory and initialize fluttercn:
+
+```bash
+cd your-flutter-project
+fluttercn init
+```
+
+This command will:
+
+- Validate that you're in a Flutter project
+- Create the theme configuration file at `lib/config/theme.dart`
+- Set up the necessary structure for components
+
+**Note:** You only need to run this once per project. If fluttercn is already initialized, you'll see a warning message.
+
+## Step 3: Add Your First Component
+
+Now you're ready to add components! First, let's see what's available:
+
+```bash
+fluttercn list
+```
+
+Or use the short alias:
+
+```bash
+fluttercn ls
+```
+
+Then add a component to your project:
+
+```bash
+fluttercn add button
+```
+
+Or add multiple components:
+
+```bash
+fluttercn add card
+fluttercn add button
+```
+
+The components will be copied to `lib/widgets/common/` in your project, and you can start using them right away!
+
+## What's Next?
+
+- Browse all available [components](/docs/components)
+- Learn about [theming](/docs/theming) your components
+- Check out component examples and usage patterns
+
+## Troubleshooting
+
+<Accordions type="single">
+  <Accordion title="Flutter project validation failed">
+    Make sure you're running the command from the root of your Flutter project (where `pubspec.yaml` is located).
+  </Accordion>
+
+<Accordion title="fluttercn is not initialized">
+  Run `fluttercn init` first to set up fluttercn in your project.
+</Accordion>
+
+<Accordion title="Component not found">
+  Use `fluttercn list` to see all available components. Make sure you're using
+  the correct component name (case-insensitive).
+</Accordion>
+
+  <Accordion title="Missing required dependencies">
+    Some components require the theme configuration. Make sure you've run `fluttercn init` before adding components.
+  </Accordion>
+</Accordions>

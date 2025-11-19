@@ -1,14 +1,22 @@
 {
   "name": "fluttercn",
-  "version": "0.0.2",
-  "description": "Flutter CN is a library of native components for Flutter. It provides a set of components that are easy to use and customize.",
+  "version": "0.0.4",
+  "description": "fluttercn is a library of native components for Flutter. It provides a set of components that are easy to use and customize.",
   "license": "MIT",
   "type": "module",
   "author": "Pinak Faldu",
   "files": [
     "dist"
   ],
-  "keywords": ["flutter", "components", "ui", "cli", "fluttercn","flutter-cn","widgets","native components"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pinak3748/fluttercn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pinak3748/fluttercn/issues"
+  },
+  "homepage": "https://fluttercn.site",
+  "keywords": ["flutter", "fluttercn", "flutter-ui","mobile-ui","mobile-components","mobile-widgets","native-components","native-ui","flutter-design"],
 "bin": {
   "fluttercn": "./dist/index.js"
 },

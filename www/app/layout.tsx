@@ -1,10 +1,12 @@
 import { RootProvider } from "fumadocs-ui/provider/next"
+import { Toaster } from "sonner"
 
 import "./global.css"
 
+import { Metadata } from "next"
+
 import { siteConfig } from "@/lib/config"
 import { fontVariables } from "@/lib/fonts"
-import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: {
@@ -13,7 +15,15 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
   description: siteConfig.description,
-  keywords: ["Flutter", "Components", "UI", "Fluttercn", "Flutter-cn", "Widgets", "Native components"],
+  keywords: [
+    "Flutter",
+    "Components",
+    "UI",
+    "Fluttercn",
+    "Flutter-cn",
+    "Widgets",
+    "Native components",
+  ],
   authors: [
     {
       name: siteConfig.name,
@@ -45,7 +55,7 @@ export const metadata: Metadata = {
     creator: "@fluttercn",
   },
   icons: {
-    icon: "/logo.png",
+    icon: "/logo-dark.png",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
@@ -57,6 +67,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
     <html lang="en" className={fontVariables} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
         <RootProvider>{children}</RootProvider>
+        <Toaster />
       </body>
     </html>
   )

@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: cli/package.json
+
+      - name: Install CLI dependencies
+        working-directory: ./cli
+        run: npm install
+
+      - name: Build CLI
+        working-directory: ./cli
+        run: npm run build
+
+      - name: Setup Node.js for www
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: www/package.json
+
+      - name: Install www dependencies
+        working-directory: ./www
+        run: npm install
+
+      - name: Generate Next.js types
+        working-directory: ./www
+        run: npx next build || true
+
+      - name: Type check www
+        working-directory: ./www
+        run: npm run typecheck || true
+

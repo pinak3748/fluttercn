@@ -38,7 +38,7 @@ export function validateFlutterProject(cwd: string = process.cwd()) {
 }
 
 /**
- * Checks if Flutter CN is already initialized
+ * Checks if fluttercn is already initialized
  * @param cwd - Current working directory
  * @returns boolean indicating if already initialized
  */

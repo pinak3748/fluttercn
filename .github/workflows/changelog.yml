@@ -1,0 +1,28 @@
+name: Update Changelog
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
+jobs:
+  check-changelog:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if CHANGELOG.md was updated
+        run: |
+          if git diff --name-only origin/${{ github.base_ref }}..HEAD | grep -q CHANGELOG.md; then
+            echo "CHANGELOG.md was updated ✓"
+          else
+            echo "⚠️ Warning: CHANGELOG.md was not updated"
+            echo "Please ensure CHANGELOG.md is updated for user-facing changes"
+            exit 0  # Don't fail, just warn
+          fi
+

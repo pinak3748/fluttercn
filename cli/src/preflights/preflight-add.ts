@@ -31,15 +31,15 @@ export function preflightAdd(cwd: string, componentName: string): PreflightResul
     };
   }
 
-  // Step 2: Check if Flutter CN is initialized
+  // Step 2: Check if fluttercn is initialized
   if (!isAlreadyInitialized(cwd)) {
     return {
       success: false,
-      error: chalk.red("✗ Flutter CN is not initialized"),
+      error: chalk.red("✗ fluttercn is not initialized"),
       details: [
         chalk.gray("  Please run ") +
           chalk.cyan("fluttercn init") +
-          chalk.gray(" first to set up Flutter CN."),
+          chalk.gray(" first to set up fluttercn."),
       ],
     };
   }

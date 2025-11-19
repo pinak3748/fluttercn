@@ -34,7 +34,22 @@ export default defineConfig({
             dark: "github-dark",
             light: "github-light-default",
           },
-          transformers,
+          transformers: [
+            ...transformers,
+            {
+              pre(node) {
+                // Enable line numbers by default
+                const codeElement = node.children?.find(
+                  (child: any) =>
+                    child.type === "element" && child.tagName === "code"
+                )
+                if (codeElement) {
+                  codeElement.properties = codeElement.properties || {}
+                  codeElement.properties["data-line-numbers"] = ""
+                }
+              },
+            },
+          ],
         },
       ])
 

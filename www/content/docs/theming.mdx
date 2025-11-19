@@ -1,0 +1,366 @@
+---
+title: Theming
+description: A comprehensive theming system for your Flutter app with light and dark mode support.
+---
+
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+
+<Callout type="info" title="Beta">
+  This theming system is currently in beta and may change in future releases.
+  Built with inspiration from shadcn/ui.
+</Callout>
+
+## Overview
+
+A complete design foundation for your Flutter app. Colors, typography, spacing, shadows—everything you need to build consistent, beautiful interfaces that work in both light and dark modes.
+
+## Installation
+
+```bash
+npx fluttercn@latest init
+```
+
+This creates `lib/config/theme.dart` with the complete theming system.
+
+## Setup
+
+Wire up the theme in your app:
+
+<Tabs items={["Light & Dark", "Light Only", "Dark Only"]}>
+  <Tab value="Light & Dark">
+```dart
+MaterialApp(
+  theme: AppTheme.lightTheme,
+  darkTheme: AppTheme.darkTheme,
+  themeMode: ThemeMode.system, // Respects system preference
+  home: HomeScreen(),
+)
+```
+  </Tab>
+  <Tab value="Light Only">
+```dart
+MaterialApp(
+  theme: AppTheme.lightTheme,
+  themeMode: ThemeMode.light,
+  home: HomeScreen(),
+)
+```
+  </Tab>
+  <Tab value="Dark Only">
+```dart
+MaterialApp(
+  theme: AppTheme.darkTheme,
+  themeMode: ThemeMode.dark,
+  home: HomeScreen(),
+)
+```
+  </Tab>
+</Tabs>
+
+## Colors
+
+### Semantic Colors
+
+Colors with meaning that adapt to light and dark themes:
+
+| Color                | Purpose             | Usage                         |
+| -------------------- | ------------------- | ----------------------------- |
+| `AppTheme.primary`   | Brand color         | Primary actions, focus states |
+| `AppTheme.secondary` | Supporting color    | Secondary UI elements         |
+| `AppTheme.success`   | Positive feedback   | Success states, confirmations |
+| `AppTheme.warning`   | Caution             | Warnings, important notices   |
+| `AppTheme.error`     | Destructive actions | Errors, validation failures   |
+| `AppTheme.info`      | Informational       | Help text, info messages      |
+
+### Text Colors
+
+Hierarchical text colors for visual structure:
+
+| Color                    | Opacity | Usage                     |
+| ------------------------ | ------- | ------------------------- |
+| `AppTheme.textPrimary`   | 100%    | Headings, primary content |
+| `AppTheme.textSecondary` | ~70%    | Body text, descriptions   |
+| `AppTheme.textTertiary`  | ~50%    | Captions, metadata        |
+| `AppTheme.textDisabled`  | ~40%    | Disabled states           |
+
+### Surface Colors
+
+Background and container colors:
+
+| Color                       | Purpose                          |
+| --------------------------- | -------------------------------- |
+| `AppTheme.background`       | Page backgrounds                 |
+| `AppTheme.surface`          | Cards, modals, elevated surfaces |
+| `AppTheme.surfaceVariant`   | Alternative surface color        |
+| `AppTheme.surfaceContainer` | Nested containers                |
+
+### Border Colors
+
+| Color                  | Usage                  |
+| ---------------------- | ---------------------- |
+| `AppTheme.border`      | Standard borders (1px) |
+| `AppTheme.borderLight` | Subtle separators      |
+| `AppTheme.borderFocus` | Focus indicators       |
+
+### Gray Scale
+
+11-step grayscale from 50 (lightest) to 950 (darkest):
+
+```dart
+AppTheme.gray50   // Almost white
+AppTheme.gray100  // Very light gray
+AppTheme.gray200  // Light gray
+AppTheme.gray300  // Medium-light gray
+AppTheme.gray400
+AppTheme.gray500  // True middle gray
+AppTheme.gray600
+AppTheme.gray700  // Medium-dark gray
+AppTheme.gray800  // Dark gray
+AppTheme.gray900  // Very dark gray
+AppTheme.gray950  // Almost black
+```
+
+<Callout>
+  Grayscale automatically inverts in dark mode—`gray50` becomes darkest,
+  `gray950` becomes lightest.
+</Callout>
+
+## Typography
+
+### Type Scale
+
+A systematic scale for text hierarchy:
+
+| Style               | Size | Weight    | Line Height | Use Case           |
+| ------------------- | ---- | --------- | ----------- | ------------------ |
+| **Display Large**   | 32px | Bold      | 1.2         | Hero sections      |
+| **Display Medium**  | 28px | Bold      | 1.2         | Page titles        |
+| **Display Small**   | 24px | Bold      | 1.2         | Section headers    |
+| **Headline Large**  | 20px | Semi-bold | 1.3         | Card headers       |
+| **Headline Medium** | 18px | Semi-bold | 1.3         | Subsections        |
+| **Headline Small**  | 16px | Semi-bold | 1.4         | List headers       |
+| **Title Large**     | 16px | Medium    | 1.4         | Card titles        |
+| **Title Medium**    | 14px | Medium    | 1.4         | Item titles        |
+| **Title Small**     | 12px | Medium    | 1.4         | Labels             |
+| **Body Large**      | 16px | Regular   | 1.6         | Large body text    |
+| **Body Medium**     | 14px | Regular   | 1.6         | Standard body text |
+| **Body Small**      | 12px | Regular   | 1.6         | Small body text    |
+| **Label Large**     | 14px | Medium    | 1.4         | Button text        |
+| **Label Medium**    | 12px | Medium    | 1.4         | Tags, badges       |
+| **Label Small**     | 10px | Medium    | 1.4         | Tiny labels        |
+
+```dart
+Text('Page Title', style: AppTheme.displayLarge)
+Text('Body content here', style: AppTheme.bodyMedium)
+```
+
+## Spacing
+
+### Space Scale
+
+Consistent spacing creates visual rhythm:
+
+| Token      | Value | Common Usage                     |
+| ---------- | ----- | -------------------------------- |
+| `spaceXs`  | 4px   | Tight spacing, icon gaps         |
+| `spaceSm`  | 8px   | Small gaps between related items |
+| `spaceMd`  | 12px  | Default spacing                  |
+| `spaceLg`  | 16px  | Section spacing                  |
+| `spaceXl`  | 20px  | Large gaps                       |
+| `space2xl` | 24px  | Major section spacing            |
+| `space3xl` | 32px  | Page-level spacing               |
+| `space4xl` | 40px  | Extra large spacing              |
+
+### Padding Helpers
+
+Pre-built padding for common patterns:
+
+**All Sides**
+
+```dart
+Container(padding: AppTheme.paddingSm)   // 8px all sides
+Container(padding: AppTheme.paddingMd)   // 12px all sides
+Container(padding: AppTheme.paddingLg)   // 16px all sides
+```
+
+**Horizontal Only**
+
+```dart
+Container(padding: AppTheme.paddingHorizontalSm)   // 8px left/right
+Container(padding: AppTheme.paddingHorizontalMd)   // 12px left/right
+Container(padding: AppTheme.paddingHorizontalLg)   // 16px left/right
+```
+
+**Vertical Only**
+
+```dart
+Container(padding: AppTheme.paddingVerticalSm)   // 8px top/bottom
+Container(padding: AppTheme.paddingVerticalMd)   // 12px top/bottom
+Container(padding: AppTheme.paddingVerticalLg)   // 16px top/bottom
+```
+
+### Gap Widgets
+
+For spacing in Columns and Rows:
+
+```dart
+Column(
+  children: [
+    Widget1(),
+    AppTheme.gapSm,      // 8px vertical gap
+    Widget2(),
+    AppTheme.gapMd,      // 12px vertical gap
+    Widget3(),
+  ],
+)
+
+Row(
+  children: [
+    Widget1(),
+    AppTheme.gapHorizontalLg,  // 16px horizontal gap
+    Widget2(),
+  ],
+)
+```
+
+## Border Radius
+
+Consistent corner radii for cohesive UI:
+
+| Token              | Radius | Visual Effect            |
+| ------------------ | ------ | ------------------------ |
+| `borderRadiusXs`   | 4px    | Subtle rounding          |
+| `borderRadiusSm`   | 6px    | Small components         |
+| `borderRadiusMd`   | 8px    | Standard rounding        |
+| `borderRadiusLg`   | 12px   | Cards, buttons (default) |
+| `borderRadiusXl`   | 16px   | Large cards              |
+| `borderRadius2xl`  | 20px   | Extra rounded            |
+| `borderRadius3xl`  | 24px   | Very rounded             |
+| `borderRadius4xl`  | 32px   | Extremely rounded        |
+| `borderRadiusFull` | 9999px | Perfect circles/pills    |
+
+```dart
+Container(
+  decoration: BoxDecoration(
+    borderRadius: AppTheme.borderRadiusLg,  // 12px corners
+  ),
+)
+```
+
+## Shadows
+
+Elevation system for depth and hierarchy:
+
+| Shadow     | Elevation | Usage                        |
+| ---------- | --------- | ---------------------------- |
+| `shadowSm` | 1dp       | Subtle lift (cards)          |
+| `shadowMd` | 2dp       | Standard elevation (buttons) |
+| `shadowLg` | 4dp       | Floating elements (dialogs)  |
+| `shadowXl` | 8dp       | Prominent elements (modals)  |
+
+```dart
+Container(
+  decoration: BoxDecoration(
+    boxShadow: AppTheme.shadowMd,
+  ),
+)
+```
+
+<Callout type="info">
+  Shadows automatically adjust opacity for light and dark themes.
+</Callout>
+
+## Motion
+
+### Duration
+
+Animation timing for smooth transitions:
+
+| Duration         | Time  | Usage                      |
+| ---------------- | ----- | -------------------------- |
+| `durationFast`   | 150ms | Micro-interactions, hovers |
+| `durationNormal` | 300ms | Standard transitions       |
+| `durationSlow`   | 500ms | Complex animations         |
+
+### Curves
+
+Easing functions for natural motion:
+
+| Curve            | Effect                           |
+| ---------------- | -------------------------------- |
+| `curveEaseIn`    | Slow start, fast end             |
+| `curveEaseOut`   | Fast start, slow end             |
+| `curveEaseInOut` | Smooth acceleration/deceleration |
+
+```dart
+AnimatedContainer(
+  duration: AppTheme.durationNormal,
+  curve: AppTheme.curveEaseInOut,
+)
+```
+
+## Customization
+
+### Changing Colors
+
+Edit `lib/config/theme.dart` to match your brand:
+
+```dart
+class CoreColors {
+  static const Color primary = Color(0xFF000000);  // Your brand color
+  static const Color success = Color(0xFF10B981);  // Your success color
+  // ...
+}
+```
+
+### Light/Dark Variations
+
+Customize theme-specific colors:
+
+```dart
+class LightColors {
+  static const Color textPrimary = Color(0xFF171717);  // Light mode text
+  // ...
+}
+
+class DarkColors {
+  static const Color textPrimary = Color(0xFFFAFAFA);  // Dark mode text
+  // ...
+}
+```
+
+<Callout type="warn">
+  Only modify `initializeTheme` if building custom components that need theme
+  access outside the widget tree. fluttercn components handle theme changes
+  automatically.
+</Callout>
+
+## Design Tokens
+
+The theme provides a complete token system—every value has a semantic name. Use tokens instead of hardcoded values for:
+
+- **Consistency** - Same spacing everywhere
+- **Maintainability** - Change once, update everywhere
+- **Theme Support** - Automatic light/dark adaptation
+- **Scalability** - Easy to extend and modify
+
+```dart
+// ❌ Don't do this
+Container(
+  padding: EdgeInsets.all(16),
+  decoration: BoxDecoration(
+    color: Color(0xFFFFFFFF),
+    borderRadius: BorderRadius.circular(12),
+  ),
+)
+
+// ✅ Do this
+Container(
+  padding: AppTheme.paddingLg,
+  decoration: BoxDecoration(
+    color: AppTheme.surface,
+    borderRadius: AppTheme.borderRadiusLg,
+  ),
+)
+```

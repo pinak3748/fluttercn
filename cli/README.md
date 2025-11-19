@@ -1,10 +1,17 @@
-# Flutter CN CLI
+<div align="center">
+  <img src="src/assets/logo.png" alt="fluttercn logo" width="120" />
+  
+  # fluttercn
+  
+  **Build beautiful Flutter apps with copy-paste components**
+  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![npm version](https://img.shields.io/npm/v/fluttercn.svg)](https://www.npmjs.com/package/fluttercn)
+</div>
 
-Flutter CN is a CLI tool that helps you quickly add native Flutter components to your projects. It provides a curated library of reusable UI components that are easy to use and customize.
+---
 
 ## Installation
-
-Install Flutter CN globally using npm:
 
 ```bash
 npm install -g fluttercn
@@ -18,165 +25,66 @@ yarn global add fluttercn
 
 ## Quick Start
 
-1. **Initialize Flutter CN in your project:**
+1. **Initialize fluttercn in your project:**
    ```bash
    fluttercn init
    ```
-   This sets up the theme configuration required for all components.
 
 2. **List available components:**
    ```bash
    fluttercn list
    ```
-   Or use the short alias:
-   ```bash
-   fluttercn ls
-   ```
 
-3. **Add a component to your project:**
+3. **Add a component:**
    ```bash
-   fluttercn add <component-name>
-   ```
-   For example:
-   ```bash
-   fluttercn add card
    fluttercn add button
+   fluttercn add card
    ```
 
 ## Commands
 
 ### `init`
+Initialize fluttercn in your Flutter project. Creates the theme configuration file at `lib/config/theme.dart`.
 
-Initialize Flutter CN in your Flutter project. This command:
-
-- Validates that you're in a Flutter project
-- Creates the theme configuration file at `lib/config/theme.dart`
-- Sets up the necessary structure for components
-
-**Usage:**
 ```bash
 fluttercn init
 ```
 
-**Note:** You only need to run this once per project. If Flutter CN is already initialized, you'll see a warning message.
-
 ### `add <component>`
+Add a Flutter component to your project. Components are copied to `lib/widgets/common/`.
 
-Add a Flutter component to your project. This command:
-
-- Validates your Flutter project
-- Checks if Flutter CN is initialized
-- Verifies component dependencies
-- Copies component files to your project
-- Automatically fixes import paths
-
-**Usage:**
 ```bash
 fluttercn add <component-name>
 ```
 
-**Examples:**
-```bash
-fluttercn add card
-fluttercn add button
-```
-
-**Features:**
-- If a file already exists, you'll be prompted to overwrite it
-- Import paths are automatically adjusted based on your project structure
-- Dependencies are checked before installation
-
 ### `list` (or `ls`)
-
 List all available components in the registry.
 
-**Usage:**
 ```bash
 fluttercn list
-```
-
-Or use the short alias:
-```bash
-fluttercn ls
-```
-
-This command displays:
-- Component names
-- Component descriptions
-- Usage examples
-
-## Available Components
-
-### Card
-
-A flexible card component with header, content, and footer sections.
-
-**Usage:**
-```dart
-import 'package:your_app/widgets/common/card.dart';
-
-CNCard(
-  header: CardHeader(
-    title: CardTitle('Card Title'),
-    description: CardDescription('Card description'),
-  ),
-  content: CardContent(
-    child: Text('Card content'),
-  ),
-)
-```
-
-### Button
-
-A customizable button component with multiple variants and sizes.
-
-**Usage:**
-```dart
-import 'package:your_app/widgets/common/button.dart';
-
-Button(
-  variant: ButtonVariant.primary,
-  size: ButtonSize.md,
-  onPressed: () {
-    // Handle button press
-  },
-  child: Text('Click me'),
-)
-
-// With icon
-Button(
-  variant: ButtonVariant.secondary,
-  onPressed: () {},
-  icon: Icon(Icons.add),
-  iconPosition: IconPosition.leading,
-  child: Text('Add Item'),
-)
 ```
 
 ## Requirements
 
 - Node.js (v14 or higher)
-- A Flutter project with `pubspec.yaml` and `lib/` directory
+- Flutter project with `pubspec.yaml` and `lib/` directory
 
 ## Troubleshooting
 
-### "Flutter project validation failed"
+**Flutter project validation failed**  
+Make sure you're running the command from the root of your Flutter project.
 
-Make sure you're running the command from the root of your Flutter project (where `pubspec.yaml` is located).
+**fluttercn is not initialized**  
+Run `fluttercn init` first to set up fluttercn in your project.
 
-### "Flutter CN is not initialized"
+**Component not found**  
+Use `fluttercn list` to see all available components.
 
-Run `fluttercn init` first to set up Flutter CN in your project.
+## Support
 
-### "Component not found"
-
-Use `fluttercn list` to see all available components. Make sure you're using the correct component name (case-insensitive).
-
-### "Missing required dependencies"
-
-Some components require the theme configuration. Make sure you've run `fluttercn init` before adding components.
+- 🐛 [Report Issues](https://github.com/pinak3748/fluttercn/issues)
+- 💬 [Discussions](https://github.com/pinak3748/fluttercn/discussions)
 
 ## License
 
 MIT
-

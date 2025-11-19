@@ -1,51 +1,109 @@
-import { ArrowRight02Icon } from "@hugeicons/core-free-icons"
-import { HugeiconsIcon } from "@hugeicons/react"
-import Link from "next/link"
+"use client"
 
-import { BenefitItem } from "@/components/benenfit-item"
+import { useState } from "react"
+import { ArrowRight02Icon, Copy01Icon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { toast } from "sonner"
+
+import { siteConfig } from "@/lib/config"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Section } from "@/lib/components/section"
-import { cn } from "@/lib/utils"
+import { BenefitItem } from "@/components/benenfit-item"
+import { Section } from "@/components/section"
 
 export default function HomePage() {
-  const commands = [
-    {
-      command: "npm install -g fluttercn",
-      description: "Installing Fluttercn CLI globally...",
-      subtext:
-        "We just started, but we have a lot planned. Join us on this journey!",
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
+  const [packageManager, setPackageManager] = useState<"npm" | "bun">("npm")
+
+  const packageManagers = {
+    npm: {
+      label: "npm",
+      logo: "/package_manager/npm.svg",
+      commands: [
+        {
+          command: "npm install -g fluttercn",
+          description: "Installing Fluttercn CLI globally...",
+          subtext:
+            "We just started, but we have a lot planned. Join us on this journey!",
+        },
+        {
+          command: "fluttercn init",
+          description: "Theme configuration created at lib/config/theme.dart",
+          subtext:
+            "Centralized theming to make your UI consistent and proper. Common widgets so you don't need to worry about components.",
+        },
+        {
+          command: "fluttercn add button",
+          subtext:
+            "As easy as writing a command. Get the component in your codebase, owning 100% of the code.",
+          description:
+            "Button component added to lib/widgets/common/button.dart",
+        },
+      ],
     },
-    {
-      command: "fluttercn init",
-      description: "Theme configuration created at lib/config/theme.dart",
-      subtext:
-        "Centralized theming to make your UI consistent and proper. Common widgets so you don't need to worry about components.",
+    bun: {
+      label: "bun",
+      logo: "/package_manager/bun.svg",
+      commands: [
+        {
+          command: "bun install --global fluttercn",
+          description: "Installing Fluttercn CLI globally with Bun...",
+          subtext:
+            "Fast installs with Bun. You're early, but we're building quickly!",
+        },
+        {
+          command: "bunx fluttercn init",
+          description: "Theme configuration created at lib/config/theme.dart",
+          subtext:
+            "Consistent theming across your Flutter app with centralized config.",
+        },
+        {
+          command: "bunx fluttercn add button",
+          subtext:
+            "Drop in a ready-made component, fully owned in your codebase.",
+          description:
+            "Button component added to lib/widgets/common/button.dart",
+        },
+      ],
     },
-    {
-      command: "fluttercn add button",
-      subtext:
-        "As easy as writing a command. Get the component in your codebase, owning 100% of the code.",
-      description: "Button component added to lib/widgets/common/button.dart",
-    },
-  ]
+  } as const
+
+  const commands = packageManagers[packageManager].commands
+
+  const copyToClipboard = async (text: string, index: number) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedIndex(index)
+      toast.success("Copied to clipboard!")
+      setTimeout(() => setCopiedIndex(null), 2000)
+    } catch (error) {
+      console.error("Failed to copy:", error)
+      toast.error("Failed to copy to clipboard")
+    }
+  }
+  const handlePackageManagerChange = (manager: "npm" | "bun") => {
+    setPackageManager(manager)
+    setCopiedIndex(null)
+  }
 
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="py-14">
+      <Section className="md:py-14">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-2 py-8 text-center md:py-16 lg:py-20 xl:gap-4">
             {/* Badge */}
             <Badge
               variant="secondary"
-              className="w-fit gap-1 border-transparent bg-primary text-primary-foreground px-4"
+              className="w-fit gap-1 cursor-none border-transparent bg-muted text-muted-foreground px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="flex size-2 rounded-full bg-blue-500" />
+              {/* <span className="flex size-2 rounded-full bg-blue-500" /> */}
+              <span className="text-xs font-medium mr-1 sm:mr-2">🎉</span>
               Free & Open Source
               <HugeiconsIcon
                 icon={ArrowRight02Icon}
-                size={24}
+                size={16}
+                className="sm:size-5"
                 color="currentColor"
                 strokeWidth={1.5}
               />
@@ -63,10 +121,10 @@ export default function HomePage() {
 
             <div className="flex items-center justify-center gap-2 pt-2">
               <Button asChild>
-                <a href="/docs/installation">Get Started</a>
+                <a href="/docs">Get Started</a>
               </Button>
               <Button variant="ghost" asChild>
-                <a href="/docs/components">View Components</a>
+                <a href="/docs/button">View Components</a>
               </Button>
             </div>
 
@@ -81,17 +139,55 @@ export default function HomePage() {
                 <span className="ml-3 text-xs text-muted-foreground font-mono tracking-wide">
                   Terminal
                 </span>
+                <div className="ml-auto flex items-center gap-1.5">
+                  {(Object.keys(packageManagers) as Array<"npm" | "bun">).map(
+                    (manager) => (
+                      <button
+                        key={manager}
+                        onClick={() => handlePackageManagerChange(manager)}
+                        className={`flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${
+                          packageManager === manager
+                            ? "border-border bg-background text-foreground"
+                            : "border-transparent text-muted-foreground hover:text-foreground"
+                        }`}
+                        aria-pressed={packageManager === manager}
+                      >
+                        <img
+                          src={packageManagers[manager].logo}
+                          alt={`${packageManagers[manager].label} logo`}
+                          className="size-4"
+                        />
+                        {packageManagers[manager].label}
+                      </button>
+                    )
+                  )}
+                </div>
               </div>
               <div className="px-6 py-5 space-y-6 font-mono text-sm bg-code text-code-foreground">
                 {commands.map((command, index) => (
                   <div className="space-y-1.5" key={`command-${index}`}>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 group">
                       <span className="text-primary/70 font-semibold text-xs">
                         $
                       </span>
                       <code className="text-primary/70 select-all font-medium">
                         {command.command}
                       </code>
+                      <button
+                        onClick={() => copyToClipboard(command.command, index)}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-muted/50 rounded-md cursor-pointer"
+                        aria-label="Copy command to clipboard"
+                        title="Copy command"
+                      >
+                        <HugeiconsIcon
+                          icon={Copy01Icon}
+                          size={16}
+                          color={
+                            copiedIndex === index ? "#0c0c22" : "currentColor"
+                          }
+                          strokeWidth={1.5}
+                        />
+                      </button>
                     </div>
                     <div className="pl-2 space-y-1 text-xs">
                       <div className="flex items-start gap-1 text-muted-foreground">
@@ -110,19 +206,19 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <Section>
+      <Section className="md:py-14">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 space-y-1">
             <h2 className="max-w-4xl text-2xl font-semibold tracking-tight text-balance xl:tracking-tighter">
-              Why Choose FlutterCN?
+              Why Choose Fluttercn?
             </h2>
-            <p className="max-w-3xl text-base text-balance text-muted-foreground sm:text-md mx-auto">
+            <p className="max-w-3xl text-base text-balance font-normal text-muted-foreground sm:text-md mx-auto">
               Built for developers who want control and speed
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto">
             <BenefitItem
               title="No Package Dependencies"
               description="Components are copied to your project. You own and control every line of code."
@@ -151,49 +247,41 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Final CTA Section */}
-      <Section className="bg-muted/30">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Build Faster?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Start using FlutterCN today and accelerate your Flutter development.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/docs/installation"
-              className={cn(
-                "inline-flex items-center justify-center",
-                "px-8 py-3 rounded-lg font-medium",
-                "bg-primary text-primary-foreground",
-                "hover:bg-primary/90 transition-colors",
-                "shadow-sm"
-              )}
-            >
-              Install Now
-              <HugeiconsIcon
-                icon={ArrowRight02Icon}
-                size={24}
-                color="currentColor"
-                strokeWidth={1.5}
+      {/* Footer */}
+      <footer className="border-t border-border bg-background">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col items-center justify-center gap-4 text-center">
+            <div className="flex items-center gap-2">
+              <img
+                src="/logo-dark.png"
+                alt="fluttercn"
+                width={20}
+                height={20}
+                className="inline-block rounded-sm"
               />
-            </Link>
-            <Link
-              href="/docs/components"
-              className={cn(
-                "inline-flex items-center justify-center",
-                "px-8 py-3 rounded-lg font-medium",
-                "bg-secondary text-secondary-foreground",
-                "hover:bg-secondary/80 transition-colors",
-                "border border-border"
-              )}
-            >
-              Browse Components
-            </Link>
+              <span className="font-semibold text-sm">{siteConfig.name}</span>
+            </div>
+            <nav className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
+              <a
+                href="/docs/installation"
+                className="hover:text-foreground transition-colors"
+              >
+                Docs
+              </a>
+              <a
+                href="/docs/components"
+                className="hover:text-foreground transition-colors"
+              >
+                Components
+              </a>
+            </nav>
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} {siteConfig.name}. Free & Open
+              Source.
+            </p>
           </div>
         </div>
-      </Section>
+      </footer>
     </div>
   )
 }

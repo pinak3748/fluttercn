@@ -1,77 +1,56 @@
-# Flutter CN CLI
+# CLI Development Guide
 
-A command-line tool to add Flutter components to your Flutter projects.
+This document provides CLI-specific development instructions. For general contributing guidelines, see the [root CONTRIBUTING.md](../CONTRIBUTING.md).
 
-## Getting Started
+## Development Setup
 
-Use your preferred package manager (npm, yarn, pnpm, or bun) for all commands.
+### Prerequisites
 
-### 1. Install Dependencies
+- Node.js (v14 or higher)
+- npm, yarn, pnpm, or bun
 
-```bash
-npm install
-```
+### Setup Steps
 
-### 2. Build the CLI
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run build
-```
-
-### 3. Link the CLI
-
-From the CLI directory, run:
-
-```bash
-npm link
-```
-
-This makes the `fluttercn` command available globally. After linking, you can use `fluttercn` from any directory.
-
-### 4. Test It Out
-
-Create a new Flutter project and test the CLI:
-
-```bash
-flutter create test_project
-cd test_project
-fluttercn init
-fluttercn list
-fluttercn add <component>
-```
-
-## Commands
-
-- `fluttercn init` - Initialize Flutter CN in your project
-- `fluttercn add <component>` - Add a component to your project
-- `fluttercn list` - List all available components
-
-## Contributing
-
-### Adding a New Component
-
-Follow this workflow to add a new component to Flutter CN:
-
-1. **Build the CLI**
+2. **Build the CLI**
    ```bash
    npm run build
    ```
 
-2. **Create a new branch**
+3. **Link the CLI Locally**
    ```bash
-   git checkout -b component/component-name
+   npm link
    ```
-   Use the naming convention: `component/component-name` (e.g., `component/toast`)
+   This makes the `fluttercn` command available globally for local development.
 
-3. **Develop in the playground**
-   - Create your widget in `playground/lib/widgets/`
-   - Create a showcase page in `playground/lib/presentations/` to demonstrate different use cases
-   - Test thoroughly
+4. **Test Locally**
+   ```bash
+   flutter create test_project
+   cd test_project
+   fluttercn init
+   fluttercn list
+   fluttercn add <component>
+   ```
 
-4. **Create a PR**
-   - Submit a PR for the playground changes
-   - Once merged, the component is ready for CLI integration
+## Development Scripts
 
-5. **Add to CLI**
-   - Create another PR to add the component to the CLI registry
-   - This makes it available through `fluttercn add <component>`
+- `npm run dev` - Watch mode for development
+- `npm run build` - Build the CLI
+- `npm run clean` - Clean the dist directory
+- `npm start` - Run the built CLI
+
+## CLI-Specific Contribution Notes
+
+When adding a new component to the CLI:
+
+1. Add component files to `src/core/widgets/`
+2. Update `src/core/registery.json` with component metadata
+3. Ensure component dependencies are properly declared
+4. Test the `fluttercn add <component>` command with a fresh Flutter project
+5. Update component documentation in the `www/` directory
+
+For the complete contribution workflow, see [CONTRIBUTING.md](../CONTRIBUTING.md).
