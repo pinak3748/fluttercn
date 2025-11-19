@@ -3,10 +3,11 @@ title: Button
 description: A versatile button component with multiple variants and sizes
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { Callout } from 'fumadocs-ui/components/callout';
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 
 ## Installation
+
 ```bash
 npx fluttercn@latest add button
 ```
@@ -35,39 +36,40 @@ Button(
 
 // Secondary - Less prominent actions
 Button(
-  onPressed: () {},
-  variant: ButtonVariant.secondary,
-  child: Text('Secondary'),
+onPressed: () {},
+variant: ButtonVariant.secondary,
+child: Text('Secondary'),
 )
 
 // Destructive - Dangerous actions
 Button(
-  onPressed: () {},
-  variant: ButtonVariant.destructive,
-  child: Text('Destructive'),
+onPressed: () {},
+variant: ButtonVariant.destructive,
+child: Text('Destructive'),
 )
 
 // Outline - Alternative style
 Button(
-  onPressed: () {},
-  variant: ButtonVariant.outline,
-  child: Text('Outline'),
+onPressed: () {},
+variant: ButtonVariant.outline,
+child: Text('Outline'),
 )
 
 // Ghost - Minimal style
 Button(
-  onPressed: () {},
-  variant: ButtonVariant.ghost,
-  child: Text('Ghost'),
+onPressed: () {},
+variant: ButtonVariant.ghost,
+child: Text('Ghost'),
 )
 
 // Link - Text link style
 Button(
-  onPressed: () {},
-  variant: ButtonVariant.link,
-  child: Text('Link'),
+onPressed: () {},
+variant: ButtonVariant.link,
+child: Text('Link'),
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -112,7 +114,8 @@ Button(
   size: ButtonSize.icon,
   child: Icon(Icons.settings),
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -139,12 +142,13 @@ Button(
 
 // Trailing icon
 Button(
-  onPressed: () {},
-  icon: Icon(Icons.arrow_forward),
-  iconPosition: IconPosition.trailing,
-  child: Text('Continue'),
+onPressed: () {},
+icon: Icon(Icons.arrow_forward),
+iconPosition: IconPosition.trailing,
+child: Text('Continue'),
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -167,7 +171,8 @@ Button(
   loading: true,
   child: Text('Loading...'),
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -175,7 +180,7 @@ Button(
 
 Disable button interactions:
 
-<Tabs items={['Preview', 'Code']}>
+<Tabs items={["Preview", "Code"]}>
   <Tab value="Preview">
     <MobileScreenshot
       src="/previews/button/button_disabled.png"
@@ -184,13 +189,8 @@ Disable button interactions:
     />
   </Tab>
   <Tab value="Code">
-```dart
-Button(
-  onPressed: () {},
-  disabled: true,
-  child: Text('Disabled'),
-)
-```
+    ```dart Button( onPressed: () {}, disabled: true, child: Text('Disabled'), )
+    ```
   </Tab>
 </Tabs>
 
@@ -198,17 +198,17 @@ Button(
 
 ### Button
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `onPressed` | `VoidCallback?` | required | Callback when button is pressed |
-| `child` | `Widget` | required | Button content (typically Text widget) |
-| `variant` | `ButtonVariant` | `primary` | Visual style variant |
-| `size` | `ButtonSize` | `md` | Button size |
-| `disabled` | `bool` | `false` | Whether button is disabled |
-| `loading` | `bool` | `false` | Show loading indicator |
-| `fullWidth` | `bool` | `false` | Expand to fill container width |
-| `icon` | `Widget?` | `null` | Optional icon |
-| `iconPosition` | `IconPosition` | `leading` | Icon placement (leading or trailing) |
+| Property       | Type            | Default   | Description                            |
+| -------------- | --------------- | --------- | -------------------------------------- |
+| `onPressed`    | `VoidCallback?` | required  | Callback when button is pressed        |
+| `child`        | `Widget`        | required  | Button content (typically Text widget) |
+| `variant`      | `ButtonVariant` | `primary` | Visual style variant                   |
+| `size`         | `ButtonSize`    | `md`      | Button size                            |
+| `disabled`     | `bool`          | `false`   | Whether button is disabled             |
+| `loading`      | `bool`          | `false`   | Show loading indicator                 |
+| `fullWidth`    | `bool`          | `false`   | Expand to fill container width         |
+| `icon`         | `Widget?`       | `null`    | Optional icon                          |
+| `iconPosition` | `IconPosition`  | `leading` | Icon placement (leading or trailing)   |
 
 ### ButtonVariant
 
@@ -244,6 +244,7 @@ Button(
 ## Examples
 
 ### Delete Confirmation
+
 ```dart
 Column(
   children: [
@@ -275,6 +276,7 @@ Column(
 ```
 
 ### Navigation Button
+
 ```dart
 Button(
   onPressed: () {
@@ -288,6 +290,7 @@ Button(
 ```
 
 ### Loading Button
+
 ```dart
 class MyWidget extends StatefulWidget {
   @override
@@ -299,9 +302,9 @@ class _MyWidgetState extends State<MyWidget> {
 
   Future<void> _handleSubmit() async {
     setState(() => _isLoading = true);
-    
+
     await Future.delayed(Duration(seconds: 2));
-    
+
     setState(() => _isLoading = false);
   }
 
@@ -317,6 +320,7 @@ class _MyWidgetState extends State<MyWidget> {
 ```
 
 ### Icon Button
+
 ```dart
 Button(
   onPressed: () {},
@@ -327,11 +331,13 @@ Button(
 ```
 
 <Callout type="info">
-Buttons automatically scale down when pressed and show appropriate cursor on hover.
+  Buttons automatically scale down when pressed and show appropriate cursor on
+  hover.
 </Callout>
 
 <Callout type="warn">
-When `loading` is true, the button becomes non-interactive. Set `loading` to false when the operation completes.
+  When `loading` is true, the button becomes non-interactive. Set `loading` to
+  false when the operation completes.
 </Callout>
 
 ## Best Practices

@@ -7,6 +7,7 @@ import { Callout } from "fumadocs-ui/components/callout"
 import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 
 ## Installation
+
 ```bash
 npx fluttercn@latest add badge
 ```
@@ -25,11 +26,7 @@ Simple badge with text:
       width={360}
     />
   </Tab>
-  <Tab value="Code">
-```dart
-Badge(label: 'New')
-```
-  </Tab>
+  <Tab value="Code">```dart Badge(label: 'New') ```</Tab>
 </Tabs>
 
 ### Variants
@@ -54,40 +51,41 @@ Badge(
 
 // Secondary - Subtle gray
 Badge(
-  label: 'Secondary',
-  variant: BadgeVariant.secondary,
+label: 'Secondary',
+variant: BadgeVariant.secondary,
 )
 
 // Destructive - Red for errors
 Badge(
-  label: 'Destructive',
-  variant: BadgeVariant.destructive,
+label: 'Destructive',
+variant: BadgeVariant.destructive,
 )
 
 // Outline - Transparent with border
 Badge(
-  label: 'Outline',
-  variant: BadgeVariant.outline,
+label: 'Outline',
+variant: BadgeVariant.outline,
 )
 
 // Success - Green for positive states
 Badge(
-  label: 'Success',
-  variant: BadgeVariant.success,
+label: 'Success',
+variant: BadgeVariant.success,
 )
 
 // Warning - Yellow for caution
 Badge(
-  label: 'Warning',
-  variant: BadgeVariant.warning,
+label: 'Warning',
+variant: BadgeVariant.warning,
 )
 
 // Info - Blue for information
 Badge(
-  label: 'Info',
-  variant: BadgeVariant.info,
+label: 'Info',
+variant: BadgeVariant.info,
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -122,7 +120,8 @@ Badge(
   label: 'Large',
   size: BadgeSize.lg,
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -149,11 +148,12 @@ Badge(
 
 // Trailing icon
 Badge(
-  label: 'External',
-  icon: Icon(Icons.open_in_new, size: 12),
-  iconPosition: IconPosition.trailing,
+label: 'External',
+icon: Icon(Icons.open_in_new, size: 12),
+iconPosition: IconPosition.trailing,
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -182,7 +182,8 @@ Badge(
   showDot: true,
   variant: BadgeVariant.secondary,
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -305,7 +306,6 @@ Named constructors for common status types:
 - **Count Badges** - Special badges for counts with max limits
 - **Status Badges** - Pre-configured for common statuses
 - **Themed** - Adapts to light/dark mode
-
 
 <Callout type="info">
   Badges automatically adjust their text color for optimal contrast against the

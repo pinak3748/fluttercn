@@ -3,10 +3,11 @@ title: Checkbox
 description: A customizable checkbox component with labels, descriptions, and error states
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { Callout } from 'fumadocs-ui/components/callout';
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 
 ## Installation
+
 ```bash
 npx fluttercn@latest add checkbox
 ```
@@ -30,13 +31,14 @@ A simple checkbox with a label:
 bool isChecked = false;
 
 Checkbox(
-  value: isChecked,
-  label: 'Accept terms and conditions',
-  onChanged: (value) {
-    setState(() => isChecked = value ?? false);
-  },
+value: isChecked,
+label: 'Accept terms and conditions',
+onChanged: (value) {
+setState(() => isChecked = value ?? false);
+},
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -62,7 +64,8 @@ Checkbox(
     setState(() => enableNotifications = value ?? false);
   },
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -90,20 +93,21 @@ Checkbox(
 
 // Medium (default)
 Checkbox(
-  value: true,
-  label: 'Medium checkbox',
-  size: CheckboxSize.md,
-  onChanged: (value) {},
+value: true,
+label: 'Medium checkbox',
+size: CheckboxSize.md,
+onChanged: (value) {},
 )
 
 // Large
 Checkbox(
-  value: true,
-  label: 'Large checkbox',
-  size: CheckboxSize.lg,
-  onChanged: (value) {},
+value: true,
+label: 'Large checkbox',
+size: CheckboxSize.lg,
+onChanged: (value) {},
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -127,7 +131,8 @@ Checkbox(
   disabled: true,
   onChanged: (value) {},
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -135,7 +140,7 @@ Checkbox(
 
 Show validation errors:
 
-<Tabs items={['Preview', 'Code']}>
+<Tabs items={["Preview", "Code"]}>
   <Tab value="Preview">
     <MobileScreenshot
       src="/previews/checkbox/checkbox_error.png"
@@ -144,15 +149,9 @@ Show validation errors:
     />
   </Tab>
   <Tab value="Code">
-```dart
-Checkbox(
-  value: false,
-  label: 'Accept terms and conditions',
-  error: true,
-  errorText: 'You must accept the terms to continue',
-  onChanged: (value) {},
-)
-```
+    ```dart Checkbox( value: false, label: 'Accept terms and conditions', error:
+    true, errorText: 'You must accept the terms to continue', onChanged: (value){" "}
+    {}, ) ```
   </Tab>
 </Tabs>
 
@@ -173,13 +172,14 @@ Manage multiple related checkboxes:
 List<String> selectedOptions = ['Option 1'];
 
 CheckboxGroup(
-  options: ['Option 1', 'Option 2', 'Option 3'],
-  selectedValues: selectedOptions,
-  onChanged: (values) {
-    setState(() => selectedOptions = values);
-  },
+options: ['Option 1', 'Option 2', 'Option 3'],
+selectedValues: selectedOptions,
+onChanged: (values) {
+setState(() => selectedOptions = values);
+},
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -209,11 +209,11 @@ class _SignupFormState extends State<SignupForm> {
 
   void _handleSubmit() {
     setState(() => attemptedSubmit = true);
-    
+
     if (!acceptTerms) {
       return; // Show error
     }
-    
+
     // Process form
   }
 
@@ -222,7 +222,7 @@ class _SignupFormState extends State<SignupForm> {
     return Column(
       children: [
         // ... other form fields
-        
+
         Checkbox(
           value: acceptTerms,
           label: 'I accept the terms and conditions',
@@ -234,9 +234,9 @@ class _SignupFormState extends State<SignupForm> {
             setState(() => acceptTerms = value ?? false);
           },
         ),
-        
+
         AppTheme.gapLg,
-        
+
         Button(
           onPressed: _handleSubmit,
           child: Text('Sign Up'),
@@ -245,38 +245,38 @@ class _SignupFormState extends State<SignupForm> {
     );
   }
 }
-```
+````
+
   </Tab>
 </Tabs>
-
 
 ## API Reference
 
 ### Checkbox
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `value` | `bool?` | required | Current checkbox state (true, false, or null) |
-| `onChanged` | `ValueChanged<bool?>?` | required | Callback when state changes |
-| `label` | `String?` | `null` | Label text next to checkbox |
-| `description` | `String?` | `null` | Description text below label |
-| `size` | `CheckboxSize` | `md` | Checkbox size |
-| `disabled` | `bool` | `false` | Whether checkbox is disabled |
-| `error` | `bool` | `false` | Show error state styling |
-| `errorText` | `String?` | `null` | Error message below checkbox |
-| `tristate` | `bool` | `false` | Allow indeterminate (null) state |
+| Property      | Type                   | Default  | Description                                   |
+| ------------- | ---------------------- | -------- | --------------------------------------------- |
+| `value`       | `bool?`                | required | Current checkbox state (true, false, or null) |
+| `onChanged`   | `ValueChanged<bool?>?` | required | Callback when state changes                   |
+| `label`       | `String?`              | `null`   | Label text next to checkbox                   |
+| `description` | `String?`              | `null`   | Description text below label                  |
+| `size`        | `CheckboxSize`         | `md`     | Checkbox size                                 |
+| `disabled`    | `bool`                 | `false`  | Whether checkbox is disabled                  |
+| `error`       | `bool`                 | `false`  | Show error state styling                      |
+| `errorText`   | `String?`              | `null`   | Error message below checkbox                  |
+| `tristate`    | `bool`                 | `false`  | Allow indeterminate (null) state              |
 
 ### CheckboxGroup
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `options` | `List<String>` | required | List of checkbox options |
-| `selectedValues` | `List<String>` | required | Currently selected values |
-| `onChanged` | `ValueChanged<List<String>>` | required | Callback when selection changes |
-| `size` | `CheckboxSize` | `md` | Size for all checkboxes |
-| `disabled` | `bool` | `false` | Disable all checkboxes |
-| `direction` | `Axis` | `vertical` | Layout direction |
-| `spacing` | `double` | `12` | Spacing between checkboxes |
+| Property         | Type                         | Default    | Description                     |
+| ---------------- | ---------------------------- | ---------- | ------------------------------- |
+| `options`        | `List<String>`               | required   | List of checkbox options        |
+| `selectedValues` | `List<String>`               | required   | Currently selected values       |
+| `onChanged`      | `ValueChanged<List<String>>` | required   | Callback when selection changes |
+| `size`           | `CheckboxSize`               | `md`       | Size for all checkboxes         |
+| `disabled`       | `bool`                       | `false`    | Disable all checkboxes          |
+| `direction`      | `Axis`                       | `vertical` | Layout direction                |
+| `spacing`        | `double`                     | `12`       | Spacing between checkboxes      |
 
 ### CheckboxSize
 
@@ -296,11 +296,12 @@ class _SignupFormState extends State<SignupForm> {
 - **Accessible** - Proper labels and hover states
 
 <Callout type="info">
-Checkboxes include a subtle scale animation when pressed for tactile feedback.
+  Checkboxes include a subtle scale animation when pressed for tactile feedback.
 </Callout>
 
 <Callout type="warn">
-When using `tristate: true`, the value cycles through `false → true → null → false` on each tap.
+  When using `tristate: true`, the value cycles through `false → true → null →
+  false` on each tap.
 </Callout>
 
 ## Best Practices

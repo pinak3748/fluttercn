@@ -1,7 +1,10 @@
-import { siteConfig } from "@/lib/config"
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared"
 
-export function baseOptions(options?: { hideLinks?: boolean }): BaseLayoutProps {
+import { siteConfig } from "@/lib/config"
+
+export function baseOptions(options?: {
+  hideLinks?: boolean
+}): BaseLayoutProps {
   return {
     nav: {
       title: (

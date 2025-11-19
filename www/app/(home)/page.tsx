@@ -1,15 +1,15 @@
 "use client"
 
+import { useState } from "react"
 import { ArrowRight02Icon, Copy01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { useState } from "react"
 import { toast } from "sonner"
 
-import { BenefitItem } from "@/components/benenfit-item"
-import { Section } from "@/components/section"
+import { siteConfig } from "@/lib/config"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { siteConfig } from "@/lib/config"
+import { BenefitItem } from "@/components/benenfit-item"
+import { Section } from "@/components/section"
 
 export default function HomePage() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
@@ -36,7 +36,8 @@ export default function HomePage() {
           command: "fluttercn add button",
           subtext:
             "As easy as writing a command. Get the component in your codebase, owning 100% of the code.",
-          description: "Button component added to lib/widgets/common/button.dart",
+          description:
+            "Button component added to lib/widgets/common/button.dart",
         },
       ],
     },
@@ -60,7 +61,8 @@ export default function HomePage() {
           command: "bunx fluttercn add button",
           subtext:
             "Drop in a ready-made component, fully owned in your codebase.",
-          description: "Button component added to lib/widgets/common/button.dart",
+          description:
+            "Button component added to lib/widgets/common/button.dart",
         },
       ],
     },
@@ -157,7 +159,7 @@ export default function HomePage() {
                         />
                         {packageManagers[manager].label}
                       </button>
-                    ),
+                    )
                   )}
                 </div>
               </div>
@@ -180,7 +182,9 @@ export default function HomePage() {
                         <HugeiconsIcon
                           icon={Copy01Icon}
                           size={16}
-                          color={copiedIndex === index ? "#0c0c22" : "currentColor"}
+                          color={
+                            copiedIndex === index ? "#0c0c22" : "currentColor"
+                          }
                           strokeWidth={1.5}
                         />
                       </button>
@@ -272,7 +276,8 @@ export default function HomePage() {
               </a>
             </nav>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} {siteConfig.name}. Free & Open Source.
+              © {new Date().getFullYear()} {siteConfig.name}. Free & Open
+              Source.
             </p>
           </div>
         </div>

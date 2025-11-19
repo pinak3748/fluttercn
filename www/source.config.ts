@@ -40,7 +40,8 @@ export default defineConfig({
               pre(node) {
                 // Enable line numbers by default
                 const codeElement = node.children?.find(
-                  (child: any) => child.type === "element" && child.tagName === "code"
+                  (child: any) =>
+                    child.type === "element" && child.tagName === "code"
                 )
                 if (codeElement) {
                   codeElement.properties = codeElement.properties || {}

@@ -3,10 +3,11 @@ title: Avatar
 description: Display user profile pictures with automatic fallbacks and status indicators
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { Callout } from 'fumadocs-ui/components/callout';
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 
 ## Installation
+
 ```bash
 npx fluttercn@latest add avatar
 ```
@@ -35,15 +36,16 @@ Avatar(
 
 // Asset image
 Avatar(
-  assetPath: 'assets/avatar.png',
-  fallbackName: 'Jane Smith',
+assetPath: 'assets/avatar.png',
+fallbackName: 'Jane Smith',
 )
 
 // Initials only
 Avatar(
-  fallbackName: 'Alice Bob',
+fallbackName: 'Alice Bob',
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -90,7 +92,8 @@ Avatar(
   fallbackName: 'John Doe',
   size: AvatarSize.xl2, // 80px
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -116,17 +119,18 @@ Avatar(
 
 // Rectangle with default radius
 Avatar(
-  fallbackName: 'Jane Smith',
-  shape: BoxShape.rectangle,
+fallbackName: 'Jane Smith',
+shape: BoxShape.rectangle,
 )
 
 // Rectangle with custom radius
 Avatar(
-  fallbackName: 'Alice Bob',
-  shape: BoxShape.rectangle,
-  borderRadius: 8,
+fallbackName: 'Alice Bob',
+shape: BoxShape.rectangle,
+borderRadius: 8,
 )
-```
+
+````
   </Tab>
 </Tabs>
 
@@ -167,7 +171,8 @@ Avatar(
   statusColor: AppTheme.warning,
   statusPosition: StatusPosition.topRight,
 )
-```
+````
+
   </Tab>
 </Tabs>
 
@@ -175,7 +180,7 @@ Avatar(
 
 Display multiple avatars with overlap:
 
-<Tabs items={['Preview', 'Code']}>
+<Tabs items={["Preview", "Code"]}>
   <Tab value="Preview">
     <MobileScreenshot
       src="/previews/avatar/avatar_group.png"
@@ -184,23 +189,13 @@ Display multiple avatars with overlap:
     />
   </Tab>
   <Tab value="Code">
-```dart
-AvatarGroup(
-  avatars: [
-    Avatar(fallbackName: 'John Doe'),
-    Avatar(fallbackName: 'Jane Smith'),
-    Avatar(fallbackName: 'Alice Bob'),
-    Avatar(fallbackName: 'Bob Wilson'),
-    Avatar(fallbackName: 'Carol Johnson'),
-  ],
-  max: 3,  // Show 3 avatars + count
-  size: AvatarSize.md,
-  spacing: -8,  // Overlap amount
-)
-```
+    ```dart AvatarGroup( avatars: [ Avatar(fallbackName: 'John Doe'),
+    Avatar(fallbackName: 'Jane Smith'), Avatar(fallbackName: 'Alice Bob'),
+    Avatar(fallbackName: 'Bob Wilson'), Avatar(fallbackName: 'Carol Johnson'),
+    ], max: 3, // Show 3 avatars + count size: AvatarSize.md, spacing: -8, //
+    Overlap amount ) ```
   </Tab>
 </Tabs>
-
 
 ## Examples
 
@@ -249,32 +244,32 @@ Row(
 
 ### Avatar
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `imageUrl` | `String?` | `null` | Network image URL |
-| `assetPath` | `String?` | `null` | Asset image path |
-| `fallbackName` | `String?` | `null` | Name for generating initials |
-| `fallbackWidget` | `Widget?` | `null` | Custom fallback widget |
-| `size` | `AvatarSize` | `md` | Avatar size |
-| `shape` | `BoxShape` | `circle` | Avatar shape (circle or rectangle) |
-| `borderRadius` | `double?` | `null` | Custom border radius (rectangle only) |
-| `showBorder` | `bool` | `false` | Show border around avatar |
-| `borderColor` | `Color?` | `null` | Border color |
-| `borderWidth` | `double` | `2.0` | Border width |
-| `showStatus` | `bool` | `false` | Show status indicator |
-| `statusColor` | `Color?` | `null` | Status indicator color (defaults to success green) |
-| `statusPosition` | `StatusPosition` | `bottomRight` | Status indicator position |
-| `onTap` | `VoidCallback?` | `null` | Callback when avatar is tapped |
+| Property         | Type             | Default       | Description                                        |
+| ---------------- | ---------------- | ------------- | -------------------------------------------------- |
+| `imageUrl`       | `String?`        | `null`        | Network image URL                                  |
+| `assetPath`      | `String?`        | `null`        | Asset image path                                   |
+| `fallbackName`   | `String?`        | `null`        | Name for generating initials                       |
+| `fallbackWidget` | `Widget?`        | `null`        | Custom fallback widget                             |
+| `size`           | `AvatarSize`     | `md`          | Avatar size                                        |
+| `shape`          | `BoxShape`       | `circle`      | Avatar shape (circle or rectangle)                 |
+| `borderRadius`   | `double?`        | `null`        | Custom border radius (rectangle only)              |
+| `showBorder`     | `bool`           | `false`       | Show border around avatar                          |
+| `borderColor`    | `Color?`         | `null`        | Border color                                       |
+| `borderWidth`    | `double`         | `2.0`         | Border width                                       |
+| `showStatus`     | `bool`           | `false`       | Show status indicator                              |
+| `statusColor`    | `Color?`         | `null`        | Status indicator color (defaults to success green) |
+| `statusPosition` | `StatusPosition` | `bottomRight` | Status indicator position                          |
+| `onTap`          | `VoidCallback?`  | `null`        | Callback when avatar is tapped                     |
 
 ### AvatarGroup
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `avatars` | `List<Avatar>` | required | List of avatars to display |
-| `max` | `int?` | `null` | Maximum avatars to show (rest shown as +N) |
-| `size` | `AvatarSize` | `md` | Size for all avatars |
-| `spacing` | `double` | `-8.0` | Spacing between avatars (negative for overlap) |
-| `showBorder` | `bool` | `true` | Show border around avatars |
+| Property     | Type           | Default  | Description                                    |
+| ------------ | -------------- | -------- | ---------------------------------------------- |
+| `avatars`    | `List<Avatar>` | required | List of avatars to display                     |
+| `max`        | `int?`         | `null`   | Maximum avatars to show (rest shown as +N)     |
+| `size`       | `AvatarSize`   | `md`     | Size for all avatars                           |
+| `spacing`    | `double`       | `-8.0`   | Spacing between avatars (negative for overlap) |
+| `showBorder` | `bool`         | `true`   | Show border around avatars                     |
 
 ### AvatarSize
 
@@ -305,11 +300,13 @@ Row(
 - **Themed** - Automatically adapts to light/dark mode
 
 <Callout type="info">
-Network images show a loading spinner while loading. If loading fails, the avatar automatically falls back to initials or the default icon.
+  Network images show a loading spinner while loading. If loading fails, the
+  avatar automatically falls back to initials or the default icon.
 </Callout>
 
 <Callout type="warn">
-Do not use both `imageUrl` and `assetPath` together. Use one or the other for the image source.
+  Do not use both `imageUrl` and `assetPath` together. Use one or the other for
+  the image source.
 </Callout>
 
 ## Fallback Priority

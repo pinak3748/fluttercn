@@ -3,9 +3,10 @@ import { Toaster } from "sonner"
 
 import "./global.css"
 
+import { Metadata } from "next"
+
 import { siteConfig } from "@/lib/config"
 import { fontVariables } from "@/lib/fonts"
-import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: {
@@ -14,7 +15,15 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
   description: siteConfig.description,
-  keywords: ["Flutter", "Components", "UI", "Fluttercn", "Flutter-cn", "Widgets", "Native components"],
+  keywords: [
+    "Flutter",
+    "Components",
+    "UI",
+    "Fluttercn",
+    "Flutter-cn",
+    "Widgets",
+    "Native components",
+  ],
   authors: [
     {
       name: siteConfig.name,
