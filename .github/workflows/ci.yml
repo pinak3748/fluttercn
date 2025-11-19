@@ -40,6 +40,10 @@ jobs:
         working-directory: ./www
         run: npm install
 
+      - name: Generate Next.js types
+        working-directory: ./www
+        run: npx next build || true
+
       - name: Type check www
         working-directory: ./www
         run: npm run typecheck || true
