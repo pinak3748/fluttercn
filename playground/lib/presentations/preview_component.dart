@@ -4,6 +4,7 @@ import 'package:flutter_cn_playground/presentations/badge/badge_preview_list.dar
 import 'package:flutter_cn_playground/presentations/button/button_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/card/card_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/checkbox/checkbox_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/typography/typography_preview_list.dart';
 
 import '../widgets/button.dart';
 import '../widgets/card.dart';
@@ -63,6 +64,9 @@ class ShowcaseDashboard extends StatelessWidget {
   void _navigateToShowcase(BuildContext context, String component) {
     Widget page;
     switch (component) {
+      case 'Typography':
+        page = const TypographyPreviewList();
+        break;
       case 'Button':
         page = const ButtonPreviewList();
         break;
@@ -87,6 +91,7 @@ class ShowcaseDashboard extends StatelessWidget {
 }
 
 final List<String> _components = [
+  'Typography',
   'Button',
   'Card',
   'Avatar',

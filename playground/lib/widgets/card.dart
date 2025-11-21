@@ -72,44 +72,41 @@ class Card extends StatefulWidget {
 }
 
 class _CNCardState extends State<Card> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
+  AnimationController? _animationController;
+  Animation<double>? _scaleAnimation;
   bool _isHovered = false;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: AppTheme.durationFast,
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.98).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
+    // Only create animation controller if card is interactive
+    if (widget.onTap != null) {
+      _animationController = AnimationController(
+        duration: AppTheme.durationFast,
+        vsync: this,
+      );
+      _scaleAnimation = Tween<double>(begin: 1.0, end: 0.98).animate(
+        CurvedAnimation(parent: _animationController!, curve: Curves.easeInOut),
+      );
+    }
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController?.dispose();
     super.dispose();
   }
 
   void _onTapDown(TapDownDetails details) {
-    if (widget.onTap != null) {
-      _animationController.forward();
-    }
+    _animationController?.forward();
   }
 
   void _onTapUp(TapUpDetails details) {
-    if (widget.onTap != null) {
-      _animationController.reverse();
-    }
+    _animationController?.reverse();
   }
 
   void _onTapCancel() {
-    if (widget.onTap != null) {
-      _animationController.reverse();
-    }
+    _animationController?.reverse();
   }
 
   void _onHover(bool isHovered) {
@@ -120,45 +117,56 @@ class _CNCardState extends State<Card> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _scaleAnimation,
-      builder: (context, child) {
-        return Transform.scale(
-          scale: _scaleAnimation.value,
-          child: MouseRegion(
-            onEnter: (_) => _onHover(true),
-            onExit: (_) => _onHover(false),
-            cursor: widget.onTap != null
-                ? SystemMouseCursors.click
-                : SystemMouseCursors.basic,
-            child: AnimatedContainer(
-              duration: AppTheme.durationNormal,
-              decoration: BoxDecoration(
-                color: AppTheme.surface,
+    final container = AnimatedContainer(
+      duration: AppTheme.durationNormal,
+      decoration: BoxDecoration(
+        color: AppTheme.surface,
+        borderRadius: BorderRadius.circular(AppTheme.radiusXl),
+        border: Border.all(color: AppTheme.border, width: 1),
+        boxShadow: _isHovered && widget.onTap != null
+            ? AppTheme.shadowMd
+            : null,
+      ),
+      child: widget.onTap != null
+          ? Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: widget.onTap,
+                onTapDown: _onTapDown,
+                onTapUp: _onTapUp,
+                onTapCancel: _onTapCancel,
                 borderRadius: BorderRadius.circular(AppTheme.radiusXl),
-                border: Border.all(color: AppTheme.border, width: 1),
-                boxShadow: _isHovered && widget.onTap != null
-                    ? AppTheme.shadowMd
-                    : null,
+                splashColor: AppTheme.secondary.withValues(alpha: 0.1),
+                highlightColor: AppTheme.secondary.withValues(alpha: 0.05),
+                child: _buildContent(context),
               ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: widget.onTap,
-                  onTapDown: _onTapDown,
-                  onTapUp: _onTapUp,
-                  onTapCancel: _onTapCancel,
-                  borderRadius: BorderRadius.circular(AppTheme.radiusXl),
-                  splashColor: AppTheme.secondary.withValues(alpha: 0.1),
-                  highlightColor: AppTheme.secondary.withValues(alpha: 0.05),
-                  child: _buildContent(context),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
+            )
+          : _buildContent(context),
     );
+
+    final mouseRegion = MouseRegion(
+      onEnter: (_) => _onHover(true),
+      onExit: (_) => _onHover(false),
+      cursor: widget.onTap != null
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
+      child: container,
+    );
+
+    // Only apply scale animation for interactive cards
+    if (widget.onTap != null && _scaleAnimation != null) {
+      return AnimatedBuilder(
+        animation: _scaleAnimation!,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation!.value,
+            child: mouseRegion,
+          );
+        },
+      );
+    }
+
+    return mouseRegion;
   }
 
   Widget _buildContent(BuildContext context) {

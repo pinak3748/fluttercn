@@ -7,7 +7,6 @@ import 'previews/checkbox_disabled_preview.dart';
 import 'previews/checkbox_error_preview.dart';
 import 'previews/checkbox_form_preview.dart';
 import 'previews/checkbox_group_preview.dart';
-import 'previews/checkbox_indeterminate_preview.dart';
 import 'previews/checkbox_label_preview.dart';
 import 'previews/checkbox_sizes_preview.dart';
 
@@ -62,13 +61,6 @@ class CheckboxPreviewList extends StatelessWidget {
             title: 'Error State',
             description: 'Checkbox showing validation feedback',
             preview: const CheckboxErrorPreview(),
-          ),
-          AppTheme.gapLg,
-          _buildPreviewCard(
-            context,
-            title: 'Indeterminate State',
-            description: 'Select-all pattern with null state',
-            preview: const CheckboxIndeterminatePreview(),
           ),
           AppTheme.gapLg,
           _buildPreviewCard(
