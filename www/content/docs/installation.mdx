@@ -11,23 +11,35 @@ Get fluttercn up and running in your Flutter project in just a few steps.
 
 Before you begin, make sure you have:
 
-- **Node.js** (v14 or higher) - for the CLI tool
+- **Dart SDK** (3.0.0 or higher) - for the CLI tool
 - **Flutter SDK** - installed and configured on your machine
 - **A Flutter project** - or create a new one
 
 ## Step 1: Install the CLI
 
-Install fluttercn CLI globally using npm:
+Install fluttercn CLI globally using Dart's pub:
 
 ```bash
-npm install -g fluttercn
+dart pub global activate fluttercn
 ```
 
-Or using yarn:
+**Important:** Make sure `~/.pub-cache/bin` is in your PATH. Add it by running:
 
 ```bash
-yarn global add fluttercn
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 ```
+
+To make this permanent, add the above line to your shell profile (`~/.zshrc`, `~/.bashrc`, etc.).
+
+### Verify Installation
+
+Check if the CLI is installed correctly:
+
+```bash
+fluttercn --version
+```
+
+You should see the version number (e.g., `0.0.5`).
 
 ## Step 2: Initialize Your Project
 
@@ -99,5 +111,14 @@ The components will be copied to `lib/widgets/common/` in your project, and you 
 
   <Accordion title="Missing required dependencies">
     Some components require the theme configuration. Make sure you've run `fluttercn init` before adding components.
+  </Accordion>
+
+  <Accordion title="Command not found: fluttercn">
+    Make sure you've installed the CLI and added `~/.pub-cache/bin` to your PATH:
+    ```bash
+    dart pub global activate fluttercn
+    export PATH="$PATH":"$HOME/.pub-cache/bin"
+    ```
+    Restart your terminal or run `source ~/.zshrc` (or `~/.bashrc`).
   </Accordion>
 </Accordions>

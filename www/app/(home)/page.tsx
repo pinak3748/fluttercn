@@ -13,62 +13,28 @@ import { Section } from "@/components/section"
 
 export default function HomePage() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
-  const [packageManager, setPackageManager] = useState<"npm" | "bun">("npm")
 
-  const packageManagers = {
-    npm: {
-      label: "npm",
-      logo: "/package_manager/npm.svg",
-      commands: [
-        {
-          command: "npm install -g fluttercn",
-          description: "Installing Fluttercn CLI globally...",
-          subtext:
-            "We just started, but we have a lot planned. Join us on this journey!",
-        },
-        {
-          command: "fluttercn init",
-          description: "Theme configuration created at lib/config/theme.dart",
-          subtext:
-            "Centralized theming to make your UI consistent and proper. Common widgets so you don't need to worry about components.",
-        },
-        {
-          command: "fluttercn add button",
-          subtext:
-            "As easy as writing a command. Get the component in your codebase, owning 100% of the code.",
-          description:
-            "Button component added to lib/widgets/common/button.dart",
-        },
-      ],
+  const commands = [
+    {
+      command: "dart pub global activate fluttercn",
+      description: "Installing Fluttercn CLI globally...",
+      subtext:
+        "Install from pub.dev. Make sure ~/.pub-cache/bin is in your PATH.",
     },
-    bun: {
-      label: "bun",
-      logo: "/package_manager/bun.svg",
-      commands: [
-        {
-          command: "bun install --global fluttercn",
-          description: "Installing Fluttercn CLI globally with Bun...",
-          subtext:
-            "Fast installs with Bun. You're early, but we're building quickly!",
-        },
-        {
-          command: "bunx fluttercn init",
-          description: "Theme configuration created at lib/config/theme.dart",
-          subtext:
-            "Consistent theming across your Flutter app with centralized config.",
-        },
-        {
-          command: "bunx fluttercn add button",
-          subtext:
-            "Drop in a ready-made component, fully owned in your codebase.",
-          description:
-            "Button component added to lib/widgets/common/button.dart",
-        },
-      ],
+    {
+      command: "fluttercn init",
+      description: "Theme configuration created at lib/config/theme.dart",
+      subtext:
+        "Centralized theming to make your UI consistent and proper. Common widgets so you don't need to worry about components.",
     },
-  } as const
-
-  const commands = packageManagers[packageManager].commands
+    {
+      command: "fluttercn add button",
+      subtext:
+        "As easy as writing a command. Get the component in your codebase, owning 100% of the code.",
+      description:
+        "Button component added to lib/widgets/common/button.dart",
+    },
+  ] as const
 
   const copyToClipboard = async (text: string, index: number) => {
     try {
@@ -80,10 +46,6 @@ export default function HomePage() {
       console.error("Failed to copy:", error)
       toast.error("Failed to copy to clipboard")
     }
-  }
-  const handlePackageManagerChange = (manager: "npm" | "bun") => {
-    setPackageManager(manager)
-    setCopiedIndex(null)
   }
 
   return (
@@ -139,29 +101,6 @@ export default function HomePage() {
                 <span className="ml-3 text-xs text-muted-foreground font-mono tracking-wide">
                   Terminal
                 </span>
-                <div className="ml-auto flex items-center gap-1.5">
-                  {(Object.keys(packageManagers) as Array<"npm" | "bun">).map(
-                    (manager) => (
-                      <button
-                        key={manager}
-                        onClick={() => handlePackageManagerChange(manager)}
-                        className={`flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${
-                          packageManager === manager
-                            ? "border-border bg-background text-foreground"
-                            : "border-transparent text-muted-foreground hover:text-foreground"
-                        }`}
-                        aria-pressed={packageManager === manager}
-                      >
-                        <img
-                          src={packageManagers[manager].logo}
-                          alt={`${packageManagers[manager].label} logo`}
-                          className="size-4"
-                        />
-                        {packageManagers[manager].label}
-                      </button>
-                    )
-                  )}
-                </div>
               </div>
               <div className="px-6 py-5 space-y-6 font-mono text-sm bg-code text-code-foreground">
                 {commands.map((command, index) => (
