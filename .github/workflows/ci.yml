@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -14,20 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: cli/package.json
+          sdk: stable
 
-      - name: Install CLI dependencies
-        working-directory: ./cli
-        run: npm install
+      - name: Install Dart CLI dependencies
+        working-directory: ./dart-cli
+        run: dart pub get
 
-      - name: Build CLI
-        working-directory: ./cli
-        run: npm run build
+      - name: Analyze Dart CLI
+        working-directory: ./dart-cli
+        run: dart analyze
 
       - name: Setup Node.js for www
         uses: actions/setup-node@v4

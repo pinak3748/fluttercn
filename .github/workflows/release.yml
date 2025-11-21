@@ -6,56 +6,8 @@ on:
       - 'v*'
 
 jobs:
-  publish-npm:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        working-directory: ./cli
-        run: npm install
-
-      - name: Build CLI
-        working-directory: ./cli
-        run: npm run build
-
-      - name: Extract version from tag
-        id: tag
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-
-      - name: Update package.json version
-        working-directory: ./cli
-        run: |
-          # Only update version if it's different
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          TAG_VERSION="${{ steps.tag.outputs.VERSION }}"
-          if [ "$CURRENT_VERSION" != "$TAG_VERSION" ]; then
-            npm version $TAG_VERSION --no-git-tag-version
-          else
-            echo "Version already set to $TAG_VERSION, skipping update"
-          fi
-          cat package.json
-
-      - name: Publish to npm
-        working-directory: ./cli
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
   create-release:
     runs-on: ubuntu-latest
-    needs: publish-npm
     permissions:
       contents: write
     
@@ -98,14 +50,22 @@ jobs:
             
             ## Installation
             
+            Install the CLI globally using Dart's pub:
+            
             ```bash
-            npm install -g fluttercn@latest
+            dart pub global activate fluttercn
             ```
             
-            Or install the specific version:
+            **Important:** Make sure `~/.pub-cache/bin` is in your PATH:
             
             ```bash
-            npm install -g fluttercn@${{ steps.tag.outputs.VERSION }}
+            export PATH="$PATH":"$HOME/.pub-cache/bin"
+            ```
+            
+            Or install a specific version:
+            
+            ```bash
+            dart pub global activate fluttercn@${{ steps.tag.outputs.VERSION }}
             ```
           draft: false
           prerelease: false
