@@ -4,6 +4,7 @@ import 'package:flutter_cn_playground/presentations/badge/badge_preview_list.dar
 import 'package:flutter_cn_playground/presentations/button/button_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/card/card_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/checkbox/checkbox_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/toggle/toggle_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/typography/typography_preview_list.dart';
 
 import '../widgets/button.dart';
@@ -82,6 +83,9 @@ class ShowcaseDashboard extends StatelessWidget {
       case 'Checkbox':
         page = const CheckboxPreviewList();
         break;
+      case 'Toggle':
+        page = const TogglePreviewList();
+        break;
       default:
         return;
     }
@@ -101,4 +105,5 @@ final List<String> _components = [
   'Dropdown',
   'Input',
   'Dialog',
+  'Toggle',
 ];
