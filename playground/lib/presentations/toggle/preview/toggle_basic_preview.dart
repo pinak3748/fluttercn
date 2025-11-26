@@ -21,9 +21,21 @@ class _ToggleBasicPreviewState extends State<ToggleBasicPreview> {
       body: Center(
         child: Padding(
           padding: AppTheme.padding2xl,
-          child: Toggle(
-            value: _enabled,
-            onChanged: (value) => setState(() => _enabled = value),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: AppTheme.spaceLg,
+            children: [
+              Toggle(
+                value: _enabled,
+                onChanged: (value) => setState(() => _enabled = value),
+              ),
+              Toggle(
+                value: !_enabled,
+                onChanged: (value) => setState(() => _enabled = !value),
+              ),
+            ],
           ),
         ),
       ),
