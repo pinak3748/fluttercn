@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart' hide Card;
 import 'package:flutter_cn_playground/presentations/avatar/avatar_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/badge/badge_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/bottom_sheet/bottom_sheet_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/button/button_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/card/card_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/checkbox/checkbox_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/dropdown/dropdown_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/text_field/text_field_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/toggle/toggle_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/typography/typography_preview_list.dart';
 
 import '../widgets/button.dart';
 import '../widgets/card.dart';
@@ -63,6 +68,9 @@ class ShowcaseDashboard extends StatelessWidget {
   void _navigateToShowcase(BuildContext context, String component) {
     Widget page;
     switch (component) {
+      case 'Typography':
+        page = const TypographyPreviewList();
+        break;
       case 'Button':
         page = const ButtonPreviewList();
         break;
@@ -75,8 +83,20 @@ class ShowcaseDashboard extends StatelessWidget {
       case 'Badge':
         page = const BadgePreviewList();
         break;
+      case 'Bottom Sheet':
+        page = const BottomSheetPreviewList();
+        break;
       case 'Checkbox':
         page = const CheckboxPreviewList();
+        break;
+      case 'Dropdown':
+        page = const DropdownPreviewList();
+        break;
+      case 'TextField':
+        page = const TextFieldPreviewList();
+        break;
+      case 'Toggle':
+        page = const TogglePreviewList();
         break;
       default:
         return;
@@ -87,13 +107,14 @@ class ShowcaseDashboard extends StatelessWidget {
 }
 
 final List<String> _components = [
+  'Typography',
   'Button',
   'Card',
   'Avatar',
   'Badge',
+  'Bottom Sheet',
   'Checkbox',
-  'Tooltip',
   'Dropdown',
-  'Input',
-  'Dialog',
+  'TextField',
+  'Toggle',
 ];

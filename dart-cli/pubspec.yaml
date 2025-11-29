@@ -1,0 +1,29 @@
+name: fluttercn
+version: 0.1.0
+description: A CLI tool for adding beautiful, production-ready Flutter components to your projects. Components are copied directly into your project, giving you complete ownership and full control.
+homepage: https://fluttercn.site
+repository: https://github.com/pinak3748/fluttercn.git
+issue_tracker: https://github.com/pinak3748/fluttercn/issues
+license: BSD-3-Clause
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  args: ^2.4.0
+  path: ^1.8.0
+  yaml: ^3.1.0
+
+dev_dependencies:
+  lints: ^6.0.0
+
+executables:
+  fluttercn: main
+
+topics:
+  - flutter-ui
+  - mobile-ui
+  - native-components
+  - components
+  - widgets
+

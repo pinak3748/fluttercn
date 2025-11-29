@@ -1,90 +1,56 @@
-<div align="center">
-  <img src="src/assets/logo.png" alt="fluttercn logo" width="120" />
-  
-  # fluttercn
-  
-  **Build beautiful Flutter apps with copy-paste components**
-  
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-  [![npm version](https://img.shields.io/npm/v/fluttercn.svg)](https://www.npmjs.com/package/fluttercn)
-</div>
+# ⚠️ DEPRECATED - Node.js CLI
+
+**This Node.js CLI has been discontinued in favor of the Dart CLI.**
+
+Please use the new Dart CLI instead for better integration with the Flutter ecosystem.
 
 ---
 
-## Installation
+## New Installation (Dart CLI)
+
+Install the fluttercn CLI globally using Dart's pub:
 
 ```bash
-npm install -g fluttercn
+dart pub global activate fluttercn
 ```
 
-Or using yarn:
+**Important:** Make sure `~/.pub-cache/bin` is in your PATH:
 
 ```bash
-yarn global add fluttercn
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 ```
 
-## Quick Start
+## Documentation
 
-1. **Initialize fluttercn in your project:**
-   ```bash
-   fluttercn init
-   ```
+For complete documentation and usage instructions, please see:
 
-2. **List available components:**
-   ```bash
-   fluttercn list
-   ```
+- **Main README**: [../README.md](../README.md)
+- **Dart CLI README**: [../dart-cli/README.md](../dart-cli/README.md)
+- **Documentation Website**: [https://fluttercn.site](https://fluttercn.site)
 
-3. **Add a component:**
-   ```bash
-   fluttercn add button
-   fluttercn add card
-   ```
+## Migration
 
-## Commands
-
-### `init`
-Initialize fluttercn in your Flutter project. Creates the theme configuration file at `lib/config/theme.dart`.
+If you were using the old Node.js CLI, simply uninstall it and install the new Dart CLI:
 
 ```bash
-fluttercn init
+# Uninstall old CLI
+npm uninstall -g fluttercn
+# or
+yarn global remove fluttercn
+
+# Install new Dart CLI
+dart pub global activate fluttercn
 ```
 
-### `add <component>`
-Add a Flutter component to your project. Components are copied to `lib/widgets/common/`.
+The commands and functionality remain the same:
+- `fluttercn init` - Initialize your project
+- `fluttercn list` - List available components
+- `fluttercn add <component>` - Add a component
 
-```bash
-fluttercn add <component-name>
-```
+## Why the change?
 
-### `list` (or `ls`)
-List all available components in the registry.
-
-```bash
-fluttercn list
-```
-
-## Requirements
-
-- Node.js (v14 or higher)
-- Flutter project with `pubspec.yaml` and `lib/` directory
-
-## Troubleshooting
-
-**Flutter project validation failed**  
-Make sure you're running the command from the root of your Flutter project.
-
-**fluttercn is not initialized**  
-Run `fluttercn init` first to set up fluttercn in your project.
-
-**Component not found**  
-Use `fluttercn list` to see all available components.
-
-## Support
-
-- 🐛 [Report Issues](https://github.com/pinak3748/fluttercn/issues)
-- 💬 [Discussions](https://github.com/pinak3748/fluttercn/discussions)
-
-## License
-
-MIT
+The Dart CLI provides:
+- Better integration with the Dart/Flutter ecosystem
+- No Node.js dependency required
+- Simpler installation and distribution
+- Consistent tooling experience for Flutter developers
