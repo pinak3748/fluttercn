@@ -110,6 +110,7 @@ class _DropdownState<T> extends State<Dropdown<T>>
   late Animation<double> _scaleAnimation;
   bool _isHovered = false;
   final LayerLink _layerLink = LayerLink();
+  final GlobalKey _buttonKey = GlobalKey();
   OverlayEntry? _overlayEntry;
   bool _isOpen = false;
 
@@ -155,7 +156,7 @@ class _DropdownState<T> extends State<Dropdown<T>>
   }
 
   OverlayEntry _createOverlayEntry() {
-    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final RenderBox renderBox = _buttonKey.currentContext!.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
 
@@ -280,6 +281,7 @@ class _DropdownState<T> extends State<Dropdown<T>>
                   return Transform.scale(
                     scale: _scaleAnimation.value,
                     child: AnimatedContainer(
+                      key: _buttonKey,
                       duration: AppTheme.durationNormal,
                       width: widget.width,
                       padding: EdgeInsets.symmetric(
