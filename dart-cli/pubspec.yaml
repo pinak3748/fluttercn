@@ -1,5 +1,5 @@
 name: fluttercn
-version: 0.0.5
+version: 0.1.0
 description: A CLI tool for adding beautiful, production-ready Flutter components to your projects. Components are copied directly into your project, giving you complete ownership and full control.
 homepage: https://fluttercn.site
 repository: https://github.com/pinak3748/fluttercn.git

@@ -1,5 +1,5 @@
 {
   "title": "Components",
-  "pages": ["button", "card", "checkbox", "toggle", "avatar", "badge"],
+  "pages": ["button", "card", "checkbox", "toggle", "avatar", "badge", "bottom-sheet", "dropdown", "text-field"],
   "defaultOpen": false
 }

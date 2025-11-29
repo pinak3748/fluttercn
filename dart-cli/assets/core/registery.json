@@ -113,6 +113,63 @@
       ],
       "importPath": "package:flutter/material.dart",
       "usageExample": "import 'package:your_app/widgets/common/toggle.dart';\n\nToggle(\n  value: darkMode,\n  label: 'Dark mode',\n  description: 'Switch to the dark color scheme',\n  onChanged: (value) => setState(() => darkMode = value),\n)\n\nToggle(\n  value: acceptTerms,\n  label: 'Accept terms and conditions',\n  error: showError,\n  errorText: showError ? 'Required to continue' : null,\n  onChanged: (value) => setState(() => acceptTerms = value),\n)"
+    },
+    "bottom_sheet": {
+      "name": "bottom_sheet",
+      "description": "Modal bottom sheet component with draggable handle, header, and scrollable content area",
+      "files": [
+        {
+          "source": "widgets/bottom_sheet.dart",
+          "destination": "lib/widgets/common/bottom_sheet.dart"
+        }
+      ],
+      "dependencies": [
+        {
+          "type": "config",
+          "file": "config/theme.dart",
+          "message": "Theme configuration is required. Make sure you have run 'fluttercn init' first."
+        }
+      ],
+      "importPath": "package:flutter/material.dart",
+      "usageExample": "import 'package:your_app/widgets/common/bottom_sheet.dart';\n\nshowCNBottomSheet(\n  context: context,\n  builder: (context) => CNBottomSheet(\n    title: 'Share',\n    description: 'Share this item with others',\n    child: Column(\n      children: [\n        ListTile(title: Text('Share via Email')),\n        ListTile(title: Text('Share via SMS')),\n      ],\n    ),\n  ),\n)"
+    },
+    "dropdown": {
+      "name": "dropdown",
+      "description": "Dropdown menu component with search, multi-select, and custom item templates",
+      "files": [
+        {
+          "source": "widgets/dropdown.dart",
+          "destination": "lib/widgets/common/dropdown.dart"
+        }
+      ],
+      "dependencies": [
+        {
+          "type": "config",
+          "file": "config/theme.dart",
+          "message": "Theme configuration is required. Make sure you have run 'fluttercn init' first."
+        }
+      ],
+      "importPath": "package:flutter/material.dart",
+      "usageExample": "import 'package:your_app/widgets/common/dropdown.dart';\n\nCNDropdown<String>(\n  items: ['Apple', 'Banana', 'Orange'],\n  value: selectedFruit,\n  label: 'Select Fruit',\n  onChanged: (value) => setState(() => selectedFruit = value),\n)\n\nCNDropdown<String>.searchable(\n  items: countries,\n  value: selectedCountry,\n  label: 'Select Country',\n  onChanged: (value) => setState(() => selectedCountry = value),\n)"
+    },
+    "text_field": {
+      "name": "text_field",
+      "description": "Text input field with prefix/suffix icons, labels, validation states, and password visibility toggle",
+      "files": [
+        {
+          "source": "widgets/text_field.dart",
+          "destination": "lib/widgets/common/text_field.dart"
+        }
+      ],
+      "dependencies": [
+        {
+          "type": "config",
+          "file": "config/theme.dart",
+          "message": "Theme configuration is required. Make sure you have run 'fluttercn init' first."
+        }
+      ],
+      "importPath": "package:flutter/material.dart",
+      "usageExample": "import 'package:your_app/widgets/common/text_field.dart';\n\nCNTextField(\n  controller: emailController,\n  label: 'Email',\n  placeholder: 'Enter your email',\n  prefixIcon: Icon(Icons.email),\n  keyboardType: TextInputType.emailAddress,\n)\n\nCNTextField.password(\n  controller: passwordController,\n  label: 'Password',\n  placeholder: 'Enter your password',\n)"
     }
   }
 }
