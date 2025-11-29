@@ -7,8 +7,9 @@
 
   fluttercn is a collection of beautifully designed, accessible Flutter components that you can copy and paste directly into your apps. Think of it as your component library—built with Flutter, for Flutter developers.
   
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-  [![npm version](https://img.shields.io/npm/v/fluttercn.svg)](https://www.npmjs.com/package/fluttercn)
+  [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+  [![pub.dev](https://img.shields.io/pub/v/fluttercn)](https://pub.dev/packages/fluttercn)
+  [![Dart SDK](https://img.shields.io/badge/Dart-3.0.0+-blue.svg)](https://dart.dev)
 </div>
 
 
@@ -28,17 +29,19 @@
 
 ### Installation
 
-Install the fluttercn CLI globally:
+Install the fluttercn CLI globally using Dart's pub:
 
 ```bash
-npm install -g fluttercn
+dart pub global activate fluttercn
 ```
 
-Or using yarn:
+**Important:** Make sure `~/.pub-cache/bin` is in your PATH:
 
 ```bash
-yarn global add fluttercn
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 ```
+
+To make this permanent, add the above line to your shell profile (`~/.zshrc`, `~/.bashrc`, etc.).
 
 ### Usage
 
@@ -76,7 +79,7 @@ Visit our [documentation website](https://fluttercn.site) for:
 
 This repository contains three main parts:
 
-- **`cli/`** - The fluttercn CLI tool (npm package)
+- **`dart-cli/`** - The fluttercn CLI tool (Dart package)
 - **`playground/`** - Flutter app for developing and testing components
 - **`www/`** - Documentation website (Next.js)
 
@@ -106,7 +109,7 @@ For detailed instructions, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the BSD-3-Clause License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 

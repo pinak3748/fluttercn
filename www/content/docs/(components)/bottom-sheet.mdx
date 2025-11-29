@@ -1,0 +1,421 @@
+---
+title: Bottom Sheet
+description: A modal or persistent overlay that slides up from the bottom of the screen
+---
+
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+
+## Installation
+
+```bash
+fluttercn add bottom-sheet
+```
+
+## Usage
+
+### Basic Bottom Sheet
+
+Simple modal bottom sheet with content:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/bottom_sheet/bottom_sheet_basic.png"
+      alt="Basic bottom sheet preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+showAppBottomSheet(
+  context: context,
+  builder: (context) => BottomSheetContent(
+    child: Text('Bottom sheet content goes here'),
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+### Bottom Sheet with Header
+
+Bottom sheet with title, description, and close button:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/bottom_sheet/bottom_sheet_with_header.png"
+      alt="Bottom sheet with header preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+showAppBottomSheet(
+  context: context,
+  builder: (context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      BottomSheetHeader(
+        title: BottomSheetTitle('Sheet Title'),
+        description: BottomSheetDescription('Description goes here'),
+        showCloseButton: true,
+      ),
+      BottomSheetContent(
+        child: Text('Your content here'),
+      ),
+    ],
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+### Bottom Sheet Sizes
+
+Four predefined sizes for different content heights:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/bottom_sheet/bottom_sheet_sizes.png"
+      alt="Bottom sheet sizes preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Small - 30% of screen height
+showAppBottomSheet(
+  context: context,
+  size: BottomSheetSize.sm,
+  builder: (context) => YourContent(),
+)
+
+// Medium - 50% of screen height (default)
+showAppBottomSheet(
+  context: context,
+  size: BottomSheetSize.md,
+  builder: (context) => YourContent(),
+)
+
+// Large - 75% of screen height
+showAppBottomSheet(
+  context: context,
+  size: BottomSheetSize.lg,
+  builder: (context) => YourContent(),
+)
+
+// Full - 95% of screen height
+showAppBottomSheet(
+  context: context,
+  size: BottomSheetSize.full,
+  builder: (context) => YourContent(),
+)
+```
+  </Tab>
+</Tabs>
+
+### Scrollable Content
+
+For long content that needs scrolling:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/bottom_sheet/bottom_sheet_scrollable.png"
+      alt="Scrollable bottom sheet preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+showAppBottomSheet(
+  context: context,
+  size: BottomSheetSize.lg,
+  builder: (context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      BottomSheetHeader(
+        title: BottomSheetTitle('Long Content'),
+        showCloseButton: true,
+      ),
+      BottomSheetContent(
+        scrollable: true,
+        child: Column(
+          children: [
+            // Your long content here
+            ...List.generate(20, (index) => 
+              ListTile(title: Text('Item $index')),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+### Bottom Sheet with Footer
+
+Add action buttons in a footer section:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/bottom_sheet/bottom_sheet_with_footer.png"
+      alt="Bottom sheet with footer preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+showAppBottomSheet(
+  context: context,
+  builder: (context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      BottomSheetHeader(
+        title: BottomSheetTitle('Confirm Action'),
+        description: BottomSheetDescription('Please confirm your choice'),
+      ),
+      BottomSheetContent(
+        child: Text('This action cannot be undone'),
+      ),
+      BottomSheetFooter(
+        child: BottomSheetActions(
+          secondaryAction: Button(
+            variant: ButtonVariant.outline,
+            onPressed: () => Navigator.pop(context),
+            child: Text('Cancel'),
+          ),
+          primaryAction: Button(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text('Confirm'),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+## Examples
+
+### Form Bottom Sheet
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/bottom_sheet/bottom_sheet_form_example.png"
+      alt="Form bottom sheet preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+showAppBottomSheet(
+  context: context,
+  size: BottomSheetSize.lg,
+  builder: (context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      BottomSheetHeader(
+        title: BottomSheetTitle('Edit Profile'),
+        showCloseButton: true,
+      ),
+      BottomSheetContent(
+        child: Column(
+          children: [
+            TextField(
+              label: 'Name',
+              placeholder: 'Enter your name',
+            ),
+            SizedBox(height: AppTheme.spaceMd),
+            TextField(
+              label: 'Email',
+              placeholder: 'Enter your email',
+            ),
+            SizedBox(height: AppTheme.spaceMd),
+            TextField(
+              label: 'Bio',
+              placeholder: 'Tell us about yourself',
+              maxLines: 3,
+            ),
+          ],
+        ),
+      ),
+      BottomSheetFooter(
+        child: BottomSheetActions(
+          secondaryAction: Button(
+            variant: ButtonVariant.outline,
+            fullWidth: true,
+            onPressed: () => Navigator.pop(context),
+            child: Text('Cancel'),
+          ),
+          primaryAction: Button(
+            fullWidth: true,
+            onPressed: () {
+              // Save changes
+              Navigator.pop(context);
+            },
+            child: Text('Save'),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+  </Tab>
+</Tabs>
+
+## API Reference
+
+### showAppBottomSheet
+
+| Property                  | Type                | Default       | Description                                    |
+| ------------------------- | ------------------- | ------------- | ---------------------------------------------- |
+| `context`                 | `BuildContext`      | required      | Build context                                  |
+| `builder`                 | `WidgetBuilder`     | required      | Builder function for sheet content             |
+| `size`                    | `BottomSheetSize`   | `md`          | Predefined height                              |
+| `isScrollControlled`      | `bool`              | `true`        | Allow custom height control                    |
+| `isDismissible`           | `bool`              | `true`        | Allow dismiss by tapping outside               |
+| `enableDrag`              | `bool`              | `true`        | Enable swipe to dismiss                        |
+| `useSafeArea`             | `bool`              | `true`        | Respect safe areas                             |
+| `resizeToAvoidBottomInset`| `bool`              | `true`        | Resize when keyboard appears                   |
+| `backgroundColor`         | `Color?`            | `transparent` | Background color                               |
+| `barrierColor`            | `Color?`            | `black54`     | Overlay backdrop color                         |
+| `constraints`             | `BoxConstraints?`   | `null`        | Custom size constraints                        |
+
+### showPersistentAppBottomSheet
+
+| Property        | Type                | Default       | Description                        |
+| --------------- | ------------------- | ------------- | ---------------------------------- |
+| `context`       | `BuildContext`      | required      | Build context                      |
+| `builder`       | `WidgetBuilder`     | required      | Builder function for sheet content |
+| `backgroundColor`| `Color?`           | `surface`     | Background color                   |
+| `enableDrag`    | `bool`              | `true`        | Enable swipe to dismiss            |
+| `constraints`   | `BoxConstraints?`   | `null`        | Custom size constraints            |
+
+### showConfirmationBottomSheet
+
+| Property        | Type           | Default   | Description                          |
+| --------------- | -------------- | --------- | ------------------------------------ |
+| `context`       | `BuildContext` | required  | Build context                        |
+| `title`         | `String`       | required  | Confirmation title                   |
+| `description`   | `String`       | required  | Confirmation description             |
+| `confirmText`   | `String`       | `Confirm` | Confirm button text                  |
+| `cancelText`    | `String`       | `Cancel`  | Cancel button text                   |
+| `isDestructive` | `bool`         | `false`   | Use destructive styling for confirm  |
+| `icon`          | `Widget?`      | `null`    | Optional icon above title            |
+
+### BottomSheetHeader
+
+| Property          | Type                     | Default | Description                                               |
+| ----------------- | ------------------------ | ------- | --------------------------------------------------------- |
+| `title`           | `BottomSheetTitle?`      | `null`  | Title widget                                              |
+| `description`     | `BottomSheetDescription?`| `null`  | Description widget                                        |
+| `child`           | `Widget?`                | `null`  | Custom header content (cannot use with title/description) |
+| `showCloseButton` | `bool`                   | `false` | Show close button                                         |
+| `onClose`         | `VoidCallback?`          | `null`  | Custom close handler                                      |
+| `padding`         | `EdgeInsets?`            | `null`  | Custom padding                                            |
+
+### BottomSheetTitle
+
+| Property | Type         | Default  | Description       |
+| -------- | ------------ | -------- | ----------------- |
+| `text`   | `String`     | required | The title text    |
+| `style`  | `TextStyle?` | `null`   | Custom text style |
+
+### BottomSheetDescription
+
+| Property | Type         | Default  | Description          |
+| -------- | ------------ | -------- | -------------------- |
+| `text`   | `String`     | required | The description text |
+| `style`  | `TextStyle?` | `null`   | Custom text style    |
+
+### BottomSheetContent
+
+| Property                | Type               | Default | Description                      |
+| ----------------------- | ------------------ | ------- | -------------------------------- |
+| `child`                 | `Widget`           | required| Content widget                   |
+| `scrollable`            | `bool`             | `false` | Enable scrolling                 |
+| `padding`               | `EdgeInsets?`      | `null`  | Custom padding                   |
+| `physics`               | `ScrollPhysics?`   | `null`  | Scroll physics                   |
+| `scrollController`      | `ScrollController?`| `null`  | External scroll controller       |
+
+### BottomSheetFooter
+
+| Property  | Type          | Default  | Description    |
+| --------- | ------------- | -------- | -------------- |
+| `child`   | `Widget`      | required | Footer widget  |
+| `padding` | `EdgeInsets?` | `null`   | Custom padding |
+
+### BottomSheetActions
+
+| Property           | Type                 | Default         | Description                    |
+| ------------------ | -------------------- | --------------- | ------------------------------ |
+| `primaryAction`    | `Widget?`            | `null`          | Primary action button          |
+| `secondaryAction`  | `Widget?`            | `null`          | Secondary action button        |
+| `spacing`          | `double`             | `AppTheme.spaceMd`| Space between buttons        |
+| `direction`        | `Axis`               | `horizontal`    | Layout direction               |
+| `mainAxisAlignment`| `MainAxisAlignment`  | `end`           | Alignment for horizontal layout|
+
+### BottomSheetLoadingOverlay
+
+| Property        | Type      | Default  | Description                  |
+| --------------- | --------- | -------- | ---------------------------- |
+| `isLoading`     | `bool`    | required | Whether to show loading      |
+| `child`         | `Widget`  | required | Content widget               |
+| `loadingWidget` | `Widget?` | `null`   | Custom loading indicator     |
+| `loadingText`   | `String?` | `null`   | Optional loading text        |
+
+### BottomSheetSize
+
+- `sm` - Small (30% of screen height)
+- `md` - Medium (50% of screen height, default)
+- `lg` - Large (75% of screen height)
+- `full` - Full (95% of screen height)
+
+## Features
+
+- **Multiple Sizes** - Four predefined sizes for different content heights
+- **Scrollable Content** - Built-in scroll support for long content
+- **Composable Structure** - Separate header, content, and footer sections
+- **Keyboard Aware** - Automatically adjusts for keyboard
+- **Safe Areas** - Respects device safe areas and notches
+- **Drag Handle** - Visual indicator for swipe gestures
+- **Confirmation Template** - Pre-built confirmation dialog
+- **Loading States** - Built-in loading overlay component
+- **Persistent Mode** - Non-modal sheets that don't block interaction
+- **Themed** - Automatically adapts to light/dark mode
+
+<Callout type="info">
+  Bottom sheets automatically handle keyboard appearance and safe areas. The content
+  will resize and adjust to avoid being hidden behind the keyboard or system UI.
+</Callout>
+
+<Callout type="warn">
+  When using `BottomSheetContent` with `scrollable: true`, avoid nesting scrollable
+  widgets as this can cause gesture conflicts.
+</Callout>
+
+## Best Practices
+
+- Use `BottomSheetSize.sm` for simple confirmations or quick actions
+- Use `BottomSheetSize.md` for forms with a few fields
+- Use `BottomSheetSize.lg` for longer forms or lists
+- Use `BottomSheetSize.full` for complex multi-step flows
+- Always provide a way to dismiss (close button or swipe)
+- Use `showConfirmationBottomSheet` for destructive actions
+- Enable `scrollable` for content that might overflow
+- Use `BottomSheetActions` for consistent button layouts
+- Show loading states with `BottomSheetLoadingOverlay`
+- Use persistent sheets for non-modal overlays that shouldn't block interaction
+

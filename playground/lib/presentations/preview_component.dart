@@ -117,7 +117,4 @@ final List<String> _components = [
   'Dropdown',
   'TextField',
   'Toggle',
-  'Tooltip',
-  'Input',
-  'Dialog',
 ];

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2025-11-29
+
+### Added
+- Bottom Sheet component with modal and persistent variants, drag handle support
+- Dropdown component with single and multi-select options, search functionality
+- Text Field component with validation, prefix/suffix support, and various input types
+- Enhanced component documentation and examples
+
+### Changed
+- Updated component registry with new form and interaction components
+- Improved component organization and structure
+
 ## [0.0.5] - 2025-11-19
 
 ### Added
@@ -53,4 +65,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial development version
-

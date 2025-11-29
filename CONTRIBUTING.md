@@ -37,12 +37,12 @@ We welcome feature suggestions! Please create an issue with:
    cd fluttercn
    ```
 
-2. **Set up the CLI:**
+2. **Set up the Dart CLI:**
    ```bash
-   cd cli
-   npm install
-   npm run build
-   npm link
+   cd dart-cli
+   dart pub get
+   # For local development, activate from path
+   dart pub global activate --source path .
    ```
 
 3. **Set up the playground:**
@@ -72,8 +72,8 @@ We welcome feature suggestions! Please create an issue with:
    - Test thoroughly
 
 3. **Add to CLI (if adding a new component):**
-   - Update `cli/src/core/registery.json`
-   - Add component files to `cli/src/core/widgets/`
+   - Update `dart-cli/assets/core/registery.json`
+   - Add component files to `dart-cli/assets/core/widgets/`
    - Test the CLI command: `fluttercn add <component-name>`
 
 4. **Update documentation:**
@@ -107,8 +107,8 @@ We welcome feature suggestions! Please create an issue with:
    - Test all variants and use cases
 
 2. **Add to CLI registry:**
-   - Copy widget file to `cli/src/core/widgets/`
-   - Add entry to `cli/src/core/registery.json`:
+   - Copy widget file to `dart-cli/assets/core/widgets/`
+   - Add entry to `dart-cli/assets/core/registery.json`:
      ```json
      "component-name": {
        "name": "component-name",
@@ -125,8 +125,9 @@ We welcome feature suggestions! Please create an issue with:
 
 4. **Test the CLI:**
    ```bash
-   cd cli
-   npm run build
+   cd dart-cli
+   # Reactivate after changes
+   dart pub global activate --source path .
    fluttercn add component-name
    ```
 

@@ -1,0 +1,367 @@
+---
+title: Text Field
+description: A customizable text input component for single-line and multi-line text entry
+---
+
+import { Callout } from "fumadocs-ui/components/callout"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+
+## Installation
+
+```bash
+fluttercn add text-field
+```
+
+## Usage
+
+### Basic Text Field
+
+Simple text input:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_basic.png"
+      alt="Basic text field preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+TextField(
+  controller: controller,
+  placeholder: 'Enter text here',
+)
+```
+  </Tab>
+</Tabs>
+
+### Text Field with Label
+
+Text field with label and description:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_with_label.png"
+      alt="Text field with label preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+TextField(
+  controller: controller,
+  label: 'Full Name',
+  description: 'Enter your first and last name',
+  placeholder: 'John Doe',
+)
+```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+Three predefined sizes for different contexts:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_sizes.png"
+      alt="Text field sizes preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Small
+TextField(
+  controller: controller,
+  size: TextFieldSize.sm,
+  placeholder: 'Small text field',
+)
+
+// Medium (default)
+TextField(
+  controller: controller,
+  size: TextFieldSize.md,
+  placeholder: 'Medium text field',
+)
+
+// Large
+TextField(
+  controller: controller,
+  size: TextFieldSize.lg,
+  placeholder: 'Large text field',
+)
+```
+  </Tab>
+</Tabs>
+
+### With Icons
+
+Add prefix or suffix icons:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_with_icons.png"
+      alt="Text field with icons preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+// Prefix icon
+TextField(
+  controller: emailController,
+  label: 'Email',
+  placeholder: 'you@example.com',
+  prefixIcon: Icons.email,
+)
+
+// Suffix icon
+TextField(
+  controller: searchController,
+  placeholder: 'Search...',
+  suffixIcon: Icons.search,
+)
+```
+  </Tab>
+</Tabs>
+
+### Password Field
+
+Text field with password visibility toggle:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_password.png"
+      alt="Password field preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+TextField(
+  controller: passwordController,
+  label: 'Password',
+  placeholder: 'Enter your password',
+  obscureText: true,
+  prefixIcon: Icons.lock,
+)
+```
+  </Tab>
+</Tabs>
+
+### Multi-line Text Field
+
+Text area for longer content:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_multiline.png"
+      alt="Multi-line text field preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+TextField(
+  controller: bioController,
+  label: 'Bio',
+  placeholder: 'Tell us about yourself',
+  maxLines: 4,
+  minLines: 3,
+)
+```
+  </Tab>
+</Tabs>
+
+### Error State
+
+Show validation errors:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_error.png"
+      alt="Text field error state preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+TextField(
+  controller: controller,
+  label: 'Email',
+  placeholder: 'you@example.com',
+  error: true,
+  errorText: 'Please enter a valid email address',
+  prefixIcon: Icons.email,
+)
+```
+  </Tab>
+</Tabs>
+
+### Read-only State
+
+Display text without allowing edits:
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_readonly.png"
+      alt="Text field read-only state preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+TextField(
+  controller: controller,
+  label: 'Account ID',
+  readOnly: true,
+)
+```
+  </Tab>
+</Tabs>
+
+## Examples
+
+### Login Form
+
+<Tabs items={["Preview", "Code"]}>
+  <Tab value="Preview">
+    <MobileScreenshot
+      src="/previews/text_field/text_field_login_example.png"
+      alt="Login form example preview"
+      width={360}
+    />
+  </Tab>
+  <Tab value="Code">
+```dart
+Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Text(
+      'Sign In',
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    SizedBox(height: AppTheme.spaceMd),
+    TextField(
+      controller: emailController,
+      label: 'Email',
+      placeholder: 'you@example.com',
+      prefixIcon: Icons.email,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+    ),
+    SizedBox(height: AppTheme.spaceMd),
+    TextField(
+      controller: passwordController,
+      label: 'Password',
+      placeholder: 'Enter your password',
+      obscureText: true,
+      prefixIcon: Icons.lock,
+      textInputAction: TextInputAction.done,
+      onSubmitted: (value) {
+        // Handle login
+      },
+    ),
+    SizedBox(height: AppTheme.spaceLg),
+    Button(
+      onPressed: () {
+        // Handle login
+      },
+      fullWidth: true,
+      child: Text('Sign In'),
+    ),
+  ],
+)
+```
+  </Tab>
+</Tabs>
+
+
+## API Reference
+
+### TextField
+
+| Property          | Type                     | Default | Description                        |
+| ----------------- | ------------------------ | ------- | ---------------------------------- |
+| `controller`      | `TextEditingController?` | `null`  | Controller for the text field      |
+| `initialValue`    | `String?`                | `null`  | Initial text value                 |
+| `onChanged`       | `ValueChanged<String>?`  | `null`  | Callback when text changes         |
+| `onSubmitted`     | `ValueChanged<String>?`  | `null`  | Callback when user submits         |
+| `placeholder`     | `String?`                | `null`  | Placeholder text                   |
+| `label`           | `String?`                | `null`  | Label text above field             |
+| `description`     | `String?`                | `null`  | Description text below label       |
+| `size`            | `TextFieldSize`          | `md`    | Text field size                    |
+| `disabled`        | `bool`                   | `false` | Disable interactions               |
+| `readOnly`        | `bool`                   | `false` | Make field read-only               |
+| `error`           | `bool`                   | `false` | Show error state                   |
+| `errorText`       | `String?`                | `null`  | Error message                      |
+| `prefixIcon`      | `IconData?`              | `null`  | Icon before text                   |
+| `suffixIcon`      | `IconData?`              | `null`  | Icon after text                    |
+| `obscureText`     | `bool`                   | `false` | Hide text (for passwords)          |
+| `maxLines`        | `int?`                   | `1`     | Maximum lines (null for unlimited) |
+| `minLines`        | `int?`                   | `null`  | Minimum lines (for multi-line)     |
+| `maxLength`       | `int?`                   | `null`  | Maximum character length           |
+| `keyboardType`    | `TextInputType?`         | `null`  | Keyboard type                      |
+| `textInputAction` | `TextInputAction?`       | `null`  | Input action button                |
+| `autofocus`       | `bool`                   | `false` | Auto-focus on mount                |
+| `width`           | `double?`                | `null`  | Optional width constraint          |
+
+### TextFieldSize
+
+- `sm` - Small (compact size)
+- `md` - Medium (default size)
+- `lg` - Large (spacious size)
+
+## Features
+
+- **Customizable Sizes** - Three size options for different contexts
+- **Icon Support** - Prefix and suffix icons
+- **Password Toggle** - Automatic visibility toggle for password fields
+- **Multi-line** - Support for text areas
+- **Validation States** - Built-in error states and messages
+- **Focus States** - Visual feedback on focus
+- **Hover Effects** - Visual feedback on hover
+- **Character Limit** - Optional max length with counter
+- **Keyboard Types** - Support for email, number, phone, etc.
+- **Input Actions** - Done, next, search buttons
+- **Read-only Mode** - Display text without editing
+- **Themed** - Automatically adapts to light/dark mode
+
+<Callout type="info">
+  Password fields automatically show a visibility toggle icon. The toggle allows
+  users to show/hide their password while typing.
+</Callout>
+
+<Callout type="warn">
+  When using `obscureText: true`, the field will always be single-line regardless
+  of the `maxLines` setting.
+</Callout>
+
+## Best Practices
+
+- Always provide a clear label for the field
+- Use meaningful placeholder text as examples
+- Show error states with helpful messages
+- Use appropriate keyboard types (email, phone, number)
+- Set `textInputAction` to guide users through forms
+- Use `maxLength` to prevent excessively long input
+- Combine `minLines` and `maxLines` for flexible text areas
+- Use prefix icons for context (email icon for email fields)
+- Use `obscureText` for sensitive data like passwords
+- Clear error states when user starts typing
+- Use `readOnly` instead of `disabled` when showing non-editable data
+- Provide descriptions for fields that need clarification
+- Use appropriate sizes based on the UI context
+

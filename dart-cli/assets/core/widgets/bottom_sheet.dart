@@ -210,8 +210,9 @@ class _BottomSheetContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final bottomInset =
-        resizeToAvoidBottomInset ? mediaQuery.viewInsets.bottom : 0.0;
+    final bottomInset = resizeToAvoidBottomInset
+        ? mediaQuery.viewInsets.bottom
+        : 0.0;
     final bottomPadding = mediaQuery.padding.bottom;
 
     return Semantics(
@@ -230,7 +231,8 @@ class _BottomSheetContainer extends StatelessWidget {
             ),
             boxShadow: AppTheme.shadowXl,
           ),
-          constraints: constraints ??
+          constraints:
+              constraints ??
               BoxConstraints(
                 maxHeight: _getSizeHeight(context, size),
                 minHeight: 0,
@@ -328,9 +330,9 @@ class BottomSheetHeader extends StatelessWidget {
     this.showCloseButton = false,
     this.onClose,
   }) : assert(
-          child == null || (title == null && description == null),
-          'Cannot use both child and title/description. Use either composable or custom child.',
-        );
+         child == null || (title == null && description == null),
+         'Cannot use both child and title/description. Use either composable or custom child.',
+       );
 
   /// Sheet title widget
   final BottomSheetTitle? title;
@@ -352,7 +354,8 @@ class BottomSheetHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPadding = padding ??
+    final defaultPadding =
+        padding ??
         const EdgeInsets.fromLTRB(
           AppTheme.spaceLg,
           AppTheme.spaceXs,
@@ -404,10 +407,7 @@ class BottomSheetHeader extends StatelessWidget {
       );
     }
 
-    return Padding(
-      padding: defaultPadding,
-      child: content,
-    );
+    return Padding(padding: defaultPadding, child: content);
   }
 }
 
@@ -579,10 +579,7 @@ class BottomSheetContent extends StatelessWidget {
       );
     }
 
-    return Padding(
-      padding: safePadding,
-      child: child,
-    );
+    return Padding(padding: safePadding, child: child);
   }
 }
 
@@ -605,11 +602,7 @@ class BottomSheetContent extends StatelessWidget {
 /// )
 /// ```
 class BottomSheetFooter extends StatelessWidget {
-  const BottomSheetFooter({
-    super.key,
-    required this.child,
-    this.padding,
-  });
+  const BottomSheetFooter({super.key, required this.child, this.padding});
 
   /// The footer widget (typically buttons or actions)
   final Widget child;
@@ -619,7 +612,8 @@ class BottomSheetFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPadding = padding ??
+    final defaultPadding =
+        padding ??
         const EdgeInsets.fromLTRB(
           AppTheme.spaceLg,
           AppTheme.spaceMd,
@@ -627,10 +621,7 @@ class BottomSheetFooter extends StatelessWidget {
           AppTheme.spaceLg,
         );
 
-    return Padding(
-      padding: defaultPadding,
-      child: child,
-    );
+    return Padding(padding: defaultPadding, child: child);
   }
 }
 
@@ -705,10 +696,7 @@ class BottomSheetActions extends StatelessWidget {
     }
 
     return direction == Axis.horizontal
-        ? Row(
-            mainAxisAlignment: mainAxisAlignment,
-            children: children,
-          )
+        ? Row(mainAxisAlignment: mainAxisAlignment, children: children)
         : Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: children,
@@ -762,9 +750,7 @@ class BottomSheetLoadingOverlay extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     loadingWidget ??
-                        CircularProgressIndicator(
-                          color: AppTheme.primary,
-                        ),
+                        CircularProgressIndicator(color: AppTheme.primary),
                     if (loadingText != null) ...[
                       const SizedBox(height: AppTheme.spaceMd),
                       Text(

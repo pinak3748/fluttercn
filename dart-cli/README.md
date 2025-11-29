@@ -238,7 +238,7 @@ More components are coming soon! Check the [documentation](https://fluttercn.sit
 
 - 📖 [Documentation](https://fluttercn.site)
 - 🐛 [Report Issues](https://github.com/pinak3748/fluttercn/issues)
-- 💬 [Discussions](https://github.com/pinak3748/fluttercn/discussions)
+- 💬 [Github](https://github.com/pinak3748/fluttercn/)
 - 📦 [pub.dev Package](https://pub.dev/packages/fluttercn)
 
 ## 📄 License
