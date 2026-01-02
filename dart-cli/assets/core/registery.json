@@ -114,8 +114,8 @@
       "importPath": "package:flutter/material.dart",
       "usageExample": "import 'package:your_app/widgets/common/toggle.dart';\n\nToggle(\n  value: darkMode,\n  label: 'Dark mode',\n  description: 'Switch to the dark color scheme',\n  onChanged: (value) => setState(() => darkMode = value),\n)\n\nToggle(\n  value: acceptTerms,\n  label: 'Accept terms and conditions',\n  error: showError,\n  errorText: showError ? 'Required to continue' : null,\n  onChanged: (value) => setState(() => acceptTerms = value),\n)"
     },
-    "bottom_sheet": {
-      "name": "bottom_sheet",
+    "bottom-sheet": {
+      "name": "bottom-sheet",
       "description": "Modal bottom sheet component with draggable handle, header, and scrollable content area",
       "files": [
         {
@@ -152,8 +152,8 @@
       "importPath": "package:flutter/material.dart",
       "usageExample": "import 'package:your_app/widgets/common/dropdown.dart';\n\nCNDropdown<String>(\n  items: ['Apple', 'Banana', 'Orange'],\n  value: selectedFruit,\n  label: 'Select Fruit',\n  onChanged: (value) => setState(() => selectedFruit = value),\n)\n\nCNDropdown<String>.searchable(\n  items: countries,\n  value: selectedCountry,\n  label: 'Select Country',\n  onChanged: (value) => setState(() => selectedCountry = value),\n)"
     },
-    "text_field": {
-      "name": "text_field",
+    "text-field": {
+      "name": "text-field",
       "description": "Text input field with prefix/suffix icons, labels, validation states, and password visibility toggle",
       "files": [
         {

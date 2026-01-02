@@ -50,13 +50,24 @@ export function loadRegistry(): Registry {
 }
 
 /**
+ * Normalizes component name for lookup (handles both kebab-case and snake_case)
+ * @param name - Component name to normalize
+ * @returns Normalized component name (kebab-case)
+ */
+function normalizeComponentName(name: string): string {
+  // Convert to lowercase and replace underscores with hyphens for consistency
+  return name.toLowerCase().replace(/_/g, '-');
+}
+
+/**
  * Gets a component from the registry
  * @param componentName - Name of the component
  * @returns Component object or null if not found
  */
 export function getComponent(componentName: string): Component | null {
   const registry = loadRegistry();
-  const component = registry.components[componentName.toLowerCase()];
+  const normalizedName = normalizeComponentName(componentName);
+  const component = registry.components[normalizedName];
   return component || null;
 }
 
