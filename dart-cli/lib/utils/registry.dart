@@ -87,7 +87,9 @@ class Registry {
     final componentsJson = json['components'] as Map<String, dynamic>;
 
     componentsJson.forEach((key, value) {
-      componentsMap[key.toLowerCase()] =
+      // Normalize keys to kebab-case (lowercase with hyphens)
+      final normalizedKey = key.toLowerCase().replaceAll('_', '-');
+      componentsMap[normalizedKey] =
           Component.fromJson(value as Map<String, dynamic>);
     });
 
@@ -112,10 +114,17 @@ Registry loadRegistry() {
   }
 }
 
+/// Normalizes component name for lookup (handles both kebab-case and snake_case)
+String normalizeComponentName(String name) {
+  // Convert to lowercase and replace underscores with hyphens for consistency
+  return name.toLowerCase().replaceAll('_', '-');
+}
+
 /// Gets a component from the registry
 Component? getComponent(String componentName) {
   final registry = loadRegistry();
-  return registry.components[componentName.toLowerCase()];
+  final normalizedName = normalizeComponentName(componentName);
+  return registry.components[normalizedName];
 }
 
 /// Lists all available components

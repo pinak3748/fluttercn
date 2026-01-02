@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${process.env.NEXT_PUBLIC_APP_URL}/opengraph-image.png`],
+    images: [`${process.env.NEXT_PUBLIC_APP_URL}/banner.png`],
     creator: "@fluttercn",
   },
   icons: {
