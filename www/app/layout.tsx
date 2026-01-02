@@ -55,17 +55,69 @@ export const metadata: Metadata = {
     creator: "@fluttercn",
   },
   icons: {
-    icon: "/logo-dark.png",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/logo-dark.png", sizes: "any" },
+      { url: "/logo-dark.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo-dark.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/logo-dark.png",
+    apple: "/logo-dark.png",
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/logo-dark.png",
+      },
+    ],
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
 }
 
 export default function Layout({ children }: LayoutProps<"/">) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/logo-dark.png`,
+      },
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteConfig.url}/docs?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <html lang="en" className={fontVariables} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <RootProvider>{children}</RootProvider>
         <Toaster />
         <Analytics />
