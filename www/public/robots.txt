@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://fluttercn.com/sitemap.xml
+
+# Disallow admin and private routes
+Disallow: /api/
+
