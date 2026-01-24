@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart' hide Card;
+import 'package:flutter_cn_playground/presentations/accordion/accordion_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/alert/alert_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/avatar/avatar_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/badge/badge_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/bottom_sheet/bottom_sheet_preview_list.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_cn_playground/presentations/button/button_preview_list.d
 import 'package:flutter_cn_playground/presentations/card/card_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/checkbox/checkbox_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/dropdown/dropdown_preview_list.dart';
+import 'package:flutter_cn_playground/presentations/slider/slider_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/text_field/text_field_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/toggle/toggle_preview_list.dart';
 import 'package:flutter_cn_playground/presentations/typography/typography_preview_list.dart';
@@ -68,6 +71,12 @@ class ShowcaseDashboard extends StatelessWidget {
   void _navigateToShowcase(BuildContext context, String component) {
     Widget page;
     switch (component) {
+      case 'Accordion':
+        page = const AccordionPreviewList();
+        break;
+      case 'Alert':
+        page = const AlertPreviewList();
+        break;
       case 'Typography':
         page = const TypographyPreviewList();
         break;
@@ -98,6 +107,9 @@ class ShowcaseDashboard extends StatelessWidget {
       case 'Toggle':
         page = const TogglePreviewList();
         break;
+      case 'Slider':
+        page = const SliderPreviewList();
+        break;
       default:
         return;
     }
@@ -107,17 +119,20 @@ class ShowcaseDashboard extends StatelessWidget {
 }
 
 final List<String> _components = [
-  'Typography',
-  'Button',
-  'Card',
+  'Accordion',
+  'Alert',
   'Avatar',
   'Badge',
   'Bottom Sheet',
+  'Button',
+  'Card',
   'Checkbox',
+  'Dialog',
   'Dropdown',
+  'Input',
+  'Slider',
   'TextField',
   'Toggle',
   'Tooltip',
-  'Input',
-  'Dialog',
+  'Typography',
 ];

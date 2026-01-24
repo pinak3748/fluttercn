@@ -22,12 +22,16 @@ class CoreColors {
 
   static const Color success = Color(0xFF10B981);
   static const Color successLight = Color(0xFFD1FAE5);
+  static const Color successDark = Color(0xFF0D2818);
   static const Color warning = Color(0xFFF59E0B);
   static const Color warningLight = Color(0xFFFEF3C7);
+  static const Color warningDark = Color(0xFF2D2006);
   static const Color error = Color(0xFFEF4444);
   static const Color errorLight = Color(0xFFFEE2E2);
+  static const Color errorDark = Color(0xFF2D1212);
   static const Color info = Color(0xFF3B82F6);
   static const Color infoLight = Color(0xFFDBEAFE);
+  static const Color infoDark = Color(0xFF0D1A2D);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -192,13 +196,21 @@ class AppTheme {
   static Color get black => CoreColors.black;
 
   static Color get success => CoreColors.success;
-  static Color get successLight => CoreColors.successLight;
+  static Color get successLight => ThemeColors._isDarkMode
+      ? CoreColors.successDark
+      : CoreColors.successLight;
   static Color get warning => CoreColors.warning;
-  static Color get warningLight => CoreColors.warningLight;
+  static Color get warningLight => ThemeColors._isDarkMode
+      ? CoreColors.warningDark
+      : CoreColors.warningLight;
   static Color get error => CoreColors.error;
-  static Color get errorLight => CoreColors.errorLight;
+  static Color get errorLight => ThemeColors._isDarkMode
+      ? CoreColors.errorDark
+      : CoreColors.errorLight;
   static Color get info => CoreColors.info;
-  static Color get infoLight => CoreColors.infoLight;
+  static Color get infoLight => ThemeColors._isDarkMode
+      ? CoreColors.infoDark
+      : CoreColors.infoLight;
 
   static Color get textPrimary => ThemeColors.textPrimary;
   static Color get textSecondary => ThemeColors.textSecondary;
